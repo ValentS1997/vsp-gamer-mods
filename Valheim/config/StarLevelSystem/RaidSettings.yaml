@@ -92,6 +92,57 @@ GlobalSettings:
   GlobalRaidChanceScalar: 0.5
   RaidCreatureDensity: 4
 Raids:
+# VSP Gamer: beginner raid before Eikthyr, a single mixed pack of 13.
+# One spawn trigger per creature entry: no replacements within this raid.
+- Name: pre_eikthyr_pack
+  Duration: 120
+  RaidActiveTillDefeated: true
+  RaidCoolDownMinutes: 15
+  Activation:
+    NearBaseOnly: true
+    Chance: 100
+    NotRequiredGlobalKeys:
+    - defeated_eikthyr
+  Spawns:
+  - PrefabName: Boar
+    SpawnInterval: 13
+    SpawnChance: 100
+    SpawnGroupSize: 4
+    MaxSpawned: 4
+    MaxSpawnTriggers: 1
+    CreatureAI: HuntPlayer
+    Faction: ForestMonsters
+    UseRaidLevelSystem: false
+  - PrefabName: Neck
+    SpawnInterval: 13
+    SpawnChance: 100
+    SpawnGroupSize: 4
+    MaxSpawned: 4
+    MaxSpawnTriggers: 1
+    CreatureAI: HuntPlayer
+    Faction: ForestMonsters
+    UseRaidLevelSystem: false
+  - PrefabName: Greyling
+    SpawnInterval: 13
+    SpawnChance: 100
+    SpawnGroupSize: 4
+    MaxSpawned: 4
+    MaxSpawnTriggers: 1
+    CreatureAI: HuntPlayer
+    Faction: ForestMonsters
+    UseRaidLevelSystem: false
+  - PrefabName: Greydwarf_Shaman
+    SpawnInterval: 13
+    SpawnChance: 100
+    SpawnGroupSize: 1
+    MaxSpawned: 1
+    MaxSpawnTriggers: 1
+    CreatureAI: HuntPlayer
+    Faction: ForestMonsters
+    UseRaidLevelSystem: false
+  StartMessage: "Существа леса почуяли ваш лагерь!"
+  EndMessage: "Лесные твари отступают."
+  ForceMusic: Zmeadows
 - Name: army_eikthyr
   Duration: 180
   Activation:
