@@ -1,5 +1,8 @@
 # Valheim vsp-gamer — CONTINUE HERE (2026-10-21)
 
+> **CURRENT DEPLOYMENT POLICY (user-approved, 2026-10-21):** [40 mandatory Server/Client + 7 optional Only Client + 1 excluded DigDug](DEPLOYMENT_POLICY_2026-10-21.md). This is the authoritative intent and overrides all preliminary 24/24 and 15/7/7/11 categorizations below. Headless-server runtime compatibility remains unverified.
+
+
 This public repository contains **configuration baselines, not a deployable server pack, not game saves and not a verified BepInEx plugin lockfile**.
 
 ## Current handoff
