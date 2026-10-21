@@ -1,0 +1,23 @@
+# Valheim vsp-gamer — CONTINUE HERE (2026-10-21)
+
+This public repository contains **configuration baselines, not a deployable server pack, not game saves and not a verified BepInEx plugin lockfile**.
+
+## Current handoff
+
+- [Maximal Russian-language context and decision register](HANDOFF_2026-10-21.yaml)
+- [Latest supplied local `config.zip` vs Git audit (safe hashes and diffs only)](LOCAL_SNAPSHOT_AUDIT_2026-10-21.yaml)
+- [Valheim baseline README](README.md)
+
+Game: native Linux / Steam, Valheim 1.0.20 (network version 41), BepInEx. Latest observed client plugin list: **48 named DLL entries** on 2026-10-21 at 21:11. Latest `config.zip`: 112 regular files, of which 8 are world/player/runtime data that must not be committed. Of 104 safe files, 61 match the Git baseline and 43 differ (35 StarLevelSystem localizations and 8 further files). **Never overwrite local edits with Git contents or the opposite without reviewing the differences.**
+
+Latest decision: Custom Raids retired; StarLevelSystem installed and auto-configured, further SLS tuning deferred. EpicLoot is legendary with intentionally rare magic; boss-gated metals via BossGate; MonsterLabZ spawn chance reduced 75%, size/cap roughly halved; OreMines reset 30 in-game days, 35% veins; HoeRadius debug off; protected BetterTames pets recover in 180 seconds, butcher-knife exception deliberately left untouched.
+
+## Next task awaiting completion
+
+Verify **every DLL** against current vendor documentation and actual dependency versions, then split into **Server & Client**, **Server Only**, **Client Only**, noting optional server-side config-sync installs. The YAML has a preliminary `deploy_hypothesis` for each DLL, explicitly **not** a verified classification. There is no proven server-only plugin yet. Check the literal-looking `DigDug.dll*` filename; the latest client listing has no `Valheim.CustomRaids.dll`.
+
+Detected local keyboard conflict: AutomaticFuel toggle `F10` versus PlantEasily snap `F10`; Git has AutomaticFuel toggle blank. Need user approval before changing. Other local-only modifications and unverified compatibility are documented in the handoff.
+
+## Evidence and safety policy
+
+The YAML is a precise snapshot **as of 2026-10-21**, grounded in user-provided `ls` and uploaded `config.zip`, plus GitHub `main` from before this documentation commit. It **cannot confirm that each DLL loaded or runs correctly on a dedicated server**. Require BepInEx client/server logs and backup of world/character before installations, removals or terrain changes. No personal JSON, SavedData, player IDs, bounty ledgers or world-state files are included. Do not use the archived Custom Raids configs as active ones. Do not compile the experimental BetterTames butcher workaround: the user declined that change.

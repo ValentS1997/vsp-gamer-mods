@@ -1,0 +1,1080 @@
+# Generated handoff artifact — verified against latest supplied config.zip and Git main at a13096d.
+handoff_metadata:
+  schema: vsp-gamer-valheim-handoff/v1
+  generated_on: '2026-10-21'
+  language: ru-RU
+  purpose: МАКСИМАЛЬНО ПОЛНЫЙ КОНТЕКСТ ДЛЯ НОВОЙ БЕСЕДЫ; не является гарантией работоспособности сборки
+  read_first:
+  - Продолжить пользовательскую работу по Valheim; не перепутать Git snapshot и локальный ZIP.
+  - Не откатывать или переписывать рабочие конфиги без отдельного решения пользователя.
+  - 'Новый незавершённый запрос: распределить все DLL по Server & Client, Server Only, Client Only с подтверждением документацией.'
+  - В публичный Git не публиковать файлы SavedData, ID игроков, состояние миров/персонажей, поимённые персональные JSON и
+    учётные данные.
+  evidence_levels:
+    user_observed: Пользователь сообщил результат теста или предоставил листинг/ZIP
+    git_verified: Читалось из существующего GitHub main
+    static_config_only: Параметр прочитан из текста; применение в runtime не доказано
+    suggested: Предложение; пользователь мог его не одобрить
+    unverified_runtime: Нет свежего LogOutput.log и/или серверного теста
+  privacy_scope: Public repository. Record only sanitized paths, game settings, names of public mod DLLs, and hashes of non-sensitive
+    configs.
+project:
+  name: vsp-gamer
+  game: Valheim
+  game_version: 1.0.20
+  network_version: 41
+  platform: native Linux Steam
+  mod_loader: BepInEx
+  mod_loader_version: not confirmed
+  game_root_example: /mnt/steam/SteamLibrary/steamapps/common/Valheim
+  paths:
+    plugins: BepInEx/plugins
+    config: BepInEx/config
+    runtime_log: BepInEx/LogOutput.log
+    world_backup: Create backup of world and character BEFORE terrain/world-changing tests
+  repository:
+    url: https://github.com/ValentS1997/vsp-gamer-mods
+    branch: main
+    head_at_time_of_handoff_pre_commit: a13096dc8a2acb419319c823cd3a8067985c9b58
+    config_baseline: Valheim/config/
+    archived_custom_raids: Valheim/Нашли лучшего кандидата/Custom Raids/
+    git_policy: Config-first repository, DLL binaries not committed, game runtime saves not committed.
+  goals:
+  - Hardcore, опасные бои и осмысленная прогрессия по боссам.
+  - EpicLoot balance legendary с редким дропом магии.
+  - Сохранение существующего мира, важность отката и backup.
+  - Серверно-клиентская сборка без лишних модов на сервере.
+  - Комфортные строительство/фарм/хранение без бессмертной чрезмерно дешёвой обороны.
+  user_preferences:
+  - Русский язык, техническая точность, короткие итоги после глубокого анализа.
+  - Не называть неподтверждённую совместимость проверенной.
+  - При изменениях — diff, backup/rollback, синхронизация Git и локального ZIP.
+  - Не устанавливать новые моды и не менять баланс самовольно.
+sources_and_snapshots:
+  client_dll_ls:
+    timestamp_local: '2026-10-21 21:11:24'
+    reported_dll_count: 48
+    notes:
+    - Directory also contained ropesnap.wav and Translations/; these are not DLL plugins.
+    - Custom Raids DLL absent in most recent listing, confirming deactivation on reported client.
+    - Earlier list from same day lacked StarLevelSystem, but latest listing includes it.
+  client_config_ls:
+    timestamp_local: '2026-10-21 21:14:18'
+    source: User pasted ls -la and uploaded config.zip
+    zip_file_sha256: 99110a187651de45b7a43945020896d670904b3f08de652af9489e2e10fcfc78
+    zip_size_bytes: 858147
+    zip_regular_files_total: 112
+    safe_non_runtime_files_count: 104
+    intentionally_excluded_runtime_personal_count: 8
+    unsafe_files_summary:
+    - 2 StarLevelSystem/SavedData state files
+    - BuildOrders per-world text record
+    - EpicLoot bounty ledger
+    - EpicLoot configstate.json
+    - QuickStackStore player state
+    - 2 personalized GooderAutoShield JSON files
+    safe_git_match_count_at_a13096d: 61
+    safe_git_different_count_at_a13096d: 43
+    git_untracked_safe_count: 0
+    comparison_algorithm: Exact raw Git blob sha1 on each safe file, compared to Git tree at a13096d.
+  config_runtime_verification: Not performed; no LogOutput.log received.
+installed_dll_inventory:
+- filename: AchievementEnabler.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: client_focus_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: Advize_PlantEasily.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: client_focus_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: AutomaticFuel.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: conditional_or_optional_server_install
+  verified_server_requirement: false
+  notes: []
+- filename: AzuCraftyBoxes.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: server_and_client_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: Basements.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: server_and_client_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: BetterPickupNotifications.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: client_focus_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: BetterTames.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: server_and_client_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: BiggerPickupRadius.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: client_focus_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: BossGate.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: server_and_client_candidate
+  verified_server_requirement: false
+  notes:
+  - Core gameplay changing mod; confirm mod requirements and server-authoritative behavior against exact release.
+- filename: BuildOrders.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: server_and_client_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: BuyableExtractors.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: server_and_client_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: CarturCompassAndClock.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: client_focus_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: ConditionalConfigSync.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: dependency_follow_consuming_plugins
+  verified_server_requirement: false
+  notes:
+  - Two related DLLs present, not by itself a duplicate/conflict.
+- filename: ConditionalConfigSync.Plugin.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: dependency_follow_consuming_plugins
+  verified_server_requirement: false
+  notes:
+  - Two related DLLs present, not by itself a duplicate/conflict.
+- filename: ConfigurationManager.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: client_focus_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: DigDug.dll*
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: client_focus_candidate
+  verified_server_requirement: false
+  notes:
+  - 'Terminal display showed quoted DigDug.dll*; verify whether literal asterisk is part of filename: a literal * means NOT
+    a normal .dll filename. This mod is temporary.'
+- filename: Digitalroot.Valheim.ChainManager.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: conditional_or_optional_server_install
+  verified_server_requirement: false
+  notes: []
+- filename: EpicLoot.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: server_and_client_candidate
+  verified_server_requirement: false
+  notes:
+  - Core gameplay changing mod; confirm mod requirements and server-authoritative behavior against exact release.
+- filename: ExtraSlots.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: conditional_or_optional_server_install
+  verified_server_requirement: false
+  notes: []
+- filename: FirstPersonMode.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: client_focus_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: ForsakenPowersPlusRemastered.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: server_and_client_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: FrizzQOL.AreaRepair.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: client_focus_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: GooderAutoShield.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: client_focus_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: HoeRadius.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: client_focus_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: InstantlyDestroyBoatsAndCarts.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: client_focus_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: Jotunn.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: server_and_client_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: LzD_StationsCustomRanges.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: conditional_or_optional_server_install
+  verified_server_requirement: false
+  notes: []
+- filename: MonsterLabZ.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: server_and_client_candidate
+  verified_server_requirement: false
+  notes:
+  - Listed DLL size 199273472 bytes (~190 MiB); check RAM/load times but size alone is not an error.
+  - Core gameplay changing mod; confirm mod requirements and server-authoritative behavior against exact release.
+- filename: NewtonsoftJsonDetector.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: dependency_follow_consuming_plugins
+  verified_server_requirement: false
+  notes: []
+- filename: Newtonsoft.Json.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: dependency_follow_consuming_plugins
+  verified_server_requirement: false
+  notes: []
+- filename: NoFoodDegradation.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: conditional_or_optional_server_install
+  verified_server_requirement: false
+  notes: []
+- filename: NoMapCartographyTable.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: conditional_or_optional_server_install
+  verified_server_requirement: false
+  notes: []
+- filename: OdinCampsite.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: server_and_client_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: OdinRealmFishingMod.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: server_and_client_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: OreMines.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: server_and_client_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: ProjectileTweaks.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: client_focus_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: QuickStackStore.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: client_focus_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: Quiver.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: conditional_or_optional_server_install
+  verified_server_requirement: false
+  notes: []
+- filename: SmartRepair.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: client_focus_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: SolidHitboxes.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: conditional_or_optional_server_install
+  verified_server_requirement: false
+  notes: []
+- filename: Spearfishing.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: conditional_or_optional_server_install
+  verified_server_requirement: false
+  notes: []
+- filename: StakeTweaks.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: server_and_client_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: StarLevelSystem.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: server_and_client_candidate
+  verified_server_requirement: false
+  notes:
+  - Core gameplay changing mod; confirm mod requirements and server-authoritative behavior against exact release.
+- filename: TopMining.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: client_focus_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: VentureValheim.NoSeasonalRestrictions.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: conditional_or_optional_server_install
+  verified_server_requirement: false
+  notes: []
+- filename: XPortal.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: server_and_client_candidate
+  verified_server_requirement: false
+  notes: []
+- filename: YamlDotNetDetector.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: dependency_follow_consuming_plugins
+  verified_server_requirement: false
+  notes: []
+- filename: YamlDotNet.dll
+  observed_in_client_plugins_ls: 2026-10-21 21:11 local
+  deploy_hypothesis: dependency_follow_consuming_plugins
+  verified_server_requirement: false
+  notes: []
+deployment_classification_status:
+  user_task: Разделить на Server & Client, Server Only и Client Only для выделенного сервера. Последний чат оборвался до готового
+    подтверждённого списка.
+  status: unfinished — THIS IS THE FIRST TASK FOR THE NEXT CONVERSATION
+  warning: deploy_hypothesis values are NOT verified by plugin documentation. No mandatory server-only DLL can be asserted
+    based on client plugin list alone.
+  classes:
+    server_and_client: Must be installed on both machines if mod adds shared prefabs/items, changes networked world state,
+      or requires matching game logic; verify exact mod.
+    server_only: No mod yet positively confirmed server-only in supplied list; do not invent one.
+    client_only: UI, graphics, controls, convenience can often live only client-side; some still need server changes to operate
+      in multiplayer.
+    depends_or_optional: Some plugins sync settings if also installed on server but work client-side without it; libraries
+      must follow their consuming plugin.
+  special_notes:
+  - 'BossGate KickClientsWithoutMod=true: client plugin requirement on modded server is explicit in CFG.'
+  - EpicLoot/StarLevelSystem/MonsterLabZ/OreMines/Basements introduce synchronized game data; inspect documentation and test
+    on dedicated server.
+  - ExtraSlots/AutomaticFuel/Spearfishing can have optional server installs depending on synchronization and gameplay goals;
+    confirm exact build.
+  - Jotunn and Newtonsoft/YamlDotNet detectors are dependencies; do not deploy blindly to servers independent of requiring
+    mods.
+  - Do not confuse presence of DLL in user client directory with server requirement.
+mod_group_design:
+  gameplay_boss_raids:
+  - StarLevelSystem.dll
+  - BossGate.dll
+  - ForsakenPowersPlusRemastered.dll
+  loot_economy:
+  - EpicLoot.dll
+  - OreMines.dll
+  - BuyableExtractors.dll
+  creatures_tames:
+  - MonsterLabZ.dll
+  - BetterTames.dll
+  - NoFoodDegradation.dll
+  world_construction:
+  - BuildOrders.dll
+  - Basements.dll
+  - StakeTweaks.dll
+  - LzD_StationsCustomRanges.dll
+  - OdinCampsite.dll
+  - Advize_PlantEasily.dll
+  - HoeRadius.dll
+  - DigDug.dll*
+  storage_logistics:
+  - AzuCraftyBoxes.dll
+  - QuickStackStore.dll
+  - AutomaticFuel.dll
+  - ExtraSlots.dll
+  fishing_combat:
+  - OdinRealmFishingMod.dll
+  - Spearfishing.dll
+  - ProjectileTweaks.dll
+  - Quiver.dll
+  - SolidHitboxes.dll
+  other_quality_of_life:
+  - FirstPersonMode.dll
+  - AchievementEnabler.dll
+  - BetterPickupNotifications.dll
+  - ConfigurationManager.dll
+  - CarturCompassAndClock.dll
+  - XPortal.dll
+  - SmartRepair.dll
+  - GooderAutoShield.dll
+confirmed_and_selected_settings:
+  epicloot:
+    file: Valheim/config/randyknapp.mods.epicloot.cfg
+    magic_loot_balance: legendary
+    balance_template: legendary
+    item_drop_limits: BossKillUnlocksNextBiomeItems
+    global_drop_rate_modifier: '0.3'
+    item_drop_ratio: '0.4'
+    materials_drop_ratio: '0.35'
+    set_item_drop_chance: '0.02'
+    gated_bounty_mode: BossKillUnlocksNextBiomeBounties
+    bounty_limit_enabled: true
+    max_active_bounties: 5
+    remove_purchased_gambles: true
+    rune_removal_mode: Break
+    custom_patch_path: Valheim/config/EpicLoot/patches/vsp-gamer/loottables.json
+    custom_patch_description: Five tier tool item-set weight reductions to 0.1; config JSON syntax checked, runtime patch
+      application needs log confirmation.
+    other: EpicLoot baseconfig files were already committed in prior baseline; local loottables.json bytes now differ and
+      should NOT be blindly replaced.
+  starlevelsystem:
+    primary_cfg: Valheim/config/MidnightsFX.StarLevelSystem.cfg
+    yaml_root: Valheim/config/StarLevelSystem
+    auto_tune: FirstTimeSetup = Auto
+    max_creature_level: MaxLevel = 3
+    max_boss_level: MaxBossLevel = 3
+    spawn_rate_modifier_global: 1.1
+    spawn_rate_modifier_meaning: Creature spawn count multiplier, not star chance; 1.1 targets approx +10% additional spawns,
+      bosses and tames have exclusions.
+    main_cfg_enable_nemesis: EnableNemesisSystem = true
+    main_cfg_enable_location_reset: EnableLocationReset = false (leave disabled to protect worlds)
+    main_cfg_enable_zone_scaling: EnableZoneScalingBonus = true
+    boss_modifiers: EnableBossModifiers=true; MaxBossModifiersPerBoss=2; ChanceOfBossModifier=1
+    raids_main: UseVanillaRaidConfiguration=false; EnableCustomRaidsCompat=true (inert because CustomRaids DLL is absent)
+    raid_yaml_global_settings:
+      GlobalRaidIntervalScalar: 2
+      RaidCreatureDensity: 4
+    raid_density_note: RaidCreatureDensity is a record of quick-config selection; existing groups in RaidSettings.yaml encode
+      density, not a live multiplier.
+    loot_scaling: PerLevelLootScale=1, ScaleAllLootByLevel=false; could inflate vanilla drops; do not change without gameplay
+      data.
+    progression_features: Zone scaling enabled; high-level boss modifiers and Nemesis selected automatically.
+    discussion_status: User wants to postpone further tuning; SpawnRateModifier=1.0 suggested but NOT approved for immediate
+      commit.
+    local_diff: Local version LimitCreatureModifierPrefixes=0 vs Git=1, use player ZIP as latest local state, not Git.
+  monsterlabz:
+    file: Valheim/config/MonsterLabZ.cfg
+    reported_version_from_cfg: 3.0.15
+    creature_sections: 35
+    spawn_modes_all: Default
+    target_from_user: Reduce per-creature spawn chance by 75% (retain 25%), max nearby creature cap and group sizes approximately
+      half.
+    implementation: Committed; integer minima at 1 kept, so cannot guarantee exactly half of all living creatures.
+    creature_spawn_table:
+    - name: Ash Hatchling
+      spawn_mode: Default
+      spawn_chance_pct: 2.5
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: AshLands
+      max_spawn_interval: 1000
+    - name: Ash Huldra
+      spawn_mode: Default
+      spawn_chance_pct: 2.5
+      nearby_cap: 2
+      group_size: 1 - 2
+      biome: AshLands
+      max_spawn_interval: 500
+    - name: Ash Huldra Queen
+      spawn_mode: Default
+      spawn_chance_pct: 25.0
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: None
+      max_spawn_interval: 600
+    - name: Balder
+      spawn_mode: Default
+      spawn_chance_pct: 25.0
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: None
+      max_spawn_interval: 600
+    - name: Burning Dead
+      spawn_mode: Default
+      spawn_chance_pct: 25.0
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: None
+      max_spawn_interval: 600
+    - name: Charred Remains
+      spawn_mode: Default
+      spawn_chance_pct: 25.0
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: None
+      max_spawn_interval: 600
+    - name: Common Jellyfish
+      spawn_mode: Default
+      spawn_chance_pct: 13.75
+      nearby_cap: 3
+      group_size: 1 - 2
+      biome: Ocean
+      max_spawn_interval: 800
+    - name: Deep-Sea Molluscan
+      spawn_mode: Default
+      spawn_chance_pct: 3.75
+      nearby_cap: 2
+      group_size: 1 - 1
+      biome: Ocean
+      max_spawn_interval: 450
+    - name: Deep-Sea Serpent
+      spawn_mode: Default
+      spawn_chance_pct: 2.5
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: Ocean
+      max_spawn_interval: 800
+    - name: Drake
+      spawn_mode: Default
+      spawn_chance_pct: 2.5
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: None
+      max_spawn_interval: 1000
+    - name: Draugr Ship
+      spawn_mode: Default
+      spawn_chance_pct: 2.5
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: BlackForest
+      max_spawn_interval: 1000
+    - name: enemy_rainbowbutterfly
+      spawn_mode: Default
+      spawn_chance_pct: 12.5
+      nearby_cap: 2
+      group_size: 1 - 1
+      biome: Meadows
+      max_spawn_interval: 300
+    - name: Fire Golem
+      spawn_mode: Default
+      spawn_chance_pct: 1.25
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: AshLands
+      max_spawn_interval: 1000
+    - name: Frigga
+      spawn_mode: Default
+      spawn_chance_pct: 25.0
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: None
+      max_spawn_interval: 600
+    - name: Frozen Bones
+      spawn_mode: Default
+      spawn_chance_pct: 7.5
+      nearby_cap: 2
+      group_size: 1 - 2
+      biome: Mountain
+      max_spawn_interval: 350
+    - name: Fuling Dwarf
+      spawn_mode: Default
+      spawn_chance_pct: 6.25
+      nearby_cap: 4
+      group_size: 2 - 3
+      biome: Plains
+      max_spawn_interval: 300
+    - name: Fuling Dwarf Shaman
+      spawn_mode: Default
+      spawn_chance_pct: 2.5
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: Plains
+      max_spawn_interval: 450
+    - name: Fuling Ship
+      spawn_mode: Default
+      spawn_chance_pct: 2.5
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: Plains
+      max_spawn_interval: 1000
+    - name: Green Butterfly
+      spawn_mode: Default
+      spawn_chance_pct: 12.5
+      nearby_cap: 2
+      group_size: 1 - 1
+      biome: BlackForest
+      max_spawn_interval: 300
+    - name: Ice Golem
+      spawn_mode: Default
+      spawn_chance_pct: 1.25
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: DeepNorth
+      max_spawn_interval: 1000
+    - name: Jumping Spider
+      spawn_mode: Default
+      spawn_chance_pct: 3.75
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: Meadows
+      max_spawn_interval: 600
+    - name: Kraken
+      spawn_mode: Default
+      spawn_chance_pct: 0.5
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: Ocean
+      max_spawn_interval: 600
+    - name: Loot Fuling Dwarf
+      spawn_mode: Default
+      spawn_chance_pct: 1.25
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: Plains
+      max_spawn_interval: 300
+    - name: ML_HailStorm
+      spawn_mode: Default
+      spawn_chance_pct: 1.25
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: Mountain, DeepNorth
+      max_spawn_interval: 1000
+    - name: ML_LightningStorm
+      spawn_mode: Default
+      spawn_chance_pct: 1.25
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: Meadows, Plains
+      max_spawn_interval: 1000
+    - name: ML_MeteorShower
+      spawn_mode: Default
+      spawn_chance_pct: 1.25
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: AshLands
+      max_spawn_interval: 1000
+    - name: Molluscan
+      spawn_mode: Default
+      spawn_chance_pct: 6.25
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: BlackForest
+      max_spawn_interval: 450
+    - name: Obsidian Golem
+      spawn_mode: Default
+      spawn_chance_pct: 25.0
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: None
+      max_spawn_interval: 600
+    - name: Rancid Remains
+      spawn_mode: Default
+      spawn_chance_pct: 7.5
+      nearby_cap: 2
+      group_size: 1 - 2
+      biome: Swamp
+      max_spawn_interval: 350
+    - name: Silkworm Moth
+      spawn_mode: Default
+      spawn_chance_pct: 12.5
+      nearby_cap: 2
+      group_size: 1 - 1
+      biome: Mistlands
+      max_spawn_interval: 300
+    - name: Skeleton
+      spawn_mode: Default
+      spawn_chance_pct: 7.5
+      nearby_cap: 2
+      group_size: 1 - 1
+      biome: BlackForest
+      max_spawn_interval: 350
+    - name: Spiderling
+      spawn_mode: Default
+      spawn_chance_pct: 25.0
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: None
+      max_spawn_interval: 600
+    - name: Surtr
+      spawn_mode: Default
+      spawn_chance_pct: 25.0
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: None
+      max_spawn_interval: 600
+    - name: Tree Spider
+      spawn_mode: Default
+      spawn_chance_pct: 2.5
+      nearby_cap: 2
+      group_size: 1 - 1
+      biome: Meadows
+      max_spawn_interval: 600
+    - name: Wraith
+      spawn_mode: Default
+      spawn_chance_pct: 17.5
+      nearby_cap: 1
+      group_size: 1 - 1
+      biome: Swamp
+      max_spawn_interval: 300
+    runtime_test: pending, check for spawned creature counts and no unexpected extra creatures
+  better_tames:
+    file: Valheim/config/xtav1m.BetterTames.cfg
+    version_from_cfg: 0.9.0
+    protect_all: 'false'
+    recovery_seconds: 180
+    individual_protection_key: Alt+E; while looking at a tame, toggle active protection; naming by itself does NOT automatically
+      protect
+    butcher_knife_behavior: Can kill even protected tames in existing mod implementation; user explicitly decided to SKIP
+      patching this.
+    damage_nerf_of_immortal_tames: Explicitly skipped at user request; do not reopen automatically.
+    teleport_lost_tames: true
+    teleport_distance_m: 30
+    teleport_tames_key: Alt+H
+    tames_follow_through_portals: true
+    big_tames_enter_dungeons: false
+    wild_and_tamed_eat_from_chests: true
+    chest_range_m: 10
+    only_food_chests: false
+    offspring_star_chance_percent: 25
+    stars_gained_from_kills: true
+    runtime_verified: Individual protection works; 180s recovery works; butcher knife kills a protected animal.
+  bossgate:
+    file: Valheim/config/Igao.BossGate.cfg
+    version_from_cfg: 1.1.2
+    metal_portal_unlock_after_boss: true
+    previous_boss_required: false
+    per_player_progress: false
+    kick_clients_without_mod: true
+    compat_testing: XPortal progression and metals before/after boss unverified.
+  forsaken_powers_plus:
+    file: Valheim/config/Turbero.ForsakenPowersPlusRemastered.cfg
+    cooldown_seconds: 1200
+    duration_seconds: 300
+    activation_key: F8
+    reset_key: None
+    all_buffs_at_once: 'Off'
+    passive_mode: 'Off'
+    power_reset_function_setting: On (but reset hotkey None)
+  ore_mines:
+    file: Valheim/config/blacks7ar.OreMines.cfg
+    version_from_cfg: 1.2.1
+    reset_enabled: 'On'
+    reset_in_game_days: 30
+    ore_vein_spawn_chance_percent: 35
+    consumable_keys: 'Off'
+    world_location_risk: Back up world; new locations or generated ore can persist after removing mod.
+  stake_tweaks:
+    file: Valheim/config/com.toolkings.staketune.cfg
+    version_from_cfg: 1.0.0
+    damaging_stakes: Ashwood, Dvergr Sharp Stakes, Sharp Stakes each damage x2.5, health x3, damage taken x1, refund all materials=true
+    stakewalls: Dvergr and regular walls health x3, damage taken x1, refund all materials=true
+    lower_durability_proposal: Proposal only, not user-approved; no edit in Git.
+  azucraftyboxes:
+    file: Valheim/config/Azumatt.AzuCraftyBoxes.cfg
+    container_range_m: 50
+    user_changed_locally_then_git_synced: true
+  quickstackstore:
+    file: Valheim/config/goldenrevolver.quick_stack_store.cfg
+    stack_range_m: 40
+    restock_range_m: 40
+    current_local_TrashKeybind: None
+    git_TrashKeybind: blank
+  automaticfuel:
+    file: Valheim/config/TastyChickenLegs.AutomaticFuel.cfg
+    smelter_chest_range_m: 15
+    current_local_toggle_hotkey: F10
+    git_toggle_hotkey: (blank)
+    warning: F10 clashes with PlantEasily EnableSnappingKey F10 when both modifiers active.
+  planteasily:
+    file: Valheim/config/advize.PlantEasily.cfg
+    local_enable_mod_key: None
+    git_enable_mod_key: (blank)
+    enable_snapping_key: F10
+  buildorders:
+    file: Valheim/config/com.quad.buildorders.cfg
+    plan_key: F7
+    build_all_radius_m: 24
+    local_bridge_mode:
+      Width: '4'
+      Material: CoreWood
+      Ends: Steps
+    git_bridge_mode:
+      Width: '2'
+      Material: Wood
+      Ends: Sloped
+    status: local differs from Git; user chose to build fences manually per piece.
+  digdug:
+    file: Valheim/config/com.antigravity.valheim.digdug.cfg
+    use_case: Temporary ditch/trench construction then uninstall
+    menu_key: LeftAlt
+    available_modes:
+    - Line
+    - Rectangle
+    - Trench
+    - Wall
+    unwanted_hud: 'Facing: North (0°); cfg has no validated hide option; no custom HUD patch commissioned.'
+    local_window_offset:
+      WindowOffsetX: 435
+      WindowOffsetY: 37
+    git_window_offset:
+      WindowOffsetX: -1
+      WindowOffsetY: -1
+    plugin_filename_warning: Listing displayed quoted DigDug.dll*; confirm actual name.
+  spear_and_fishing:
+    spearfishing_file: Valheim/config/org.bepinex.plugins.spearfishing.cfg
+    enable_harpoons: true
+    enable_spears: false
+    enable_bows: true
+    enable_crossbows: true
+    owner: OdinRealmFishing handles spear fishing; avoid overlapping spear mechanics.
+    quiver: ground arrows kept 100%, creature arrows kept 50%, bolts supported, fire arrows burn up, visual quiver shown.
+  stations_and_inventory:
+    stations_custom_ranges_enabled: true
+    workbench_base_range_m: 60
+    crafting_chest_range_m: 50
+    extrslots_lightened_first_row_index: 0
+    food_keys:
+    - Alt+4
+    - Alt+5
+    - Alt+6
+    buildorders_plan_key: F7
+  other_quality_of_life:
+    hoeradius_debug: false
+    no_food_degradation_installed: true
+    automaticfuel_installed: true
+    firstperson_installed: true
+    achievement_enabler_installed: true
+specific_conflicts_and_checks:
+- id: KEY-F10
+  severity: observed_static_conflict
+  mods:
+  - AutomaticFuel
+  - PlantEasily
+  evidence: LOCAL AutomaticFuel Mod ToggleKey=F10, PlantEasily EnableSnappingKey=F10; Git AutomaticFuel key is blank.
+  recommendation: Choose alternate key or blank for AutomaticFuel after user approval.
+- id: SLS-RAID-CUSTOM
+  severity: resolved_in_list
+  mods:
+  - StarLevelSystem
+  - Custom Raids
+  evidence: Custom Raids DLL absent in latest client ls. Configs archived in Git. SLS EnableCustomRaidsCompat=true has no
+    effect without CustomRaids DLL.
+  recommendation: Do not reinstall CustomRaids DLL. Dedicated server must also be checked.
+- id: SLS-MONSTERLABZ
+  severity: runtime_unverified
+  mods:
+  - StarLevelSystem
+  - MonsterLabZ
+  evidence: MonsterLabZ spawn chances reduced, SLS global SpawnRateModifier=1.1.
+  recommendation: Measure actual spawns; consider SLS 1.0 only after explicit user approval.
+- id: SLS-EPICLOOT
+  severity: runtime_unverified
+  mods:
+  - StarLevelSystem
+  - EpicLoot
+  evidence: SLS loot quantity scaling and EpicLoot independent magic tables.
+  recommendation: Test drops from 0-star/1-star/2-star creatures and boss rewards; watch both logs.
+- id: SLS-BETTERTAMES
+  severity: runtime_unverified
+  mods:
+  - StarLevelSystem
+  - BetterTames
+  evidence: Both influence creature star levels; BetterTames awards stars to tames.
+  recommendation: Test star gains, level scaling, and protection on a disposable test tame.
+- id: PORTAL-GATE
+  severity: runtime_unverified
+  mods:
+  - BossGate
+  - XPortal
+  - BetterTames
+  evidence: BossGate enforces boss-gated portal items, XPortal changes destinations, BetterTames follows through portals.
+  recommendation: Test metals before and after biome boss, then test following tame through portal.
+- id: KEY-ALT
+  severity: likely_context_separated
+  mods:
+  - DigDug
+  - HoeRadius
+  - QuickStackStore
+  - BetterTames
+  evidence: DigDug MenuKey=LeftAlt; HoeRadius scroll modifier=LeftAlt; QuickStack favorite toggle uses Alt; tames use Alt+E/F/G/H.
+  recommendation: Test interactions with pickaxe/hoe/container, especially while holding Alt.
+- id: KEY-FIGHT
+  severity: input_overlap_possible
+  mods:
+  - EpicLoot
+  - BetterTames
+  evidence: EpicLoot ability keys g,h,j; BetterTames Alt+G and Alt+H.
+  recommendation: Check Alt+G and Alt+H do not trigger unmodified G/H abilities.
+- id: SLS-WORLD-RESET
+  severity: mitigated
+  mods:
+  - StarLevelSystem
+  - OreMines
+  - Basements
+  - DigDug
+  evidence: SLS EnableLocationReset=false; OreMines own mine reset enabled at 30 days.
+  recommendation: Preserve SLS world-reset OFF until tested on isolated backup.
+- id: EPICLOOT-PATCH
+  severity: unverified_runtime
+  mods:
+  - EpicLoot
+  evidence: JSON patch decreases tool weights at Tiers 0,1,2,3,6.
+  recommendation: Check BepInEx log confirms patch applied; base loottables is locally different, audit version.
+- id: STACKED-BENEFITS
+  severity: design_choice
+  mods:
+  - AzuCraftyBoxes
+  - QuickStackStore
+  - AutomaticFuel
+  - BetterTames
+  evidence: 'Chest radii are separate: 50m,40m,15m,10m.'
+  recommendation: Do not force all to one number; they implement different actions.
+- id: WORLD-CONTENT
+  severity: save_compatibility_warning
+  mods:
+  - MonsterLabZ
+  - OreMines
+  - OdinCampsite
+  - Basements
+  evidence: New prefabs/structures potentially persist in world save.
+  recommendation: Save backup before server migration or mod removal.
+open_tasks_and_decisions:
+  highest_priority:
+  - task: Classify each installed DLL Server & Client / Server Only / Client Only, with verified source and mandatory vs optional
+      status
+    status: unresolved
+    next: Look up exact Thunderstore/GitHub mod docs; produce both plugin deployment folders, server/test-safety notes, required
+      dependencies.
+  - task: Reconcile config.zip against Git, preserve local edits
+    status: unresolved
+    next: Review local 43 mismatches (especially 8 non-localization files) with user, then optionally cherry-pick only desired
+      settings into Git.
+  - task: Review F10 AutomaticFuel vs PlantEasily
+    status: observed_conflict
+    next: Offer single-key fix, no silent change.
+  - task: Confirm runtime with BepInEx/LogOutput.log
+    status: unresolved
+    next: Check plugins load on client and dedicated server; detect version, RPC, missing prefab, Harmony errors.
+  later:
+  - task: StarLevelSystem auto-tune boss, raids, loot, zone scaling, SpawnRateModifier=1.0 proposal
+    status: explicitly_deferred
+  - task: Measure MonsterLabZ population and EpicLoot drop behavior
+    status: testing_pending
+  - task: Verify BossGate + XPortal portal metals + pet teleport
+    status: testing_pending
+  - task: Remove temporary DigDug DLL after trench built
+    status: future_cleanup
+  - task: Consider Stake Tweaks durability and economic balance
+    status: proposal_only
+  explicitly_skipped:
+  - task: Block butcher knife killing individually protected tames
+    reason: User explicitly said skip.
+  - task: Reduce battle damage from nearly immortal protected tames
+    reason: User explicitly said skip.
+  - task: Line-placing fences with new mod
+    reason: User accepted placing them individually.
+  - task: NPC guard/mannequin mod
+    reason: User decided to skip.
+  - task: BossAdd tactical boss overhaul
+    reason: Preferred StarLevelSystem.
+  experimental_not_active: Valheim/experimental/BetterTamesNoButcherBypass/ contains source-only prototype, NOT compiled DLL
+    and NOT commissioned for installation.
+github_change_history:
+- commit: eab8e331310b5015a7a60046732e763e20ae1cfc
+  summary: Initial Valheim config snapshot + README + gitignore; tracked config files.
+- commit: eacbf42a5e109ef20ef87b53c26f094003a5e04c
+  summary: ExtraSlots hotkeys, BossGate gated metals, BetterTames protection/recovery, Spearfishing roles, EpicLoot legendary
+    but rare and JSON patches.
+- commit: 576904701513e127f67757a3d30f10159d6c9e5f
+  summary: Archived four Custom Raids configs under folder Нашли лучшего кандидата/Custom Raids; removed from active Valheim/config.
+- commit: c28b23a7957593827be8d7924003067b731bc536
+  summary: MonsterLabZ spawn reduction; AzuCraftyBoxes 50m; experimental BetterTames knife patch source; audit.
+- commit: f4fe02558abbc271c14dd14241456b4314236bcd
+  summary: Imported auto-configured StarLevelSystem primary CFG + YAMLs + 35 localization files; excluded SavedData.
+- commit: a13096dc8a2acb419319c823cd3a8067985c9b58
+  summary: EpicLoot gated bounties, enabled max 5 bounty limit, removed purchased gambles; OreMines reset=30 days, ore chance=35;
+    HoeRadius debug OFF.
+repository_docs_at_previous_head:
+- Valheim/README.md
+- Valheim/CONFIG_PATCH_2026-10-21.md
+- Valheim/CONFIG_FOLLOWUP_2026-10-21.md
+- Valheim/STAR_LEVEL_SYSTEM_2026-10-21.md
+- Valheim/audit/MonsterLabZ_spawn_changes_2026-10-21.json
+local_vs_git_snapshot_audit:
+  reference_git_head: a13096dc8a2acb419319c823cd3a8067985c9b58
+  snapshot_safe_files_total: 104
+  exactly_matched: 61
+  different: 43
+  missing_from_git: 0
+  difference_paths_without_localizations:
+    Valheim/config/com.quad.buildorders.cfg:
+      active_changes_local_vs_git:
+      - key: '[Bridge] / Width'
+        git: '2'
+        local: '4'
+      - key: '[Bridge] / Material'
+        git: Wood
+        local: CoreWood
+      - key: '[Bridge] / Ends'
+        git: Sloped
+        local: Steps
+    Valheim/config/advize.PlantEasily.cfg:
+      active_changes_local_vs_git:
+      - key: '[Controls] / EnableModKey'
+        git: (blank)
+        local: None
+    Valheim/config/com.antigravity.valheim.digdug.cfg:
+      active_changes_local_vs_git:
+      - key: '[UI] / WindowOffsetX'
+        git: '-1'
+        local: '435'
+      - key: '[UI] / WindowOffsetY'
+        git: '-1'
+        local: '37'
+    Valheim/config/TastyChickenLegs.AutomaticFuel.cfg:
+      active_changes_local_vs_git:
+      - key: '[General] / Mod ToggleKey'
+        git: (blank)
+        local: F10
+    Valheim/config/MidnightsFX.StarLevelSystem.cfg:
+      active_changes_local_vs_git:
+      - key: '[Modifiers] / LimitCreatureModifierPrefixes'
+        git: '1'
+        local: '0'
+    Valheim/config/goldenrevolver.quick_stack_store.cfg:
+      active_changes_local_vs_git:
+      - key: '[5 - Trashing] / TrashKeybind'
+        git: (blank)
+        local: None
+    Valheim/config/StarLevelSystem/RaidSettings.yaml:
+      difference: bytes differ; YAML semantics not yet fully reconciled, do not claim equivalent
+    Valheim/config/EpicLoot/baseconfig/loottables.json:
+      difference: bytes differ, same approximate size; inspect semantic JSON difference before syncing
+  localization_changes:
+    count: 35
+    paths:
+    - Valheim/config/StarLevelSystem/localizations/Italian.json
+    - Valheim/config/StarLevelSystem/localizations/English.json
+    - Valheim/config/StarLevelSystem/localizations/Turkish.json
+    - Valheim/config/StarLevelSystem/localizations/Ukrainian.json
+    - Valheim/config/StarLevelSystem/localizations/French.json
+    - Valheim/config/StarLevelSystem/localizations/Finnish.json
+    - Valheim/config/StarLevelSystem/localizations/Chinese_Trad.json
+    - Valheim/config/StarLevelSystem/localizations/Romanian.json
+    - Valheim/config/StarLevelSystem/localizations/Icelandic.json
+    - Valheim/config/StarLevelSystem/localizations/Norwegian.json
+    - Valheim/config/StarLevelSystem/localizations/Hungarian.json
+    - Valheim/config/StarLevelSystem/localizations/Greek.json
+    - Valheim/config/StarLevelSystem/localizations/Slovak.json
+    - Valheim/config/StarLevelSystem/localizations/Georgian.json
+    - Valheim/config/StarLevelSystem/localizations/Bulgarian.json
+    - Valheim/config/StarLevelSystem/localizations/Hindi.json
+    - Valheim/config/StarLevelSystem/localizations/Serbian.json
+    - Valheim/config/StarLevelSystem/localizations/Korean.json
+    - Valheim/config/StarLevelSystem/localizations/Thai.json
+    - Valheim/config/StarLevelSystem/localizations/Swedish.json
+    - Valheim/config/StarLevelSystem/localizations/Danish.json
+    - Valheim/config/StarLevelSystem/localizations/Czech.json
+    - Valheim/config/StarLevelSystem/localizations/German.json
+    - Valheim/config/StarLevelSystem/localizations/Croatian.json
+    - Valheim/config/StarLevelSystem/localizations/Russian.json
+    - Valheim/config/StarLevelSystem/localizations/Macedonian.json
+    - Valheim/config/StarLevelSystem/localizations/Chinese.json
+    - Valheim/config/StarLevelSystem/localizations/Polish.json
+    - Valheim/config/StarLevelSystem/localizations/Portuguese_European.json
+    - Valheim/config/StarLevelSystem/localizations/Portuguese_Brazilian.json
+    - Valheim/config/StarLevelSystem/localizations/Lithuanian.json
+    - Valheim/config/StarLevelSystem/localizations/Japanese.json
+    - Valheim/config/StarLevelSystem/localizations/Dutch.json
+    - Valheim/config/StarLevelSystem/localizations/Latvian.json
+    - Valheim/config/StarLevelSystem/localizations/Spanish.json
+    note: Byte hashes changed for all SLS localization files; likely version-generated strings; semantic review not yet done.
+  policy: Do not overwrite Git configs with local zip until user reviews 8 non-localization differences; especially ensure
+    no game state or player files are committed.
+new_chat_start_here:
+  suggested_opening: Продолжить vsp-gamer Valheim. Прочти Valheim/HANDOFF_2026-10-21.yaml в Git и раздели 48 DLL по Server
+    & Client, Server Only и Client Only; используй самые новые ls и config.zip, проверяй требования каждого мода, прежде чем
+    давать команды mv/cp.
+  execution_order:
+  - Read latest Git main handoff and audit first; local ZIP is a separately supplied source and may have changed.
+  - Verify DLL presence and exact plugin metadata; check suspicious DigDug.dll* filename.
+  - Confirm per-mod server/client obligations with exact versions, especially libraries and world content.
+  - Prepare server install set, client install set, and optional client-only conveniences; do not treat hypotheses as verified.
+  - Do not commit changed configs unless the user selects the local differences to keep.
+  - After deployment run same plugin inventories and BepInEx logs on both sides; test fresh world backup.
