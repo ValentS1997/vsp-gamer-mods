@@ -1,0 +1,38 @@
+{
+  "TargetFile": "loottables.json",
+  "Author": "vsp-gamer-mods",
+  "Priority": 500,
+  "RequireAll": true,
+  "Patches": [
+    {
+      "Path": "$.ItemSets[?(@.Name == 'Tier0Everything')].Loot[?(@.Item == 'Tier0Tools')]",
+      "Action": "Add",
+      "PropertyName": "Weight",
+      "Value": 0.1
+    },
+    {
+      "Path": "$.ItemSets[?(@.Name == 'Tier1Everything')].Loot[?(@.Item == 'Tier1Tools')]",
+      "Action": "Add",
+      "PropertyName": "Weight",
+      "Value": 0.1
+    },
+    {
+      "Path": "$.ItemSets[?(@.Name == 'Tier2Everything')].Loot[?(@.Item == 'Tier2Tools')]",
+      "Action": "Add",
+      "PropertyName": "Weight",
+      "Value": 0.1
+    },
+    {
+      "Path": "$.ItemSets[?(@.Name == 'Tier3Everything')].Loot[?(@.Item == 'Tier3Tools')]",
+      "Action": "Add",
+      "PropertyName": "Weight",
+      "Value": 0.1
+    },
+    {
+      "Path": "$.ItemSets[?(@.Name == 'Tier6Everything')].Loot[?(@.Item == 'Tier6Tools')]",
+      "Action": "Add",
+      "PropertyName": "Weight",
+      "Value": 0.1
+    }
+  ]
+}
