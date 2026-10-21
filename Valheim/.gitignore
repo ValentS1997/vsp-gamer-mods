@@ -1,0 +1,10 @@
+# Valheim / BepInEx transient state (not configuration)
+config/BuildOrders/*.txt
+config/EpicLoot/BountySaves/
+config/EpicLoot/configstate.json
+config/.GooderAutoShield.json
+config/QuickStackStore_player_*.dat
+config/**/*.log
+config/*.log
+config/**/*.tmp
+config/*.tmp
