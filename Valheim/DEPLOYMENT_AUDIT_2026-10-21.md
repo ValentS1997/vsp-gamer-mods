@@ -1,5 +1,8 @@
 # Valheim vsp-gamer — evidence-based deployment audit (2026-10-21)
 
+> **SUPERSEDED FOR DEPLOYMENT CHOICES:** [Final user-approved policy](DEPLOYMENT_POLICY_2026-10-21.md) requires **40 shared**, permits **7 optional client**, and excludes **1 DigDug**. The preliminary candidates and approvals described below are archived for technical evidence only, not instructions to move files.
+
+
 > **PRELIMINARY — DO NOT DEPLOY AS A LOCKFILE OR AUTOMATED COPY PLAN.**
 > This file documents current vendor documentation + user-selected deployment policy; no checksums, installed package versions, dedicated server log or join/leave tests were provided. All version and runtime compatibility claims remain [Needs confirmation].
 
