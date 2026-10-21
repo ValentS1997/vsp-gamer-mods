@@ -1,6 +1,8 @@
 # Valheim vsp-gamer — CONTINUE HERE (2026-10-21)
 
-> **CURRENT DEPLOYMENT POLICY (user-approved, 2026-10-21):** [40 mandatory Server/Client + 7 optional Only Client + 1 excluded DigDug](DEPLOYMENT_POLICY_2026-10-21.md). This is the authoritative intent and overrides all preliminary 24/24 and 15/7/7/11 categorizations below. Headless-server runtime compatibility remains unverified.
+> **CURRENT DEPLOYMENT POLICY (updated 2026-10-22):** [42 mandatory Server/Client + 7 optional Only Client + 1 excluded DigDug](DEPLOYMENT_POLICY_2026-10-21.md). Original 40-DLL manifest remains as a dated baseline: add FiresGhettoNetworking and HipLantern; **replace NoMapCartographyTable.dll with BlindCartographer.dll** (one-for-one, no count change). Quads Companion is only a concept, not installed. Dedicated-server compatibility unverified; host is the user's own game instance.
+> **Navigation mod replacement (2026-10-22):** Active manifest and [README](README.md) now use [BlindCartographer](https://thunderstore.io/c/valheim/p/NightKosh/BlindCartographer/) 1.0.3 rather than NoMapCartographyTable. In client/game installs remove `NoMapCartographyTable.dll` and install `BlindCartographer.dll` (don't run both); old `com.dreich.nomapcartographytable.cfg` is deleted from Git, and [nightkosh.BlindCartographer.cfg](config/nightkosh.BlindCartographer.cfg) is added. `EnableCartographyTableInNoMapMode = true`, `Left Alt + Y` makes a pin. Git changes do NOT install the DLL on players' Linux game copies.
+
 
 
 This public repository contains **configuration baselines, not a deployable server pack, not game saves and not a verified BepInEx plugin lockfile**.
