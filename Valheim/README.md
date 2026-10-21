@@ -4,8 +4,8 @@
 
 **Основа:** Valheim **1.0.20** (network 41) · Linux / Steam · **BepInEx**.  
 **Состояние документации:** 21 октября 2026 года.  
-**Политика сборки:** **40 Server / Client**, **7 Only Client (по желанию)**, **0 Only Server**.  
-**Исходный инвентарь:** 48 записей DLL, из них `DigDug.dll*` исключён. `Custom Raids` выведен из активной сборки.
+**Состав сборки:** **42 Server / Client**, **7 Only Client (по желанию)**, **0 Only Server**; два новых мода — FiresGhettoNetworking и HipLantern. Обязательность установки указана по политике проекта, runtime-тест dedicated server остаётся открытым.  
+**Исходный инвентарь (21.10.2026):** 48 записей DLL, из них `DigDug.dll*` исключён; **после добавления 2 новых модов:** 50 учтённых записей (42 общих + 7 необязательных + 1 исключённая). `Custom Raids` выведен из активной сборки.
 
 Это **каталог состава и настроек**, а не архив готовых DLL и не список проверенных совместимых версий. Названия DLL взяты из пользовательского инвентаря; ссылки ведут на **страницы загрузки** (не фиксированные версии). Под «Server / Client» понимается **обязательность по политике сборки**, а не обещание автора мода о поддержке headless dedicated server. Это ещё проверяется по логам и игровым тестам.
 
@@ -21,7 +21,7 @@
 
 В столбце **«Что изменено в конфиге»** записаны известные пользовательские значения или решения из истории сборки. Формулировка **«не зафиксированы»** не означает, что мод обязательно работает с настройками по умолчанию: без сравнения с исходной версией автора это утверждать нельзя. Некоторые локальные значения могут отличаться от файлов Git; [аудит различий](LOCAL_SNAPSHOT_AUDIT_2026-10-21.yaml) сохранён отдельно.
 
-### Server / Client — обязательный комплект (40 DLL)
+### Server / Client — обязательный комплект (42 DLL)
 
 **Тип:** `S/C` — Server / Client (обязательно на сервере и у игроков); `C` — Only Client (необязательный клиентский мод). Ссылки скачивания размещены вместе с именами модов, типы — рядом с авторами. Так для описания и изменений конфигурации остаётся больше места.
 
@@ -40,9 +40,11 @@
 | **Chain Manager**<br><sub><code>Digitalroot.<wbr>Valheim.<wbr>Chain<wbr>Manager.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/Digitalroot/Chain_Manager/) | Digitalroot<br>**S/C** | Позволяет получать/изготавливать цепи без прежних ограничений. | Индивидуальные правки не зафиксированы. |
 | **EpicLoot**<br><sub><code>Epic<wbr>Loot.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/RandyKnapp/EpicLoot/) | RandyKnapp<br>**S/C** | Магические предметы, зачарования и награды с прогрессией по боссам. | Профиль **Legendary**; глобальный дроп ×0.3, предметы 0.4, материалы 0.35, сеты 0.02; максимум 5 заданий; JSON-патч для инструментов. |
 | **ExtraSlots**<br><sub><code>Extra<wbr>Slots.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/shudnal/ExtraSlots/) | shudnal<br>**S/C** | Отдельные слоты экипировки, еды и боеприпасов. | Клавиши еды `Alt+4/5/6`; отключено облегчение веса в слотах. |
+| **FiresGhettoNetworking**<br><sub><code>VAGhettoNetworking.dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/VerdantsAscent/FiresGhettoNetworking/) | VerdantsAscent<br>**S/C** | Комплексная сетевая оптимизация: сжатие, очереди и автоподстройка; дополнительные функции симуляции на dedicated server. | В конфиге v1.5.65 включены `Server-Side Simulation` и обе экспериментальные настройки `ZDO Ownership Transfer`; режим Selective имеет приоритет. Для обычного игрового хоста серверные режимы не подтверждены. |
 | **Forsaken<wbr>Powers<wbr>Plus<wbr>Remastered**<br><sub><code>Forsaken<wbr>Powers<wbr>Plus<wbr>Remastered.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/turbero/ForsakenPowersPlusRemastered/) | turbero<br>**S/C** | Настройка силы Отрёкшихся: время действия, откат и управление. | Действие **300 с**, откат **1200 с**; активация `F8`, сброс без горячей клавиши. |
 | **Area Repair**<br><sub><code>Frizz<wbr>QOL.<wbr>Area<wbr>Repair.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/FrizzQOL/Area_Repair/) | FrizzQOL<br>**S/C** | Массовый ремонт построек в выбранной области. | Отдельные правки не задокументированы. |
 | **HoeRadius**<br><sub><code>Hoe<wbr>Radius.<wbr>dll</code></sub><br>[Скачать](https://github.com/aedenthorn/ValheimMods) | aedenthorn<br>**S/C** | Изменение радиуса воздействия мотыги на местность. | Отключена отладочная информация (`debug=false`). |
+| **HipLantern**<br><sub><code>HipLantern.dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/shudnal/HipLantern/) | shudnal<br>**S/C** | Поясной фонарь с постоянным освещением, топливом, теплом и отдельным слотом через ExtraSlots. | `ExtraSlots - Create slot = true`; `Available after discovery = false`; `Scale = 0.5` (**×2**); топливо **240 минут**. Git-конфиг восстановлен из старой загрузки и согласованных правок, точная локальная копия не загружена. |
 | **Instantly Destroy Boats And Carts**<br><sub><code>Instantly<wbr>Destroy<wbr>Boats<wbr>And<wbr>Carts.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/Goldenrevolver/Instantly_Destroy_Boats_And_Carts/) | Goldenrevolver<br>**S/C** | Быстрое разрушение лодок и телег. | Отдельные правки не зафиксированы. |
 | **Jötunn / Valheim Library**<br><sub><code>Jotunn.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/ValheimModding/Jotunn/) | ValheimModding<br>**S/C** | Библиотека API для модов с предметами, рецептами и строительными объектами. | Отдельного пользовательского конфига в снимке нет. |
 | **Stations Custom Ranges**<br><sub><code>Lz<wbr>D_<wbr>Stations<wbr>Custom<wbr>Ranges.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/LzD/LzD_Stations_Custom_Ranges/) | LzD<br>**S/C** | Настраивает дистанции производственных станций и связанных взаимодействий. | Включён; радиус верстака **60 м**, крафт из сундуков **50 м**. |
@@ -81,6 +83,9 @@
 | **ConfigurationManager**<br><sub><code>Configuration<wbr>Manager.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/shudnal/ConfigurationManager/) | shudnal<br>**C** | Игровой редактор настроек BepInEx и модов. | Индивидуальные правки не зафиксированы. |
 | **FirstPersonMode**<br><sub><code>First<wbr>Person<wbr>Mode.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/Azumatt/FirstPersonMode/) | Azumatt<br>**C** | Вид от первого лица. | Индивидуальные правки не зафиксированы. |
 | **GooderAutoShield**<br><sub><code>Gooder<wbr>Auto<wbr>Shield.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/MainStreetGaming/GooderAutoShield/) | MainStreetGaming (публикация; HumanSandbag)<br>**C** | Автоматическое экипирование подходящего щита. | Индивидуальные правки не зафиксированы; состояние выбранного щита персональное и не публикуется. |
+
+
+**Новые конфигурации (22.10.2026):** [FiresGhettoNetworking v1.5.65](config/com.Fire.FiresGhettoNetworkMod.cfg) сохранён точно по последней загрузке пользователя; [HipLantern v1.1.14](config/shudnal.HipLantern.cfg) восстановлен из ранее приложенного конфига с согласованными изменениями после скриншота. Фактический текущий файл HipLantern с ПК повторно не присылался. В `FiresGhettoNetworking` оба experimental ownership-переключателя остаются `true` из присланного файла; режим Selective имеет приоритет, полноценная серверная симуляция предназначена для dedicated server.
 
 ## Исключения и технические примечания
 
