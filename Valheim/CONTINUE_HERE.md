@@ -21,3 +21,9 @@ Detected local keyboard conflict: AutomaticFuel toggle `F10` versus PlantEasily 
 ## Evidence and safety policy
 
 The YAML is a precise snapshot **as of 2026-10-21**, grounded in user-provided `ls` and uploaded `config.zip`, plus GitHub `main` from before this documentation commit. It **cannot confirm that each DLL loaded or runs correctly on a dedicated server**. Require BepInEx client/server logs and backup of world/character before installations, removals or terrain changes. No personal JSON, SavedData, player IDs, bounty ledgers or world-state files are included. Do not use the archived Custom Raids configs as active ones. Do not compile the experimental BetterTames butcher workaround: the user declined that change.
+
+## User clarifications (2026-10-21, continuation)
+
+- **AutomaticFuel / PlantEasily F10 collision:** user decided to change `AutomaticFuel` config `[General] / Mod ToggleKey` to `None` themselves. **Decision confirmed; execution and runtime effect NOT yet verified**. Last supplied local snapshot still has `F10`; Git baseline has a blank value. Keep PlantEasily `EnableSnappingKey=F10`. Do not claim the conflict has already been eliminated, and do not silently edit the live config.
+- **DigDug.dll***: the trailing literal `*` is an **intentional user-controlled disable-by-rename technique**; the user retains the file instead of removing it. Treat the plugin as **disabled in the reported client state**, not as a malformed filename requiring investigation. Do not revert this rename or remove the file without a new instruction. This is a user report, not BepInEx runtime verification.
+- These clarifications supersede the corresponding open questions in `HANDOFF_2026-10-21.yaml` and earlier lines of this document; historical snapshot evidence is preserved unchanged.
