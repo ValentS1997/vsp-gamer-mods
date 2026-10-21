@@ -1,5 +1,8 @@
 # Valheim — deployment policy, user-approved (2026-10-21)
 
+> **ЗАМЕНА (2026-10-22):** `NoMapCartographyTable.dll` → `BlindCartographer.dll` (**NightKosh/BlindCartographer 1.0.3**). Полная замена 1:1; оба одновременно не устанавливать. Старый `com.dreich.nomapcartographytable.cfg` исключён из актуальных конфигов; новый [nightkosh.BlindCartographer.cfg](config/nightkosh.BlindCartographer.cfg) включает карту только на картографическом столе и метки по `Left Alt + Y`. **Текущий обязательный S/C-манифест:** 42 DLL (исторические 40 ниже, но в них читать замену NoMapCartographyTable → BlindCartographer, плюс 2 дополнения); Optional Only Client: 7; excluded DigDug: 1. Категория S/C сохранена по пользовательской политике «без новых опциональных модов», хотя Thunderstore классифицирует BlindCartographer как **client-side**; запуск в headless dedicated server не проверялся и технически для функции мода не нужен.
+
+
 > **ТЕКУЩЕЕ ДОПОЛНЕНИЕ (2026-10-22):** 2 новых мода добавлены к исходному утверждённому набору из 40 общих: **FiresGhettoNetworking** (`VAGhettoNetworking.dll`, конфиг [com.Fire.FiresGhettoNetworkMod.cfg](config/com.Fire.FiresGhettoNetworkMod.cfg)) и **HipLantern** (`HipLantern.dll`, конфиг [shudnal.HipLantern.cfg](config/shudnal.HipLantern.cfg)). Оба относятся к **Server / Client** по политике комплектации. Текущий список: **42 общих + 7 Only Client + 1 DigDug исключён = 50**. Старое число 48 и перечень из 40 ниже — зафиксированный инвентарь **до этих двух дополнений**, а не ошибка подсчёта. Dedicated server всё ещё не запущен; его runtime-совместимость не подтверждена.
 
 
