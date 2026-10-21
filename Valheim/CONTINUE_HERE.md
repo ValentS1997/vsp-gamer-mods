@@ -53,3 +53,10 @@ GooderAutoShield.dll
 **Inventory accounting:** the latest observed client listing contains 48 DLL filename entries = 7 explicitly designated optional Only Client + 1 excluded DigDug + **40 not yet assigned by this new policy**. Do **not** infer that the remaining 40 are all mandatory Server / Client or move them from the user's PC. Verify actual runtime dependencies and classify them in the next audit.
 
 This policy supersedes the earlier assistant-proposed 24/24 split. No live config, DLL or world data has been changed by this documentation entry.
+
+## Deployment audit update (2026-10-21)
+
+- Full vendor-source-by-DLL assessment: [DEPLOYMENT_AUDIT_2026-10-21.md](DEPLOYMENT_AUDIT_2026-10-21.md).
+- 48 accounted for: **7 user-approved Only Client**, **1 DigDug excluded**, **15 common-gameplay server/client candidates**, **7 shared/common-policy candidates where server may be optional**, **7 dependency/library entries following consumers**, **11 additional *unapproved* client-only candidates**.
+- Confirmed Only Server: **zero**. Treat none of the above as a deployable version-pinned manifest. Per-DLL exact build, actual server requirements and runtime acceptance test remain open.
+- The earlier user-approved seven-item client optional list remains the ONLY approved optional list. The eleven new client candidates are proposed, not accepted.
