@@ -1,0 +1,492 @@
+[
+  {
+    "creature": "Ash Hatchling",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "10",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "2.5",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Ash Huldra",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "10",
+      "Maximum creature count": "3",
+      "Group size": "1 - 3"
+    },
+    "new": {
+      "Spawn chance": "2.5",
+      "Maximum creature count": "2",
+      "Group size": "1 - 2"
+    }
+  },
+  {
+    "creature": "Ash Huldra Queen",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "100",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "25",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Balder",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "100",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "25",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Burning Dead",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "100",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "25",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Charred Remains",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "100",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "25",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Common Jellyfish",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "55",
+      "Maximum creature count": "6",
+      "Group size": "1 - 3"
+    },
+    "new": {
+      "Spawn chance": "13.75",
+      "Maximum creature count": "3",
+      "Group size": "1 - 2"
+    }
+  },
+  {
+    "creature": "Deep-Sea Molluscan",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "15",
+      "Maximum creature count": "4",
+      "Group size": "1 - 2"
+    },
+    "new": {
+      "Spawn chance": "3.75",
+      "Maximum creature count": "2",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Deep-Sea Serpent",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "10",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "2.5",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Drake",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "10",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "2.5",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Draugr Ship",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "10",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "2.5",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "enemy_rainbowbutterfly",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "50",
+      "Maximum creature count": "3",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "12.5",
+      "Maximum creature count": "2",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Fire Golem",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "5",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "1.25",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Frigga",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "100",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "25",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Frozen Bones",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "30",
+      "Maximum creature count": "4",
+      "Group size": "2 - 3"
+    },
+    "new": {
+      "Spawn chance": "7.5",
+      "Maximum creature count": "2",
+      "Group size": "1 - 2"
+    }
+  },
+  {
+    "creature": "Fuling Dwarf",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "25",
+      "Maximum creature count": "8",
+      "Group size": "4 - 5"
+    },
+    "new": {
+      "Spawn chance": "6.25",
+      "Maximum creature count": "4",
+      "Group size": "2 - 3"
+    }
+  },
+  {
+    "creature": "Fuling Dwarf Shaman",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "10",
+      "Maximum creature count": "2",
+      "Group size": "1 - 2"
+    },
+    "new": {
+      "Spawn chance": "2.5",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Fuling Ship",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "10",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "2.5",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Green Butterfly",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "50",
+      "Maximum creature count": "3",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "12.5",
+      "Maximum creature count": "2",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Ice Golem",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "5",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "1.25",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Jumping Spider",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "15",
+      "Maximum creature count": "2",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "3.75",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Kraken",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "2",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "0.5",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Loot Fuling Dwarf",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "5",
+      "Maximum creature count": "2",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "1.25",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "ML_HailStorm",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "5",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "1.25",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "ML_LightningStorm",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "5",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "1.25",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "ML_MeteorShower",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "5",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "1.25",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Molluscan",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "25",
+      "Maximum creature count": "2",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "6.25",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Obsidian Golem",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "100",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "25",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Rancid Remains",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "30",
+      "Maximum creature count": "4",
+      "Group size": "1 - 3"
+    },
+    "new": {
+      "Spawn chance": "7.5",
+      "Maximum creature count": "2",
+      "Group size": "1 - 2"
+    }
+  },
+  {
+    "creature": "Silkworm Moth",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "50",
+      "Maximum creature count": "3",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "12.5",
+      "Maximum creature count": "2",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Skeleton",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "30",
+      "Maximum creature count": "3",
+      "Group size": "1 - 2"
+    },
+    "new": {
+      "Spawn chance": "7.5",
+      "Maximum creature count": "2",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Spiderling",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "100",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "25",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Surtr",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "100",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "25",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Tree Spider",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "10",
+      "Maximum creature count": "3",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "2.5",
+      "Maximum creature count": "2",
+      "Group size": "1 - 1"
+    }
+  },
+  {
+    "creature": "Wraith",
+    "previous": {
+      "Spawn": "Default",
+      "Spawn chance": "70",
+      "Maximum creature count": "2",
+      "Group size": "1 - 1"
+    },
+    "new": {
+      "Spawn chance": "17.5",
+      "Maximum creature count": "1",
+      "Group size": "1 - 1"
+    }
+  }
+]
