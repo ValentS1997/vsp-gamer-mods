@@ -2136,6 +2136,13 @@
         "ForestTokenCost": 0,
         "IronBountyTokenCost": 0,
         "GoldBountyTokenCost": 0
+      },
+      {
+        "Item": "HipLantern",
+        "CoinsCost": 400,
+        "ForestTokenCost": 0,
+        "IronBountyTokenCost": 0,
+        "GoldBountyTokenCost": 0
       }
     ]
   },
