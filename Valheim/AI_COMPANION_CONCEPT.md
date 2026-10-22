@@ -51,6 +51,17 @@ Party HUD: `F8` показывает/скрывает; отображает то
 
 **Реальные конфиги уже получены:** [Companion](config/com.quad.aicompanion.cfg), [Companion.more](config/com.quad.aicompanion.more.cfg), [BountyBoard](config/com.quad.bountyboard.cfg), [PartyHud](config/com.quad.partyhud.cfg). Их Git blob SHA совпадают с ZIP (см. [аудит 22.10](LOCAL_SNAPSHOT_AUDIT_2026-10-22.md)). В Companion уже **MaxCompanions=1**, **WhileAway=Mild**, **FightRange=12**, **RespawnSeconds=30**. В Party HUD `F8` конфликтует с силой Отрёкшихся, а `H` Companion — с HipLantern. Переназначение требует отдельного решения; реальный запуск/синхронизация у всех игроков ещё не проверены.
 
+## Изменения после проверки локальных конфигов 22.10.2026
+
+Параметры изменены **в Git**, а не автоматически на игровом ПК:
+
+- Quads Companion: `MenuKey = L`, `CommandKey = K`. Это устраняет конфликты прежних `J/H` с EpicLoot и HipLantern.
+- Quads Party HUD: `ToggleKey = F11` вместо `F8` (F8 оставлен силе Отрёкшихся; F9 уже занимает Quads Build Orders).
+- SolidHitboxes: по прямому решению пользователя `EnableFriendlyFire = true`, `FriendlyFireDamageModifier = 1`. Требуется проверить в тестовом мире, не пострадает ли компаньон из-за дружественных атак NPC.
+- Татьяна по-прежнему **концепт**: получение файлов настроек не доказывает выбор женской внешности и имени.
+
+Подробно: [CONFIG_RECONCILIATION_2026-10-22.md](CONFIG_RECONCILIATION_2026-10-22.md).
+
 ## Испытания перед внедрением
 
 1. Копия мира и персонажа; BepInEx логи до и после; только один NPC-мод одновременно.
