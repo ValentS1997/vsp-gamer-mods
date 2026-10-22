@@ -3,9 +3,9 @@
 > **Сложный, но управляемый Valheim:** более опасные противники и боссы, осмысленная прогрессия, редкая магическая добыча, дополнительные занятия, строительство и удобство повседневной игры. Настройки подобраны для совместного прохождения с сохранением ценности исследования мира и развития персонажа.
 
 **Основа:** Valheim **1.0.20** (network 41) · Linux / Steam · **BepInEx**.  
-**Состояние документации:** 21 октября 2026 года.  
-**Состав сборки:** **42 Server / Client**, **7 Only Client (по желанию)**, **0 Only Server**; два новых мода — FiresGhettoNetworking и HipLantern. Обязательность установки указана по политике проекта, runtime-тест dedicated server остаётся открытым.  
-**Исходный инвентарь (21.10.2026):** 48 записей DLL, из них `DigDug.dll*` исключён; **после добавления 2 новых модов:** 50 учтённых записей (42 общих + 7 необязательных + 1 исключённая). `Custom Raids` выведен из активной сборки.
+**Состояние документации:** 22 октября 2026 года.  
+**Согласованный состав после установки Quads:** **44 Server / Client**, **8 Only Client (по желанию)**, **0 Only Server**. Три новых Quads-мода пользователь скачивает; локальная установка и конфиги ещё не подтверждены. Категории отражают политику комплектации; headless dedicated server не используется.  
+**Исходный инвентарь (21.10.2026):** 48 записей DLL, из них `DigDug.dll*` исключён. С учётом FiresGhettoNetworking, HipLantern и трёх Quads-модов: **53 учтённых записи** (44 общих + 8 необязательных + 1 исключённая). BlindCartographer заменяет NoMapCartographyTable **1:1**; `Custom Raids` выведен из активной сборки.
 
 Это **каталог состава и настроек**, а не архив готовых DLL и не список проверенных совместимых версий. Названия DLL взяты из пользовательского инвентаря; ссылки ведут на **страницы загрузки** (не фиксированные версии). Под «Server / Client» понимается **обязательность по политике сборки**, а не обещание автора мода о поддержке headless dedicated server. Это ещё проверяется по логам и игровым тестам.
 
@@ -21,7 +21,7 @@
 
 В столбце **«Что изменено в конфиге»** записаны известные пользовательские значения или решения из истории сборки. Формулировка **«не зафиксированы»** не означает, что мод обязательно работает с настройками по умолчанию: без сравнения с исходной версией автора это утверждать нельзя. Некоторые локальные значения могут отличаться от файлов Git; [аудит различий](LOCAL_SNAPSHOT_AUDIT_2026-10-21.yaml) сохранён отдельно.
 
-### Server / Client — обязательный комплект (42 DLL)
+### Server / Client — обязательный комплект (44 DLL)
 
 **Тип:** `S/C` — Server / Client (обязательно на сервере и у игроков); `C` — Only Client (необязательный клиентский мод). Ссылки скачивания размещены вместе с именами модов, типы — рядом с авторами. Так для описания и изменений конфигурации остаётся больше места.
 
@@ -58,6 +58,8 @@
 | **OreMines**<br><sub><code>Ore<wbr>Mines.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/blacks7ar/OreMines/) | blacks7ar<br>**S/C** | Шахты и рудные жилы как новые точки добычи в мире. | Сброс шахт через **30 игровых дней**, шанс появления жилы **35%**. |
 | **ProjectileTweaks**<br><sub><code>Projectile<wbr>Tweaks.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/Searica/ProjectileTweaks/) | Searica<br>**S/C** | Изменяет поведение снарядов и дистанционного оружия. | Специальные изменения не задокументированы. |
 | **Quick Stack Store**<br><sub><code>Quick<wbr>Stack<wbr>Store.<wbr>dll</code></sub><br>[Скачать](https://www.nexusmods.com/valheim/mods/2094) | Goldenrevolver<br>**S/C** | Быстрое складирование и пополнение предметов из сундуков. | Радиус складывания/пополнения **40 м**; удаление горячей клавишей отключено локально (`None`). |
+| **Quads Bounty Board**<br><sub><code>Bounty<wbr>Board.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/Quads_Lab/Quads_Bounty_Board/) | Quads_Lab<br>**S/C** | Общая доска контрактов: 5 предложений за игровой день, до 3 активных групповых заданий, личные награды за вклад, прогрессия по боссам. Требуется у всех игроков и у хоста. | v1.4.4; конфиг создаётся игрой: `com.quad.bountyboard.cfg`. Пользователь скачивает; локальная конфигурация пока не получена. |
+| **Quads Companion**<br><sub><code>AI<wbr>Companion.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/Quads_Lab/Quads_Companion/) | Quads_Lab<br>**S/C** | NPC-викинг с боевым поведением, собственным инвентарём и работой на базе; интеграция с Quads Build Orders, ExtraSlots и Party HUD. Обязателен всем игрокам и хосту. | v0.25.0; `com.quad.aicompanion.cfg` + `.more.cfg` появляются после запуска; назначение имени **Татьяна** и женской внешности пока тест не проходили. `H` для приказов конфликтует с HipLantern; переназначить после генерации CFG. |
 | **Quads Quiver**<br><sub><code>Quiver.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/Quads_Lab/Quads_Quiver/) | Quads_Lab<br>**S/C** | Колчан, возврат стрел и поддержка болтов. | Возврат стрел: с земли **100%**, из существ **50%**; огненные сгорают; колчан отображается. |
 | **SmartRepair**<br><sub><code>Smart<wbr>Repair.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/LJIndustries/SmartRepair/) | LJIndustries<br>**S/C** | Автоматически выбирает подходящие повреждённые предметы для ремонта. | Отдельные правки не зафиксированы. |
 | **SolidHitboxes**<br><sub><code>Solid<wbr>Hitboxes.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/Korppis/SolidHitboxes/) | Korppis<br>**S/C** | Твёрдые хитбоксы и дополнительные настройки коллизий. | Индивидуальные правки не зафиксированы. |
@@ -70,7 +72,7 @@
 | **YamlDotNet — detector**<br><sub><code>Yaml<wbr>Dot<wbr>Net<wbr>Detector.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/ValheimModding/YamlDotNet/) | ValheimModding (сборка)<br>**S/C** | Вспомогательный модуль обнаружения версии YamlDotNet. | Настройки отсутствуют; устанавливается с пакетом зависимости. |
 | **YamlDotNet**<br><sub><code>Yaml<wbr>Dot<wbr>Net.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/ValheimModding/YamlDotNet/) | Antoine Aubry и соавторы; ValheimModding (пакет)<br>**S/C** | Библиотека чтения YAML-конфигураций других модов. | Настройки отсутствуют. |
 
-### Only Client — необязательные дополнения (7 DLL)
+### Only Client — необязательные дополнения (8 DLL)
 
 Эти моды каждый игрок устанавливает **только на своём ПК и по желанию**. Для основной сборки они не должны быть необходимы.
 
@@ -82,10 +84,13 @@
 | **Cartur's Compass and Clock**<br><sub><code>Cartur<wbr>Compass<wbr>And<wbr>Clock.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/Cartur/Carturs_Compass_and_Clock/) | Cartur<br>**C** | Полоска компаса, метки направления и часы. | Индивидуальные правки не зафиксированы. |
 | **ConfigurationManager**<br><sub><code>Configuration<wbr>Manager.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/shudnal/ConfigurationManager/) | shudnal<br>**C** | Игровой редактор настроек BepInEx и модов. | Индивидуальные правки не зафиксированы. |
 | **FirstPersonMode**<br><sub><code>First<wbr>Person<wbr>Mode.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/Azumatt/FirstPersonMode/) | Azumatt<br>**C** | Вид от первого лица. | Индивидуальные правки не зафиксированы. |
+| **Quads Party HUD**<br><sub><code>Party<wbr>Hud.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/Quads_Lab/Quads_Party_HUD/) | Quads_Lab<br>**C** | Необязательная панель группы: HP, выносливость, еда, расстояние и направление к игрокам; NPC из Companion показаны под хозяином. | v1.12.0; клиентский `com.quad.partyhud.cfg` генерируется игрой, `F8` скрывает панель. Пользователь скачивает; локальный конфиг ещё не предоставлен. |
 | **GooderAutoShield**<br><sub><code>Gooder<wbr>Auto<wbr>Shield.<wbr>dll</code></sub><br>[Скачать](https://thunderstore.io/c/valheim/p/MainStreetGaming/GooderAutoShield/) | MainStreetGaming (публикация; HumanSandbag)<br>**C** | Автоматическое экипирование подходящего щита. | Индивидуальные правки не зафиксированы; состояние выбранного щита персональное и не публикуется. |
 
 
-**Новые конфигурации (22.10.2026):** [FiresGhettoNetworking v1.5.65](config/com.Fire.FiresGhettoNetworkMod.cfg) сохранён точно по последней загрузке пользователя; [HipLantern v1.1.14](config/shudnal.HipLantern.cfg) восстановлен из ранее приложенного конфига с согласованными изменениями после скриншота. Фактический текущий файл HipLantern с ПК повторно не присылался. В `FiresGhettoNetworking` оба experimental ownership-переключателя остаются `true` из присланного файла; режим Selective имеет приоритет, полноценная серверная симуляция предназначена для dedicated server.
+**Полученные конфигурации (22.10.2026):** [FiresGhettoNetworking v1.5.65](config/com.Fire.FiresGhettoNetworkMod.cfg) сохранён точно по последней загрузке пользователя; [HipLantern v1.1.14](config/shudnal.HipLantern.cfg) восстановлен из ранее приложенного конфига с согласованными изменениями после скриншота. Фактический текущий файл HipLantern с ПК повторно не присылался. В `FiresGhettoNetworking` оба experimental ownership-переключателя остаются `true` из присланного файла; режим Selective имеет приоритет, полноценная серверная симуляция предназначена для dedicated server.
+
+**Quads (22.10.2026):** [Companion](https://thunderstore.io/c/valheim/p/Quads_Lab/Quads_Companion/) v0.25.0 и [Bounty Board](https://thunderstore.io/c/valheim/p/Quads_Lab/Quads_Bounty_Board/) v1.4.4 предназначены всем игрокам и хосту; [Party HUD](https://thunderstore.io/c/valheim/p/Quads_Lab/Quads_Party_HUD/) v1.12.0 — только желающим игрокам. Имена DLL подтверждены исходниками. Пока нет подтверждения фактического локального запуска, **пользовательские конфиги не выдумываются**; после первого запуска следует сверить созданные файлы и BepInEx-логи. Эти три модификации увеличивают плановый манифест с 49 до **52 активных DLL**. См. [концепт компаньона](AI_COMPANION_CONCEPT.md).
 
 ## Исключения и технические примечания
 
