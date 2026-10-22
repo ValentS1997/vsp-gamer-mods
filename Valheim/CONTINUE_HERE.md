@@ -1,6 +1,6 @@
 # Valheim vsp-gamer — CONTINUE HERE (2026-10-21)
 
-> **CURRENT DEPLOYMENT POLICY (selected 2026-10-22; local Quads install pending):** [44 mandatory Server/Client + 8 optional Only Client + 1 excluded DigDug](DEPLOYMENT_POLICY_2026-10-21.md). Historical 40-DLL baseline + FiresGhettoNetworking and HipLantern + Quads Companion (`AICompanion.dll`) and Bounty Board (`BountyBoard.dll`) = 44 S/C; `PartyHud.dll` adds the eighth optional C. **NoMapCartographyTable.dll was replaced one-for-one by BlindCartographer.dll**. Quads DLLs are being downloaded; local installs and settings are NOT yet verified. Dedicated server is not in use; the game itself hosts two friends.
+> **CURRENT DEPLOYMENT POLICY (selected 2026-10-22; local additions pending):** [44 mandatory Server/Client + 9 optional Only Client + 1 excluded DigDug](DEPLOYMENT_POLICY_2026-10-21.md). Original baseline 40 S/C + FiresGhettoNetworking/HipLantern + Quads Companion (`AICompanion.dll`) and Bounty Board (`BountyBoard.dll`) = 44 S/C; `PartyHud.dll` is optional C, and new optional client-side **KeepCharacterEffects** (Nexus mod 4410, Virkatta v1, exact DLL name unverified) brings total optional C to 9. **NoMapCartographyTable.dll replaced one-for-one by BlindCartographer.dll**. Quads/KeepCharacterEffects local installs are NOT yet verified. There is no separate dedicated server; user hosts in-game.
 > **Navigation mod replacement (2026-10-22):** Active manifest and [README](README.md) now use [BlindCartographer](https://thunderstore.io/c/valheim/p/NightKosh/BlindCartographer/) 1.0.3 rather than NoMapCartographyTable. In client/game installs remove `NoMapCartographyTable.dll` and install `BlindCartographer.dll` (don't run both); old `com.dreich.nomapcartographytable.cfg` is deleted from Git, and [nightkosh.BlindCartographer.cfg](config/nightkosh.BlindCartographer.cfg) is added. `EnableCartographyTableInNoMapMode = true`, `Left Alt + Y` makes a pin. Git changes do NOT install the DLL on players' Linux game copies.
 
 
@@ -9,6 +9,7 @@ This public repository contains **configuration baselines, not a deployable serv
 
 ## Current handoff
 
+- **KeepCharacterEffects selected (22.10.2026, local installation unverified):** client-only Nexus mod by Virkatta preserves remaining timers of temporary character effects between sessions. Need inspect actual DLL filename/GUID from user's download; do not invent CFG. Author has not tested coexistence with other mods: test with ForsakenPowersPlusRemastered and EpicLoot. **SolidHitboxes already present** in mandatory S/C catalog with CFG v1.0.8, friendly fire disabled. Planned tally **44 S/C + 9 C = 53 active DLL**, 54 accounted including excluded DigDug.
 - **Quads package selected (22.10.2026; local install not yet verified):** Companion 0.25.0 and Bounty Board 1.4.4 for all three human players, Party HUD 1.12.0 optional per-client. New generated CFGs are still unknown. Concept [Tatiana AI companion](AI_COMPANION_CONCEPT.md) remains in progress; need test name/model/controls and key H conflict with HipLantern. [Mod catalog](README.md) and [deployment policy](DEPLOYMENT_POLICY_2026-10-21.md) are updated for 44 S/C + 8 C.
 
 
