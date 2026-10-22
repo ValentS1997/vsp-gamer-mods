@@ -1,5 +1,9 @@
 # Valheim — deployment policy, user-approved (2026-10-21)
 
+> **НОВЫЙ ВЫБОР (2026-10-22, установка ещё не подтверждена):** пользователь скачивает [Quads Companion](https://thunderstore.io/c/valheim/p/Quads_Lab/Quads_Companion/) v0.25.0 — `AICompanion.dll` (**Server / Client**), [Quads Bounty Board](https://thunderstore.io/c/valheim/p/Quads_Lab/Quads_Bounty_Board/) v1.4.4 — `BountyBoard.dll` (**Server / Client**), [Quads Party HUD](https://thunderstore.io/c/valheim/p/Quads_Lab/Quads_Party_HUD/) v1.12.0 — `PartyHud.dll` (**Only Client**, опционален). У Companion и Bounty Board установку на всех клиентах и хосте прямо требует автор, иначе сохранённые NPC / доски могут исчезнуть при загрузке зоны. Для Party HUD достаточно установить только тому, кому нужен интерфейс; расширенная телеметрия удалённых игроков требует их добровольного ShareMyStats. Точные DLL имена сверены с `thunderstore.toml` и `.csproj` в публичном GitHub Quads Lab.
+> **АКТУАЛЬНАЯ ПЛАНОВАЯ КОМПЛЕКТАЦИЯ:** **44 S/C + 8 Only Client + 1 отключённый DigDug = 53 учтённые DLL, 52 активные**, при условии установки всех новых компонентов. Исторические значения 40/7 и 42/7 ниже сохраняются для аудита и уже не отражают выбранный состав. Dedicated server не используется; хост — локальный клиент пользователя. Конфиги новых Quads-модов (`com.quad.aicompanion.cfg`, `com.quad.aicompanion.more.cfg`, `com.quad.bountyboard.cfg`, `com.quad.partyhud.cfg`) будут созданы игрой при первом запуске; не считать их зафиксированными до получения с ПК.
+
+
 > **ЗАМЕНА (2026-10-22):** `NoMapCartographyTable.dll` → `BlindCartographer.dll` (**NightKosh/BlindCartographer 1.0.3**). Полная замена 1:1; оба одновременно не устанавливать. Старый `com.dreich.nomapcartographytable.cfg` исключён из актуальных конфигов; новый [nightkosh.BlindCartographer.cfg](config/nightkosh.BlindCartographer.cfg) включает карту только на картографическом столе и метки по `Left Alt + Y`. **Текущий обязательный S/C-манифест:** 42 DLL (исторические 40 ниже, но в них читать замену NoMapCartographyTable → BlindCartographer, плюс 2 дополнения); Optional Only Client: 7; excluded DigDug: 1. Категория S/C сохранена по пользовательской политике «без новых опциональных модов», хотя Thunderstore классифицирует BlindCartographer как **client-side**; запуск в headless dedicated server не проверялся и технически для функции мода не нужен.
 
 
@@ -97,3 +101,25 @@ The user's trailing `*` is an intentional disable-by-renaming technique. Preserv
 - `HipLantern.dll` — **HipLantern** v1.1.14: слот ExtraSlots, удвоенный визуальный размер, топливо 240 минут. **CFG восстановлен** из предыдущей загрузки с тремя правками согласно переписке; пользователь подтвердил изображение и свет в игре, но ещё не предоставил точный финальный файл после этих изменений.
 
 Никакие другие DLL и конфиги исходной сборки этой записью не менялись.
+
+## Additions 2026-10-22 — Quads Lab (3 DLL, local install pending)
+
+### Required Server / Client — add 2
+
+```text
+AICompanion.dll    # Quads Companion 0.25.0
+BountyBoard.dll    # Quads Bounty Board 1.4.4
+```
+
+### Optional Only Client — add 1
+
+```text
+PartyHud.dll       # Quads Party HUD 1.12.0
+```
+
+- Установить **AICompanion** и **BountyBoard** у обоих товарищей и на хосте; моды хранят свои сохранённые объекты в мире, и отсутствие мода опасно для таких объектов при загрузке областей.
+- **PartyHud** можно ставить выборочно. Совместимость и отображение NPC из AICompanion заявлены автором.
+- Только зависимость BepInExPack Valheim указана в актуальных пакетах; в сборке BepInEx уже имеется, дополнительных DLL по зависимостям этих трёх пакетов не добавлять без проверки.
+- Не коммитить «типовые» CFG как будто они считаны с компьютера. После запуска собрать реальные версии DLL, конфиги и BepInEx-логи, проверить клавишу H (занята HipLantern) и совместимость с ExtraSlots, StarLevelSystem, EpicLoot, MonsterLabZ, Quads Build Orders.
+- Татьяна: пока концепт желаемого NPC; имя/женская модель требуют проверки в игре.
+
