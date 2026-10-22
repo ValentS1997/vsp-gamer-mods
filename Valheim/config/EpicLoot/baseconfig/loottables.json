@@ -1943,7 +1943,7 @@
         },
         {
           "Item": "Tier0Tools",
-          "Weight": 1.0,
+          "Weight": 0.1,
           "Rarity": null
         },
         {
@@ -2240,7 +2240,7 @@
         },
         {
           "Item": "Tier1Tools",
-          "Weight": 1.0,
+          "Weight": 0.1,
           "Rarity": null
         }
       ]
@@ -2629,6 +2629,18 @@
           ]
         },
         {
+          "Item": "HipLantern",
+          "Weight": 1.0,
+          "Rarity": [
+            80.0,
+            14.0,
+            4.0,
+            2.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
           "Item": "FishingRod",
           "Weight": 1.0,
           "Rarity": [
@@ -2705,7 +2717,7 @@
         },
         {
           "Item": "Tier2Tools",
-          "Weight": 1.0,
+          "Weight": 0.1,
           "Rarity": null
         },
         {
@@ -3041,7 +3053,7 @@
         },
         {
           "Item": "Tier3Tools",
-          "Weight": 1.0,
+          "Weight": 0.1,
           "Rarity": null
         },
         {
@@ -3958,7 +3970,7 @@
         },
         {
           "Item": "Tier6Tools",
-          "Weight": 1.0,
+          "Weight": 0.1,
           "Rarity": null
         },
         {
