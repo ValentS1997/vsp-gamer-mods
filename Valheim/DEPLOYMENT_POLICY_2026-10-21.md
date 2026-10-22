@@ -1,5 +1,8 @@
 # Valheim — deployment policy, user-approved (2026-10-21)
 
+> **KEEP CHARACTER EFFECTS (2026-10-22, выбран, ещё не подтверждён локально):** [KeepCharacterEffects](https://www.nexusmods.com/valheim/mods/4410) от Virkatta, Nexus version **1**, дата публикации 12.10.2026. Автор заявляет полную работоспособность на **Only Client**: сохранение оставшегося времени Rested, Wet, Mead/Potions и Guardian Powers между выходом/входом; серверу и другим игрокам мод не обязателен. **Имя DLL/Plugin GUID не подтверждены:** Nexus не публикует их в доступном описании; не придумывать. Автор не тестировал совместимость с другими модами, включая нашу связку ForsakenPowersPlusRemastered. Установить и проверить позже, перед этим копия персонажа. 
+> **АКТУАЛЬНЫЙ ВЫБРАННЫЙ СОСТАВ (план после установки):** **44 Server/Client + 9 Only Client + 1 исключённый DigDug = 54 учтённых записи, 53 ожидаемых активных DLL**. Цифры 42/7, 44/8 и исторические списки ниже отражают предыдущие этапы. Из 9 клиентских 8 были уже выбраны; KeepCharacterEffects девятый, пока только запланирован.
+
 > **НОВЫЙ ВЫБОР (2026-10-22, установка ещё не подтверждена):** пользователь скачивает [Quads Companion](https://thunderstore.io/c/valheim/p/Quads_Lab/Quads_Companion/) v0.25.0 — `AICompanion.dll` (**Server / Client**), [Quads Bounty Board](https://thunderstore.io/c/valheim/p/Quads_Lab/Quads_Bounty_Board/) v1.4.4 — `BountyBoard.dll` (**Server / Client**), [Quads Party HUD](https://thunderstore.io/c/valheim/p/Quads_Lab/Quads_Party_HUD/) v1.12.0 — `PartyHud.dll` (**Only Client**, опционален). У Companion и Bounty Board установку на всех клиентах и хосте прямо требует автор, иначе сохранённые NPC / доски могут исчезнуть при загрузке зоны. Для Party HUD достаточно установить только тому, кому нужен интерфейс; расширенная телеметрия удалённых игроков требует их добровольного ShareMyStats. Точные DLL имена сверены с `thunderstore.toml` и `.csproj` в публичном GitHub Quads Lab.
 > **АКТУАЛЬНАЯ ПЛАНОВАЯ КОМПЛЕКТАЦИЯ:** **44 S/C + 8 Only Client + 1 отключённый DigDug = 53 учтённые DLL, 52 активные**, при условии установки всех новых компонентов. Исторические значения 40/7 и 42/7 ниже сохраняются для аудита и уже не отражают выбранный состав. Dedicated server не используется; хост — локальный клиент пользователя. Конфиги новых Quads-модов (`com.quad.aicompanion.cfg`, `com.quad.aicompanion.more.cfg`, `com.quad.bountyboard.cfg`, `com.quad.partyhud.cfg`) будут созданы игрой при первом запуске; не считать их зафиксированными до получения с ПК.
 
@@ -124,3 +127,11 @@ PartyHud.dll       # Quads Party HUD 1.12.0
 - **Горячие клавиши:** Quads Companion по умолчанию использует `H` для приказов, а `H` уже используется HipLantern; у Quads Party HUD переключатель `F8`, но `F8` занят у ForsakenPowersPlusRemastered. Переназначать после генерации реальных пользовательских CFG. Не вводить произвольные якобы локальные настройки в Git.
 - Татьяна: пока концепт желаемого NPC; имя/женская модель требуют проверки в игре.
 
+
+## Additions 2026-10-22 — KeepCharacterEffects (Only Client, installation pending)
+
+- [KeepCharacterEffects](https://www.nexusmods.com/valheim/mods/4410) — Virkatta, Nexus version 1 (12.10.2026), сохраняет оставшуюся продолжительность временных эффектов персонажа при выходе/входе.
+- **Только клиент**, не нужно на сервер и обоим друзьям в рамках нашей политики (каждый может установить отдельно по желанию).
+- **DLL-файл и BepInEx GUID ещё не верифицированы.** После скачивания сверить название реального DLL, возможный CFG и лог BepInEx; не записывать вымышленные имена.
+- В авторском описании прямо указано отсутствие проверок совместимости. Прежде всего испытать сохранение и восстановление эффекта силы Отрёкшихся с уже установленным ForsakenPowersPlusRemastered, а также медовухи, отдыха и эффектов от EpicLoot при перезаходе.
+- **SolidHitboxes** уже включён в прежний S/C-манифест и README. В реальном Git CFG `org.bepinex.plugins.solid-hitboxes.cfg` указана версия **1.0.8**, `EnableFriendlyFire=false`, `FriendlyFireDamageModifier=1`, `LockConfig=true`; повторно DLL не добавлять и численность из-за него не менять.
