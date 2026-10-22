@@ -1,6 +1,6 @@
 # Valheim vsp-gamer — CONTINUE HERE (2026-10-21)
 
-> **CURRENT DEPLOYMENT POLICY (updated 2026-10-22):** [42 mandatory Server/Client + 7 optional Only Client + 1 excluded DigDug](DEPLOYMENT_POLICY_2026-10-21.md). Original 40-DLL manifest remains as a dated baseline: add FiresGhettoNetworking and HipLantern; **replace NoMapCartographyTable.dll with BlindCartographer.dll** (one-for-one, no count change). Quads Companion is only a concept, not installed. Dedicated-server compatibility unverified; host is the user's own game instance.
+> **CURRENT DEPLOYMENT POLICY (selected 2026-10-22; local Quads install pending):** [44 mandatory Server/Client + 8 optional Only Client + 1 excluded DigDug](DEPLOYMENT_POLICY_2026-10-21.md). Historical 40-DLL baseline + FiresGhettoNetworking and HipLantern + Quads Companion (`AICompanion.dll`) and Bounty Board (`BountyBoard.dll`) = 44 S/C; `PartyHud.dll` adds the eighth optional C. **NoMapCartographyTable.dll was replaced one-for-one by BlindCartographer.dll**. Quads DLLs are being downloaded; local installs and settings are NOT yet verified. Dedicated server is not in use; the game itself hosts two friends.
 > **Navigation mod replacement (2026-10-22):** Active manifest and [README](README.md) now use [BlindCartographer](https://thunderstore.io/c/valheim/p/NightKosh/BlindCartographer/) 1.0.3 rather than NoMapCartographyTable. In client/game installs remove `NoMapCartographyTable.dll` and install `BlindCartographer.dll` (don't run both); old `com.dreich.nomapcartographytable.cfg` is deleted from Git, and [nightkosh.BlindCartographer.cfg](config/nightkosh.BlindCartographer.cfg) is added. `EnableCartographyTableInNoMapMode = true`, `Left Alt + Y` makes a pin. Git changes do NOT install the DLL on players' Linux game copies.
 
 
@@ -8,6 +8,9 @@
 This public repository contains **configuration baselines, not a deployable server pack, not game saves and not a verified BepInEx plugin lockfile**.
 
 ## Current handoff
+
+- **Quads package selected (22.10.2026; local install not yet verified):** Companion 0.25.0 and Bounty Board 1.4.4 for all three human players, Party HUD 1.12.0 optional per-client. New generated CFGs are still unknown. Concept [Tatiana AI companion](AI_COMPANION_CONCEPT.md) remains in progress; need test name/model/controls and key H conflict with HipLantern. [Mod catalog](README.md) and [deployment policy](DEPLOYMENT_POLICY_2026-10-21.md) are updated for 44 S/C + 8 C.
+
 
 - [Maximal Russian-language context and decision register](HANDOFF_2026-10-21.yaml)
 - [Latest supplied local `config.zip` vs Git audit (safe hashes and diffs only)](LOCAL_SNAPSHOT_AUDIT_2026-10-21.yaml)
