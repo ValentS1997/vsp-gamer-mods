@@ -1,0 +1,520 @@
+# VSP Gamer / Valheim — comprehensive handoff to a NEW ChatGPT thread.
+# Current decisions supersede historical discussion in HANDOFF_2026-10-21.yaml.
+# This is a sanitized public context document, NOT a game save or a verified DLL lockfile.
+handoff:
+  schema: vsp-gamer/valheim-chat-handoff/v2
+  generated_on: "2026-10-22"
+  language: ru-RU
+  purpose: "Максимально подробный перенос рабочего контекста модифицированного Valheim в следующую ветку ChatGPT"
+  owner_decision_priority: "Latest explicit user decision always overrides older recommendations"
+  evidence_levels:
+    user_reported: "Пользователь сообщил непосредственно; runtime мог измениться"
+    github_verified: "Прочитано из Valheim/ GitHub main"
+    uploaded_config: "Из присланного ZIP CFG; не равно доказательству загрузки DLL"
+    source_reviewed: "Из изученных исходников автора на GitHub"
+    proposal: "План или гипотеза; не считать установленным либо одобренным"
+    superseded: "Исторические сведения, позже заменены"
+  first_read:
+    - "ExtraSlotsCustomSlots ОТМЕНЁН пользователем. НЕ устанавливать, НЕ добавлять в манифест, НЕ предлагать снова без нового запроса."
+    - "Обычный ExtraSlots остаётся; идея шести универсальных слотов остаётся нереализованной, а не выбранным модом."
+    - "KeepCharacterEffects отменён (невозможно скачать Nexus даже через FullVPN); Venture Logout Tweaks 1.0.0 выбран вместо него и помещён в Only Client."
+    - "Мод на удобное меню рецептов/еды ещё НЕ выбран и не установлен по подтверждённым сведениям."
+    - "Quads Companion тестировался: NPC без разрешения забирала экипировку из сундуков и била киркой по каменному ограждению базы."
+    - "SolidHitboxes NPC friendly fire включён по прямому решению пользователя; DAMAGE modifier = 1."
+    - "Party HUD ToggleKey=F4 уже подтверждён пользователем на его ПК. F11 занят Build Orders, НЕ возвращать HUD на F11."
+    - "Приоритет — сохранность мира, персонажей и надгробий; не удалять prefab-моды на живом сохранении."
+    - "Git содержит эталонные CFG и документацию, но не устанавливает файлы на vsp-pc автоматически."
+
+project:
+  title: VSP Gamer
+  repository: "https://github.com/ValentS1997/vsp-gamer-mods"
+  branch: main
+  project_subdir: Valheim/
+  game:
+    name: Valheim
+    version: "1.0.20"
+    network_protocol: 41
+    platform: "Native Linux via Steam"
+    mod_loader: BepInEx
+  host:
+    host_type: "Peer-to-peer session hosted from user's own Valheim client; NOT headless dedicated server"
+    humans: 3
+    ai_npc_may_make_fourth_visible_character: true
+    ai_npc_is_not_fourth_network_client: true
+    computer_username: vspadmin
+    computer_name: vsp-pc
+    cpu: Intel Core i7-12700K
+    gpu: NVIDIA RTX 3060
+  paths:
+    game: "/mnt/steam/SteamLibrary/steamapps/common/Valheim/"
+    plugins: "/mnt/steam/SteamLibrary/steamapps/common/Valheim/BepInEx/plugins/"
+    configs: "/mnt/steam/SteamLibrary/steamapps/common/Valheim/BepInEx/config/"
+    log: "/mnt/steam/SteamLibrary/steamapps/common/Valheim/BepInEx/LogOutput.log"
+    world_local_candidate: "~/.config/unity3d/IronGate/Valheim/worlds_local/"
+    world_path_note: "Check actual save type/path, since Steam Cloud and local storage differ"
+  gameplay_preferences:
+    map_mode: "No Map; map visible at cartography table only"
+    difficulty: "Very hard combat and frequent/high-pressure raids"
+    death_penalty: normal
+    world_resource_rate_multiplier: 0.5
+    epic_loot_drop_rate_multiplier: 0.3
+    intent: "Keep boss progression meaningful; rare loot; protective backups before risky changes"
+  communication:
+    language: Russian
+    style: "Direct and technical; user may call assistant Ковальски and themselves Шкипер"
+    git_updates: "Document key user-approved changes; state differences between local machine and Git"
+    never_claim_runtime_verified_from_cfg_only: true
+
+deployment:
+  selected_policy:
+    required_server_and_client: 44
+    optional_only_client: 9
+    only_server: 0
+    planned_active_total: 53
+    excluded_from_active_total:
+      - "DigDug.dll* (intentionally disabled / excluded)"
+    accounted_total_including_excluded: 54
+    classification_note: "S/C is a chosen distribution policy for this peer host, not a guarantee of headless server compatibility"
+    count_is_plan_not_verified_inventory: true
+    current_local_dll_inventory: "Not freshly audited after all additions/replacements"
+  selected_recent_changes:
+    - name: "FiresGhettoNetworking"
+      class: server_client
+    - name: "HipLantern"
+      class: server_client
+    - name: "Quads Companion"
+      class: server_client
+      dll: AICompanion.dll
+      version_from_cfg: "0.25.0"
+    - name: "Quads Bounty Board"
+      class: server_client
+      dll: BountyBoard.dll
+      version_from_cfg: "1.4.4"
+    - name: "Quads Party HUD"
+      class: only_client
+      dll: PartyHud.dll
+      version_from_cfg: "1.12.0"
+    - name: "BlindCartographer"
+      class: "S/C by project policy (upstream may say client-side)"
+      replaces: NoMapCartographyTable.dll
+      not_additional_mod_count: true
+    - name: "Venture Logout Tweaks"
+      class: only_client
+      replaces: KeepCharacterEffects
+      version_selected: "1.0.0"
+      installation_verified: false
+  deliberately_not_selected:
+    - name: ExtraSlotsCustomSlots
+      status: "EXPLICITLY CANCELED by user on 2026-10-22"
+      dll_count_delta: 0
+    - name: KeepCharacterEffects
+      status: "Rejected due to download access; archived under Нашли лучшее решение"
+      dll_count_delta: 0
+    - name: "Workstation Search / CraftingSearch / CraftIndex"
+      status: "Shortlist only, no user selection"
+      dll_count_delta: 0
+    - name: "Custom Raids"
+      status: "Out of active pack; SLS schedules active raids"
+    - name: "Wandering Companions"
+      status: "Research only; original Offline Companions dependency questionable for Valheim 1.0"
+  required_multiplayer_notes:
+    quads_companion: "All three human clients including host need same compatible mod; missing prefab can delete saved NPC and inventory"
+    bounty_board: "All three humans including host need it; persistent bounty board object depends on registered prefab"
+    party_hud: "May be installed selectively; extended remote stat sharing requires the other player's opt-in mod"
+    venture_logout_tweaks: "Client-only; not mandatory for friends"
+    extraslots_customslots: "Not selected; do not add to any friend's modpack"
+  references:
+    catalog: Valheim/README.md
+    policy: Valheim/DEPLOYMENT_POLICY_2026-10-21.md
+    history_yaml: Valheim/HANDOFF_2026-10-21.yaml
+    local_archive_audit: Valheim/LOCAL_SNAPSHOT_AUDIT_2026-10-22.md
+
+decisions_chronology:
+  "2026-10-21":
+    - "Original DLL list and config snapshot investigated; historical 40 shared + 7 optional, DigDug excluded"
+    - "Custom Raids retired; StarLevelSystem chosen for raid scheduling"
+    - "OreMines locations injected into existing world using temporary Upgrade World tools"
+  "2026-10-22":
+    - "NoMapCartographyTable → BlindCartographer, with pin hotkey Left Alt + Y"
+    - "AI companion concept Татьяна; Quads Companion, Bounty Board, optional Party HUD chosen and actual generated CFGs received"
+    - "SolidHitboxes EnableFriendlyFire=true at full multiplier"
+    - "Conflicting Quads keys reassigned (Menu=L, Command=K, HUD=F4); F4 confirmed by user as locally set"
+    - "KeepCharacterEffects download failed even with FullVPN; archived, replaced by Venture Logout Tweaks client-only"
+    - "Wanted six unrestricted slots for useful items; researched ExtraSlotsCustomSlots and established whitelist-only behavior"
+    - "ExtraSlotsCustomSlots explicitly CANCELED by user; existing ExtraSlots retained"
+    - "Requested client-only crafting recipe/food interface improvements; options researched but no mod chosen"
+
+mod_settings:
+  extraslots:
+    source: Valheim/config/shudnal.ExtraSlots.cfg
+    config_version: "1.2.21"
+    selected_values:
+      amount_of_quick_slots: 5
+      amount_of_extra_utility_slots: 3
+      amount_of_extra_inventory_rows: 2
+      slots_backup_enabled: true
+      slots_progression_enabled: false
+      inventory_rows_progression_enabled: false
+      use_single_hotbar_item: true
+      show_extra_utility_items: false
+    guidance: "Keep original ExtraSlots intact; test any topology changes on a backed-up character due to save/inventory risk"
+  epicloot:
+    source: Valheim/config/randyknapp.mods.epicloot.cfg
+    cfg_version: "0.14.13"
+    balance_profile: Legendary
+    global_drop_rate_modifier: 0.3
+    defer_chest_loot_roll: true
+    hotkeys:
+      ability_1: G
+      ability_2: H
+      ability_3: J
+    restored_json_exactly_from_user_zip:
+      - Valheim/config/EpicLoot/baseconfig/adventuredata.json
+      - Valheim/config/EpicLoot/baseconfig/iteminfo.json
+      - Valheim/config/EpicLoot/baseconfig/loottables.json
+    items:
+      HipLantern:
+        gamble_coin_cost: 400
+        unlock_boss_key: defeated_gdking
+        added_to: Tier2Tools
+    reduced_tool_weight:
+      item_set_tiers: [0, 1, 2, 3, 6]
+      relative_weight: 0.1
+    patch_folder: Valheim/config/EpicLoot/patches/vsp-gamer/
+  star_level_system:
+    cfg_version: "1.26.3"
+    config_path: Valheim/config/MidnightsFX.StarLevelSystem.cfg
+    raid_file: Valheim/config/StarLevelSystem/RaidSettings.yaml
+    vanilla_raid_configuration: false
+    first_time_setup: Never
+    quick_config_button: false
+    limit_creature_modifier_prefixes: 0
+    raid_tested: pre_eikthyr_pack
+    warning: "Do not overwrite active raids with vanilla or unfinished MonsterLabzReid concept"
+    spawn_multiplier_and_quads_note: "SLS can affect companion prefabs; Quads 0.25.1 source changelog claims fix, but package presence/version in user's game is not verified"
+  monsterlabz:
+    cfg_version: "3.0.15"
+    config: Valheim/config/MonsterLabZ.cfg
+    concept_only: Valheim/MonsterLabzReid.md
+    note: "Unimplemented raid concept; creature prefab names not all established"
+  oremine:
+    cfg_version: "1.2.1"
+    config: Valheim/config/blacks7ar.OreMines.cfg
+    enable_mine_reset: true
+    reset_every_ingame_days: 30
+    ore_veins_spawn_chance_percent: 35
+  solid_hitboxes:
+    cfg_version: "1.0.8"
+    config: Valheim/config/org.bepinex.plugins.solid-hitboxes.cfg
+    enable_friendly_fire_between_npcs: true
+    friendly_fire_damage_modifier: 1
+    lock_config: true
+    local_applied: "Not directly rechecked after Git patch"
+    note: "Separate from Companion choosing to attack rock/wall"
+  network:
+    source: Valheim/config/com.Fire.FiresGhettoNetworkMod.cfg
+    cfg_version: "1.5.65"
+    server_side_simulation: true
+    experimental_global_zdo_ownership_transfer: false
+    experimental_selective_zdo_transfer: true
+  quads:
+    companion:
+      primary_config: Valheim/config/com.quad.aicompanion.cfg
+      more_config: Valheim/config/com.quad.aicompanion.more.cfg
+      version_from_cfg: "0.25.0"
+      max_companions_per_player: 1
+      not_one_per_server: true
+      while_away: Mild
+      menu_key: L
+      command_key: K
+      fight_range_m: 12
+      respawn_after_seconds: 30
+      base_health: 25
+      base_stamina: 75
+      eat_below_percent: 10
+      starting_skill: 0
+    bounty_board:
+      config: Valheim/config/com.quad.bountyboard.cfg
+      version_from_cfg: "1.4.4"
+      active_contracts_group_max: 3
+      notices_per_board: 5
+      notices_every_ingame_days: 1
+      reward_percent: 100
+      build_cost: "Wood:20, LeatherScraps:6, Flint:4"
+    party_hud:
+      config: Valheim/config/com.quad.partyhud.cfg
+      version_from_cfg: "1.12.0"
+      toggle_key: F4
+      locally_confirmed_by_user: true
+      show_companions: true
+      show_food: true
+      show_status_effects: true
+      share_my_stats: true
+  build_orders:
+    version_from_cfg: "1.14.7"
+    config: Valheim/config/com.quad.buildorders.cfg
+    hotkeys: {plan: F7, ghosts: F9, import: F11}
+    bridge: {width: 4, material: CoreWood, ends: Steps}
+  hip_lantern:
+    version_from_cfg: "1.1.14"
+    config: Valheim/config/shudnal.HipLantern.cfg
+    toggle: H
+    creates_extraslots_slot: true
+    available_after_discovery: false
+    visual_scale_setting: 0.5
+  forsaken_powers:
+    config: Valheim/config/Turbero.ForsakenPowersPlusRemastered.cfg
+    activation_key: F8
+    effect_duration_seconds: 300
+    cooldown_seconds: 1200
+  plant_easily:
+    config: Valheim/config/advize.PlantEasily.cfg
+    toggle_mod: None
+    snapping: F10
+    auto_replant_toggle: F6
+  achievement_enabler:
+    config: Valheim/config/MidnightsFX.AchievementEnabler.cfg
+    vanilla_only_requirements: true
+    show_all_requirements: true
+    show_secret_achievements: true
+  quads_quiver:
+    config: Valheim/config/com.quad.quiver.cfg
+    recover_arrows_from_ground_probability: 1.0
+    recover_arrows_from_creatures_probability: 0.75
+  blind_cartographer:
+    replaces: NoMapCartographyTable
+    config: Valheim/config/nightkosh.BlindCartographer.cfg
+    git_config_header_version: "1.0.3"
+    last_uploaded_local_header_version: "1.0.2"
+    installed_dll_version: unknown
+    no_map_table_enabled: true
+    pin_shortcut: "Left Alt + Y"
+    note: "Avoid assuming 1.0.3 installed; original saved game allows map only at cartographic table"
+
+hotkey_registry:
+  F1: "ConfigurationManager"
+  F2: "ExtraSlots rebind panel"
+  F4: "Quads Party HUD (USER CONFIRMED CONFIGURED LOCALLY)"
+  F6: "PlantEasily auto replant"
+  F7: "Quads Build Orders planning"
+  F8: "Forsaken power"
+  F9: "Quads Build Orders ghost toggle"
+  F10: "PlantEasily snapping"
+  F11: "Quads Build Orders import plans and blueprints; NOT Party HUD"
+  G: "EpicLoot ability 1"
+  H: "HipLantern; previously conflicted with Companion/EpicLoot"
+  J: "EpicLoot ability 3"
+  K: "Quads Companion command (Git baseline)"
+  L: "Quads Companion menu (Git baseline)"
+  Alt_plus_Y: "BlindCartographer drop a pin without opening map"
+  not_all_vanilla_or_external_bindings_checked: true
+
+world_and_backups:
+  world_existing_before_oremines_install: true
+  backup_world_db_and_fwl: "Both files required, as appropriate to actual save storage"
+  oremine_locations_upgrade:
+    status: completed_per_user_console
+    tool: "JereKuusela Upgrade World with temporary Server_devcommands"
+    command: "locations_add 16 BOM_* mine prefabs; then start"
+    prefab_names:
+      - BOM_FlintMine01
+      - BOM_FlintMine02
+      - BOM_CopperMine01
+      - BOM_CopperMine02
+      - BOM_TinMine01
+      - BOM_TinMine02
+      - BOM_CoalMine01
+      - BOM_CoalMine02
+      - BOM_IronMine01
+      - BOM_IronMine02
+      - BOM_SilverMine01
+      - BOM_SilverMine02
+      - BOM_BlackMetalMine01
+      - BOM_BlackMetalMine02
+      - BOM_FlametalMine01
+      - BOM_FlametalMine02
+    protected_zones_skipped_because_base: 77
+    candidate_zones_examined: 810
+    new_locations_added: 717
+    all_world_locations_after: 803
+    spawned_in_previously_generated_areas: 12
+    processed_percent: 100
+    special_note: "BOM_FlametalMine02 placed 0 of planned 70; other biome/location restrictions affected placement"
+    action: "Do not rerun locations_add just because some prefab quotas were unmet. Save and verify world, and remove temporary admin mods when safe."
+  safety:
+    - "Before NPC/inventory/version/world changes back up both world and player; test on clone"
+    - "Do not delete Quads Companion or Bounty Board and then load zones with their saved prefabs/items"
+    - "Do not assume a Git config patch automatically changes a running client"
+    - "Never publish SavedData, character IDs, personalized autosaves or player-specific JSON in public Git"
+
+ai_companion:
+  design_goal:
+    name: Татьяна
+    preferred_character: female_viking
+    in_game_actual_name_verified: false
+    in_game_gender_verified: false
+    npc_not_llm: "Quads implements scripted game AI; natural-language LLM agent remains future concept"
+    chat_agent_research: "ValheimCli and valheim-ai-agent researched earlier; not deployed"
+  active_test:
+    user_tested_companion: true
+    observed_incident:
+      - "NPC autonomously took gear intended for human players from their chests"
+      - "NPC took a pickaxe and struck the base wall built from stone fencing"
+    reference: Valheim/QUADS_COMPANION_SAFETY_2026-10-22.md
+  root_causes_from_author_source:
+    armory_default_true: "Home / Your chests / Armory auto-upgrades gear from nearby player's chests (ZDO dhc_armory)"
+    auto_jobs: "If no explicit Job flags selected and NPC has pickaxe, Work.AutoJobs chooses Stone and Ore"
+    home_duties: "Home duties can override chosen work; Mining and Build may need explicit deactivation"
+    orders: "Order.Stay pauses autonomous Work.Tick; Go Home / Gather actually enables work"
+    goal_targeting: "Work.Consider rejects Unity Piece targets; fence may have been incidental hit or atypical prefab. Exact hit cause NOT confirmed."
+    settings_location: "Per-NPC ZDO in world, NOT global com.quad.aicompanion.cfg"
+  recommended_safe_tatiana:
+    orders: "Stay for immediate safety; do not confuse with Go Home"
+    armory: OFF
+    pantry: OFF
+    stow: "Optional OFF to fully isolate personal chests"
+    duty_mining: OFF
+    duty_build: "OFF during initial test; BuildOrders can consume resources from chests"
+    jobs: "Explicitly select Forage ON; Stone/Ore/Wood OFF (all OFF would re-enable AutoJobs)"
+    pickaxe: "Remove until NPC confirmed safe"
+    own_chests: "Assign dedicated empty chests away from valuable loot"
+    test: "In cloned world, check selected target, fence health, logs and inventory after relog"
+  version_issue:
+    thunderstore_last_seen: "0.25.0"
+    github_author_source_seen: "0.25.1"
+    github_change: "Claimed compatibility fix to prevent StarLevelSystem cloning/star-modifying a companion"
+    unpublished_runtime_warning: "Do not claim installed or available on Thunderstore until verified; 0.25.1 does not assert a wall-mining fix"
+
+inventory_ui_request:
+  existing_mod: ExtraSlots
+  screenshot_intent: "Six extra cells near existing equipment and Lantern slot on right, roughly 2 columns x 3 rows"
+  desired_type: "Unrestricted pockets for arbitrary items, not equipment-only whitelists"
+  examples:
+    - "Campsite Resources (OdinCampsite; proposed prefab rae_CampsiteResources; confirm in-game)"
+    - "Any shield; many prefabs so a one-item whitelist is unwanted"
+    - "Fishing rod"
+    - "Fishing net"
+    - "Butcher knife (possible prefab KnifeButcher; confirm)"
+    - "Cultivator / пропашник"
+  ExtraSlotsCustomSlots:
+    status: "REJECTED / CANCELED / DO NOT INSTALL"
+    vendor: shudnal
+    version_researched: "1.0.23"
+    researched_source: "https://github.com/shudnal/ExtraSlotsCustomSlots"
+    reason: "User defined custom equipment slots require an exact Item list; empty list accepts no items, '*' wildcard unsupported"
+    can_use_with_extraslots: true
+    needs_other_deps: "ExtraSlots and ConditionalConfigSync"
+    user_wants_no_item_whitelist: true
+    count_in_pack: false
+    config_created: false
+    installation_verified: false
+  future_note: "Only explore a different approach to truly universal pockets if user raises the goal again; do not re-offer rejected addon"
+
+effects_mod_decision:
+  selected:
+    name: Venture Logout Tweaks
+    author: VentureValheim
+    version_selected: "1.0.0"
+    source: "https://thunderstore.io/c/valheim/p/VentureValheim/Venture_Logout_Tweaks/"
+    category: only_client
+    no_cfg_expected: true
+    expected_effects: "Vanilla Rested, Wet, potion/mead, boss powers, poison/burn/frost/lightning etc"
+    custom_mod_effects: "Not guaranteed"
+    valheim_1_0_20_compatibility: "Not tested; published for older Valheim target 1.0.7"
+    install_verified: false
+    important_test: "Log out/in with rested, mead and ForsakenPowersPlusRemastered, compare remaining durations"
+  rejected:
+    name: KeepCharacterEffects
+    source: "https://www.nexusmods.com/valheim/mods/4410"
+    why: "User could not download even through FullVPN"
+    archive_in_repo: "Valheim/Нашли лучшее решение/KeepCharacterEffects.md"
+    dont_install_both: true
+  selected_pack_count_delta: 0
+
+crafting_and_food_recipe_ui:
+  requirement: "Only Client; improve discoverability, search/sort of recipes for creating items and food without changing recipes or server progression"
+  status: "SEARCHED, NOT SELECTED, NOT INSTALLED"
+  researched_candidates:
+    - name: Workstation Search
+      version_seen: "0.6.13"
+      link: "https://thunderstore.io/c/valheim/p/ValheimEnthusiestKakimaki/Workstation_Search"
+      features: "Search, recipe categories including food, favorites, typo-tolerance"
+      assessment: "First cautious candidate; verify current version and 1.0.20 compatibility"
+    - name: CraftingSearch
+      version_seen: "1.0.2"
+      link: "https://thunderstore.io/c/valheim/p/Ab5oluteZer0/CraftingSearch/"
+      features: "Search and sorting default, A-Z, Z-A, type, weight; crafting stations and cauldron"
+      assessment: "Alternative; do not stack with Workstation Search without UI conflict test"
+    - name: CraftIndex
+      version_seen: "0.5.8"
+      link: "https://thunderstore.io/c/valheim/p/jg224/CraftIndex/"
+      features: "Food/nutrition sorting plus recipe index"
+      assessment: "Deprecated in last research and potentially conflicts with BuildOrders hammer UI; not recommended"
+    - name: Goldenrevolver Sorted Menus
+      version_seen: "1.3.4"
+      assessment: "Old; not validated for Valheim 1.0.20"
+  do_not_install_on_assumption: true
+
+repositories_and_documents:
+  primary:
+    - Valheim/README.md
+    - Valheim/CONTINUE_HERE.md
+    - Valheim/DEPLOYMENT_POLICY_2026-10-21.md
+    - Valheim/HANDOFF_2026-10-22.yaml
+  historical:
+    - Valheim/HANDOFF_2026-10-21.yaml
+    - Valheim/LOCAL_SNAPSHOT_AUDIT_2026-10-21.yaml
+  audit:
+    - Valheim/LOCAL_SNAPSHOT_AUDIT_2026-10-22.md
+    - Valheim/CONFIG_RECONCILIATION_2026-10-22.md
+  mechanics:
+    - Valheim/STAR_LEVEL_SYSTEM_2026-10-21.md
+    - Valheim/MonsterLabzReid.md
+    - Valheim/AI_COMPANION_CONCEPT.md
+    - Valheim/QUADS_COMPANION_SAFETY_2026-10-22.md
+    - Valheim/UNIVERSAL_SLOTS_AND_CRAFTING_UI_2026-10-22.md
+  archived_decisions:
+    - "Valheim/Нашли лучшее решение/KeepCharacterEffects.md"
+  config_dir: Valheim/config/
+  public_repository_safety:
+    - "Only configuration docs and safe configs; no actual DLL archive or world/character saves"
+    - "Do not commit personally identifiable runtime state, Steam IDs, passwords, per-player records"
+    - "Last previous attached ZIP may no longer be accessible to the next chat; use committed safe files in Git"
+    - "If byte-level comparison against previous uploaded archive is required, ask user to reupload that archive"
+
+next_thread_tasks:
+  confirmed_actions:
+    - "Treat ExtraSlotsCustomSlots as rejected; do not add a mod to DLL count."
+    - "Use Venture Logout Tweaks as chosen Only Client instead of KeepCharacterEffects; only validate/install when user directs."
+    - "Prioritize safety of saved character, NPC, world and chests."
+  possible_user_requested_followup:
+    - "Evaluate a client-only UI enhancement for crafting and food recipe search/sort, choosing ONE after checking current release and collision with Quads Build Orders"
+    - "If asked, help disable Quads NPC Armory and mining using per-NPC Home/Orders UI; distinguish Git CFG from world/ZDO state"
+    - "If asked for universal pockets, explain the previously rejected whitelist solution is not an option"
+    - "Check Venture effect restoration with modded ForsakenPowersPlusRemastered"
+    - "If requested, verify version mismatch BlindCartographer local config 1.0.2 vs Git 1.0.3"
+    - "If requested, check Quads 0.25.1 availability and StarLevelSystem fix simultaneously across 3 clients"
+  require_before_local_modpack_rollout:
+    - "Fresh ls listing of actual BepInEx/plugins DLLs for host and friends"
+    - "Fresh BepInEx/LogOutput.log showing actual runtime plugin versions"
+    - "Verified backups of .db/.fwl world and character before risky edits"
+  avoid:
+    - "Do not claim Git files were installed onto host; Git operations only"
+    - "Do not invent keys or prefabs without exact config/source"
+    - "Do not change SLS active raids or EpicLoot balance without explicit request"
+    - "Do not re-add NoMapCartographyTable, KeepCharacterEffects, ExtraSlotsCustomSlots, Custom Raids or DigDug without new user decision"
+
+short_bootstrap_for_new_chat: |
+  Мы продолжаем проект VSP Gamer: Valheim 1.0.20/Linux, кооператив трое игроков; хост играет с друзьями peer-to-peer.
+  Git: https://github.com/ValentS1997/vsp-gamer-mods/tree/main/Valheim
+  Читай HANDOFF_2026-10-22.yaml, CONTINUE_HERE.md и README.md. Выбранный план: 44 обязательных S/C и
+  9 необязательных клиентских DLL (53 всего), DigDug отключён. ExtraSlotsCustomSlots ПРЯМО ОТМЕНЁН;
+  стандартный ExtraSlots остаётся. Хотелось 6 универсальных дополнительных ячеек справа от экипировки,
+  но НЕ реализовано. KeepCharacterEffects исключён из-за проблем Nexus, заменён на Only Client
+  Venture Logout Tweaks; пока не проверен в игре. Нужен кандидат Only Client для удобного списка
+  рецептов и еды; пока не выбран. Quads Companion NPC «Татьяна» тестировался и без разрешения
+  брал экипировку из сундуков и колотил киркой по каменному ограждению; Armory нужно выключить
+  в меню NPC, Mining Duties/AutoJobs ограничить, а не менять глобальный CFG.
+  Последние клавиши: Companion L/K, Party HUD F4 (пользователь настроил на ПК),
+  BuildOrders F7/F9/F11, сила F8, HipLantern H, SLS рейд pre_eikthyr_pack сохранён.
+  SolidHitboxes friendly fire включён. Действующий мир и прогрессию не ломать.
