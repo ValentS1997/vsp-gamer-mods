@@ -56,7 +56,7 @@ Party HUD: `F8` показывает/скрывает; отображает то
 Параметры изменены **в Git**, а не автоматически на игровом ПК:
 
 - Quads Companion: `MenuKey = L`, `CommandKey = K`. Это устраняет конфликты прежних `J/H` с EpicLoot и HipLantern.
-- Quads Party HUD: `ToggleKey = F11` вместо `F8` (F8 оставлен силе Отрёкшихся; F9 уже занимает Quads Build Orders).
+- Quads Party HUD: `ToggleKey = F4` вместо `F8` (F8 — сила Отрёкшихся; F11 — планы/чертежи Build Orders, F9 — его призраки).
 - SolidHitboxes: по прямому решению пользователя `EnableFriendlyFire = true`, `FriendlyFireDamageModifier = 1`. Требуется проверить в тестовом мире, не пострадает ли компаньон из-за дружественных атак NPC.
 - Татьяна по-прежнему **концепт**: получение файлов настроек не доказывает выбор женской внешности и имени.
 
