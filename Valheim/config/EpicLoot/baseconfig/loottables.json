@@ -2550,7 +2550,7 @@
           ]
         },
         {
-          "Item": "CapeTrollHide",
+          "Item": "HelmetPointyHat",
           "Weight": 1.0,
           "Rarity": [
             80.0,
@@ -2562,7 +2562,7 @@
           ]
         },
         {
-          "Item": "HelmetPointyHat",
+          "Item": "CapeTrollHide",
           "Weight": 1.0,
           "Rarity": [
             80.0,
