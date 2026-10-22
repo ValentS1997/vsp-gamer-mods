@@ -8,6 +8,8 @@
 This public repository contains **configuration baselines, not a deployable server pack, not game saves and not a verified BepInEx plugin lockfile**.
 
 ## Current handoff
+- **NPC SAFETY INCIDENT (22.10.2026):** Tatiana Quads Companion took unintended equipment from shared chests and mined near/banged stone base fencing. Per-NPC Home Armory (dhc_armory) default true; disable. Work AutoJobs auto-selects Stone/Ore if no explicit jobs selected and holding pickaxe; choose explicit safe jobs instead, and disable Home Duty Mining/Build. Order Stay suspends Work.Tick; Go Home starts autonomy. See [QUADS_COMPANION_SAFETY_2026-10-22.md](QUADS_COMPANION_SAFETY_2026-10-22.md). GitHub source has 0.25.1 SLS fix but Thunderstore still lists 0.25.0. No global CFG changed because restrictions are stored per NPC in world ZDO.
+
 
 - **LATEST POST-ARCHIVE FIXES (22.10.2026): [reconciliation report](CONFIG_RECONCILIATION_2026-10-22.md).** User explicitly enabled SolidHitboxes NPC friendly fire (`EnableFriendlyFire=true`, damage modifier 1). Resolved Quads keys against EpicLoot/HipLantern/Forsaken/BuildOrders: Companion menu `L`, command `K`; Party HUD toggle `F11`. Three EpicLoot JSON files `adventuredata.json`, `iteminfo.json`, `loottables.json` have been restored to byte-exact user ZIP (including HipLantern, post-Elder unlock and 0.1 tool weights). HipLantern and FiresGhettoNetworking runtime values match local; BlindCartographer v1.0.2 local config vs Git v1.0.3 template still pending exact DLL version check. A three-file patch ZIP for local changes was generated in the current chat; Git changes do NOT update the actual game. Raids unchanged.
 
