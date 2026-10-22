@@ -9,7 +9,7 @@
 | `org.bepinex.plugins.solid-hitboxes.cfg` | `EnableFriendlyFire=false` | **`true`** | Прямое решение пользователя: включить friendly fire NPC |
 | `com.quad.aicompanion.cfg` | `MenuKey=J` | **`L`** | `J` занят EpicLoot Ability Hotkey 3 |
 | `com.quad.aicompanion.cfg` | `CommandKey=H` | **`K`** | `H` занят HipLantern и EpicLoot Ability Hotkey 2 |
-| `com.quad.partyhud.cfg` | `ToggleKey=F8` | **`F11`** | `F8` занят ForsakenPowersPlusRemastered |
+| `com.quad.partyhud.cfg` | `ToggleKey=F8` | **`F4`** | `F8` — ForsakenPowersPlusRemastered; промежуточная F11 также занята Build Orders (`ImportKey`) |
 | `EpicLoot/baseconfig/adventuredata.json` | есть `HipLantern` с ценой 400 | внесено в Git | Вернули локальную дополнительную цену азартного приобретения |
 | `EpicLoot/baseconfig/iteminfo.json` | `HipLantern` после `defeated_gdking` | внесено в Git | Сохранили пользовательский boss gate |
 | `EpicLoot/baseconfig/loottables.json` | `HipLantern` в Tier2Tools, инструменты редкие | внесено в Git | Сохранили редкий дроп `Tier0/1/2/3/6Tools`: вес **0.1** вместо 1 |
@@ -31,7 +31,7 @@
 - **HipLantern v1.1.14:** 47 активных конфигурационных записей одинаковы в локальном ZIP и Git; различается служебное форматирование/комментарии. Клавиша `H` остаётся для фонаря.
 - **FiresGhettoNetworking:** 126 активных записей одинаковы; `Enable Server-Side Simulation=true`, общий `ZDO Ownership Transfer=false`, `Selective=true`. Различается текстовый файл, не активные параметры.
 - **BlindCartographer:** одинаковые пять активных параметров: `ModEnabled=true`, карта на столе включена, `Left Alt + Y` для метки. В ZIP конфиг помечен **v1.0.2**, а Git-заготовка помечена **v1.0.3**; это **не проверка установленной DLL**. Временно не меняли конфигурацию, её функции совпадают. Возможное пересечение `Y` с FetchKey BuildOrders проверить в игре: первая требует Alt, вторая — нет.
-- **Quads Build Orders:** `F9` занят `ToggleGhostsKey`, поэтому его сознательно не назначали на HUD. `F7` — планирование построек, `F10` — PlantEasily. По известным ZIP-конфигам `L`, `K`, `F11` были свободны; это не абсолютная гарантия отсутствия назначений в самой игре или Steam.
+- **Quads Build Orders:** `F9` занят `ToggleGhostsKey`, поэтому его сознательно не назначали на HUD. `F7` — планирование построек, `F10` — PlantEasily, `F11` — импорт планов и чертежей Build Orders, `F6` — автопосадка PlantEasily. В сохранённых CFG `L`, `K`, `F4` свободны; это не исключает пользовательских горячих клавиш вне Git.
 - **Действующий `RaidSettings.yaml` и MonsterLabZ** оставлены в прежнем состоянии. Концепт `MonsterLabzReid` отдельно, новый рейд не создавался.
 - **KeepCharacterEffects:** в ZIP не было его конфигурации и DLL; подтвердить установку по `BepInEx/plugins` / логам.
 
@@ -59,6 +59,6 @@ com.quad.partyhud.cfg
 - Что все DLL и совместимые версии действительно установлены у трёх участников.
 - Что Quads корректно распознаёт женскую модель и выбранное имя «Татьяна».
 - Что NPC friendly fire не влияет на приручённых существ или компаньона при данных настройках (зависит от NPC faction).
-- Что игра не использует F11 сама; проверка в игре нужна.
+- Что игра и другие программы не используют F4; проверка в игре нужна.
 
 См. [README](README.md), [AI-компаньон](AI_COMPANION_CONCEPT.md), [общее правило распространения](DEPLOYMENT_POLICY_2026-10-21.md).
