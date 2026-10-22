@@ -4,6 +4,7 @@
 
 **Основа:** Valheim **1.0.20** (network 41) · Linux / Steam · **BepInEx**.  
 **Состояние документации:** 22 октября 2026 года.  
+**Последнее решение:** ExtraSlotsCustomSlots **отменён пользователем**, не установлен и не учитывается в сборке. Существующий ExtraSlots остаётся. Шесть универсальных слотов — только не реализованная идея. Client-only мод для улучшения поиска/сортировки рецептов пока **не выбран**. [Текущий YAML-контекст](HANDOFF_2026-10-22.yaml) · [История идеи слотов](UNIVERSAL_SLOTS_AND_CRAFTING_UI_2026-10-22.md).  
 **Согласованный состав после Quads и Venture Logout Tweaks:** **44 Server / Client**, **9 Only Client (по желанию)**, **0 Only Server**. Локальный архив содержит созданные конфиги Quads (Companion, Bounty Board, Party HUD); это подтверждает генерацию настроек, но не проверяет фактический набор DLL или совместный запуск трёх игроков. Venture Logout Tweaks выбран вместо труднодоступного KeepCharacterEffects; у Venture нет собственного CFG, установка DLL ещё не подтверждена. Dedicated server не используется.  
 **Исходный инвентарь (21.10.2026):** 48 записей DLL, из них `DigDug.dll*` исключён. С учётом FiresGhettoNetworking, HipLantern и трёх Quads-модов: **54 учтённых записи** (44 общих + 9 необязательных + 1 исключённая). BlindCartographer заменяет NoMapCartographyTable **1:1**; `Custom Raids` выведен из активной сборки.
 
