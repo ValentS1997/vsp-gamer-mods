@@ -1,15 +1,33 @@
 # Valheim — deployment policy, user-approved (2026-10-21)
 
-> **FINAL SELECTED STATE 2026-10-22:** user explicitly **rejected ExtraSlotsCustomSlots**, which was never approved for installation and was never included in the counted DLLs. Maintain existing ExtraSlots 1.2.21 config (version from CFG, not verified DLL). [Rejected research](UNIVERSAL_SLOTS_AND_CRAFTING_UI_2026-10-22.md). **No new crafting UI mod selected**; Workstation Search and CraftingSearch are candidates only. Venture Logout Tweaks replaces KeepCharacterEffects 1:1 as optional C, pending runtime test. Selected plan remains 44 shared S/C + 9 optional C = 53 active DLL if all installed; excluded DigDug +1. See [current handoff](HANDOFF_2026-10-22.yaml).
+> **FINAL SELECTED STATE 2026-10-22 (updated):** ExtraSlotsCustomSlots **CANCELED**, existing ExtraSlots retained. [WorkbenchesPlus 1.0.16](https://thunderstore.io/c/valheim/p/Morda/WorkbenchesPlus/) selected as new optional **Only Client** crafting UI (DLL `WorkbenchesPlus.dll`, CFG generated as `com.morda.workbenchesplus.cfg`). [Venture Logout Tweaks 1.0.0](https://thunderstore.io/c/valheim/p/VentureValheim/Venture_Logout_Tweaks/) remains already-selected Only Client replacing rejected KeepCharacterEffects; **do not count twice**. **Current plan: 44 required S/C + 10 optional C = 54 selected active DLLs; +1 intentionally disabled DigDug = 55 accounted.** Runtime inventories/compatibility not verified. The two previously researched UI alternatives Workstation Search and CraftingSearch are **not selected**. WorkbenchesPlus extras (dismantle/build-range/auto-repair) can alter gameplay; no CFG or world changes approved. Historical notes below retain earlier 44+9 states for audit.
 
-> **НОВОЕ РЕШЕНИЕ (2026-10-22):** KeepCharacterEffects **исключён из выбранного состава** из-за недоступности загрузки; вместо него выбран [Venture Logout Tweaks v1.0.0](https://thunderstore.io/c/valheim/p/VentureValheim/Venture_Logout_Tweaks/), **Only Client**, без CFG. Старое решение перемещено в [«Нашли лучшее решение»](%D0%9D%D0%B0%D1%88%D0%BB%D0%B8%20%D0%BB%D1%83%D1%87%D1%88%D0%B5%D0%B5%20%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5/KeepCharacterEffects.md). Замена 1:1; **44 S/C + 9 Only Client**, план 53 активные DLL, без подтверждения установки. Зафиксирован интерес к ExtraSlotsCustomSlots (до 8 пользовательских слотов), но это **пока кандидат, не считать установленным и не прибавлять к DLL**. Список допустимых предметов обязательный, пустой список не разрешает всё; подробности в [концепте](UNIVERSAL_SLOTS_AND_CRAFTING_UI_2026-10-22.md).
+## Актуальный Only Client-манифест (10 выбранных модов; installation unverified)
+
+```text
+Advize_PlantEasily.dll
+BetterPickupNotifications.dll
+BuildOrders.dll
+CarturCompassAndClock.dll
+ConfigurationManager.dll
+FirstPersonMode.dll
+GooderAutoShield.dll
+PartyHud.dll
+WorkbenchesPlus.dll              # Morda WorkbenchesPlus 1.0.16; NEW
+Venture Logout Tweaks 1.0.0     # DLL filename [Needs confirmation]; ALREADY COUNTED
+```
+
+- **WorkbenchesPlus:** автор заявляет client-side, Valheim 1.0, BepInExPack 5.4.2350+. Генерируемый при запуске CFG: `BepInEx/config/com.morda.workbenchesplus.cfg` (не был получен с ПК). Встроенные dismantle, изменение радиуса станции (`Shift+E`) и auto-repair — потенциальные gameplay changes, а не только UI; перед использованием проверить совместимость с `LzD_StationsCustomRanges`, Quads Build Orders и сохранением мира. Не включать новые функции автоматически в Git.
+- **Venture Logout Tweaks:** автор подтверждает client-only и отсутствие CFG; версии DLL, загрузку плагина и восстановление эффектов в нашей сборке проверить логом и тестом.
+
+> **ПРЕДЫДУЩЕЕ РЕШЕНИЕ (историческая запись, до WorkbenchesPlus, 2026-10-22):** KeepCharacterEffects **исключён из выбранного состава** из-за недоступности загрузки; вместо него выбран [Venture Logout Tweaks v1.0.0](https://thunderstore.io/c/valheim/p/VentureValheim/Venture_Logout_Tweaks/), **Only Client**, без CFG. Старое решение перемещено в [«Нашли лучшее решение»](%D0%9D%D0%B0%D1%88%D0%BB%D0%B8%20%D0%BB%D1%83%D1%87%D1%88%D0%B5%D0%B5%20%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5/KeepCharacterEffects.md). Замена 1:1; **44 S/C + 9 Only Client**, план 53 активные DLL, без подтверждения установки. Зафиксирован интерес к ExtraSlotsCustomSlots (до 8 пользовательских слотов), но это **пока кандидат, не считать установленным и не прибавлять к DLL**. Список допустимых предметов обязательный, пустой список не разрешает всё; подробности в [концепте](UNIVERSAL_SLOTS_AND_CRAFTING_UI_2026-10-22.md).
 
 > **ПРОВЕРКА И ИСПРАВЛЕНИЯ (22.10.2026):** [отчёт о сверке CFG](CONFIG_RECONCILIATION_2026-10-22.md). Дружественный огонь NPC включён в SolidHitboxes (`EnableFriendlyFire=true`, `FriendlyFireDamageModifier=1`); кнопки Quads Companion переназначены `L/K`, Party HUD — `F4` (F11 занята импортом планов Build Orders). Три JSON EpicLoot в Git побайтово синхронизированы с загруженным ZIP; прогрессию и редкий дроп пользователя не отменяли. **Все правки сделаны в Git; для реального игрового хоста требуется локальное применение трёх CFG.** Классификация DLL остаётся **44 S/C + 9 Only Client** (план).
 
 > **ПОСЛЕДНИЙ ПОДТВЕРЖДЁННЫЙ CONFIG-СНИМОК (2026-10-22):** [Аудит присланного ZIP](LOCAL_SNAPSHOT_AUDIT_2026-10-22.md). Все четыре локальных Quads CFG получены и сохранены в Git побайтово, остальные согласованные изменения в настройках Achievements, SLS, AutomaticFuel, PlantEasily, Quiver, Build Orders и QuickStack также синхронизированы. Это не подтверждает факт установки всех DLL у друзей. В локальном BlindCartographer.cfg записана версия v1.0.2, версия DLL не проверена. В архиве не обнаружен CFG KeepCharacterEffects. **Текущий выбранный план 44 S/C + 9 Only Client**, но точный установленный состав пока нельзя считать проверенным.
 
 > **УСТАРЕЛАЯ ЗАПИСЬ (отклонено позднее 22.10): KEEP CHARACTER EFFECTS:** [KeepCharacterEffects](https://www.nexusmods.com/valheim/mods/4410) от Virkatta, Nexus version **1**, дата публикации 12.10.2026. Автор заявляет полную работоспособность на **Only Client**: сохранение оставшегося времени Rested, Wet, Mead/Potions и Guardian Powers между выходом/входом; серверу и другим игрокам мод не обязателен. **Имя DLL/Plugin GUID не подтверждены:** Nexus не публикует их в доступном описании; не придумывать. Автор не тестировал совместимость с другими модами, включая нашу связку ForsakenPowersPlusRemastered. Установить и проверить позже, перед этим копия персонажа. 
-> **АКТУАЛЬНЫЙ ВЫБРАННЫЙ СОСТАВ (план после установки):** **44 Server/Client + 9 Only Client + 1 исключённый DigDug = 54 учтённых записи, 53 ожидаемых активных DLL**. Цифры 42/7, 44/8 и исторические списки ниже отражают предыдущие этапы. Из 9 клиентских 8 были уже выбраны; KeepCharacterEffects девятый, пока только запланирован.
+> **ИСТОРИЧЕСКИЙ ВЫБРАННЫЙ СОСТАВ (до WorkbenchesPlus):** **44 Server/Client + 9 Only Client + 1 исключённый DigDug = 54 учтённых записи, 53 ожидаемых активных DLL**. Цифры 42/7, 44/8 и исторические списки ниже отражают предыдущие этапы. Из 9 клиентских 8 были уже выбраны; KeepCharacterEffects девятый, пока только запланирован.
 
 > **ИСТОРИЯ ВЫБОРА (2026-10-22; после неё получены CFG, см. выше):** пользователь скачивает [Quads Companion](https://thunderstore.io/c/valheim/p/Quads_Lab/Quads_Companion/) v0.25.0 — `AICompanion.dll` (**Server / Client**), [Quads Bounty Board](https://thunderstore.io/c/valheim/p/Quads_Lab/Quads_Bounty_Board/) v1.4.4 — `BountyBoard.dll` (**Server / Client**), [Quads Party HUD](https://thunderstore.io/c/valheim/p/Quads_Lab/Quads_Party_HUD/) v1.12.0 — `PartyHud.dll` (**Only Client**, опционален). У Companion и Bounty Board установку на всех клиентах и хосте прямо требует автор, иначе сохранённые NPC / доски могут исчезнуть при загрузке зоны. Для Party HUD достаточно установить только тому, кому нужен интерфейс; расширенная телеметрия удалённых игроков требует их добровольного ShareMyStats. Точные DLL имена сверены с `thunderstore.toml` и `.csproj` в публичном GitHub Quads Lab.
 > **ПРЕДЫДУЩАЯ ПЛАНОВАЯ КОМПЛЕКТАЦИЯ (до KeepCharacterEffects):** **44 S/C + 8 Only Client + 1 отключённый DigDug = 53 учтённые DLL, 52 активные**, при условии установки всех новых компонентов. Исторические значения 40/7 и 42/7 ниже сохраняются для аудита и уже не отражают выбранный состав. Dedicated server не используется; хост — локальный клиент пользователя. Эти четыре конфига Quads позднее были получены в архиве 22.10 и записаны в Git побайтово; см. актуальный аудит в начале документа.
@@ -72,7 +90,7 @@ YamlDotNetDetector.dll
 YamlDotNet.dll
 ```
 
-## Only Client — OPTIONAL (7)
+## Historical initial Only Client — OPTIONAL (7; superseded by 10 above)
 
 Install these only on individual player machines, at player discretion. The server and essential game mechanics must work without them.
 

@@ -18,7 +18,7 @@ handoff:
     - "ExtraSlotsCustomSlots ОТМЕНЁН пользователем. НЕ устанавливать, НЕ добавлять в манифест, НЕ предлагать снова без нового запроса."
     - "Обычный ExtraSlots остаётся; идея шести универсальных слотов остаётся нереализованной, а не выбранным модом."
     - "KeepCharacterEffects отменён (невозможно скачать Nexus даже через FullVPN); Venture Logout Tweaks 1.0.0 выбран вместо него и помещён в Only Client."
-    - "Мод на удобное меню рецептов/еды ещё НЕ выбран и не установлен по подтверждённым сведениям."
+    - "WorkbenchesPlus 1.0.16 выбран как новый Only Client для рецептов/еды; runtime не проверен. Его разборка предметов и изменение радиуса станций требуют осторожного теста."
     - "Quads Companion тестировался: NPC без разрешения забирала экипировку из сундуков и била киркой по каменному ограждению базы."
     - "SolidHitboxes NPC friendly fire включён по прямому решению пользователя; DAMAGE modifier = 1."
     - "Party HUD ToggleKey=F4 уже подтверждён пользователем на его ПК. F11 занят Build Orders, НЕ возвращать HUD на F11."
@@ -68,12 +68,12 @@ project:
 deployment:
   selected_policy:
     required_server_and_client: 44
-    optional_only_client: 9
+    optional_only_client: 10
     only_server: 0
-    planned_active_total: 53
+    planned_active_total: 54
     excluded_from_active_total:
       - "DigDug.dll* (intentionally disabled / excluded)"
-    accounted_total_including_excluded: 54
+    accounted_total_including_excluded: 55
     classification_note: "S/C is a chosen distribution policy for this peer host, not a guarantee of headless server compatibility"
     count_is_plan_not_verified_inventory: true
     current_local_dll_inventory: "Not freshly audited after all additions/replacements"
@@ -103,6 +103,13 @@ deployment:
       replaces: KeepCharacterEffects
       version_selected: "1.0.0"
       installation_verified: false
+    - name: "WorkbenchesPlus"
+      class: only_client
+      dll: WorkbenchesPlus.dll
+      version_selected: "1.0.16"
+      source: "https://thunderstore.io/c/valheim/p/Morda/WorkbenchesPlus/"
+      installation_verified: false
+      note: "Selected for crafting recipe search/sort; dismantle, build range and auto repair are potentially gameplay-changing, not approved as active behaviors"
   deliberately_not_selected:
     - name: ExtraSlotsCustomSlots
       status: "EXPLICITLY CANCELED by user on 2026-10-22"
@@ -111,7 +118,7 @@ deployment:
       status: "Rejected due to download access; archived under Нашли лучшее решение"
       dll_count_delta: 0
     - name: "Workstation Search / CraftingSearch / CraftIndex"
-      status: "Shortlist only, no user selection"
+      status: "Unselected alternatives; WorkbenchesPlus selected instead"
       dll_count_delta: 0
     - name: "Custom Raids"
       status: "Out of active pack; SLS schedules active raids"
@@ -142,7 +149,7 @@ decisions_chronology:
     - "KeepCharacterEffects download failed even with FullVPN; archived, replaced by Venture Logout Tweaks client-only"
     - "Wanted six unrestricted slots for useful items; researched ExtraSlotsCustomSlots and established whitelist-only behavior"
     - "ExtraSlotsCustomSlots explicitly CANCELED by user; existing ExtraSlots retained"
-    - "Requested client-only crafting recipe/food interface improvements; options researched but no mod chosen"
+    - "WorkbenchesPlus 1.0.16 chosen Only Client for crafting UI; one additional planned DLL, 44 S/C + 10 C = 54 active. Venture Logout Tweaks already counted; no local installation verified"
 
 mod_settings:
   extraslots:
@@ -433,18 +440,33 @@ effects_mod_decision:
 
 crafting_and_food_recipe_ui:
   requirement: "Only Client; improve discoverability, search/sort of recipes for creating items and food without changing recipes or server progression"
-  status: "SEARCHED, NOT SELECTED, NOT INSTALLED"
+  status: "SELECTED, RUNTIME NOT VERIFIED"
+  selected:
+    name: WorkbenchesPlus
+    author: Morda
+    version_selected: "1.0.16"
+    link: "https://thunderstore.io/c/valheim/p/Morda/WorkbenchesPlus/"
+    dll_expected: WorkbenchesPlus.dll
+    client_only_claim: true
+    required_loader: "BepInExPack Valheim 5.4.2350+ (installed version unverified)"
+    config_expected: "BepInEx/config/com.morda.workbenchesplus.cfg"
+    favorites_file_expected: "BepInEx/config/WorkbenchesPlus_favorites.txt"
+    main_features: "Search, favorites, recipe categories/sorting, food Health/Stamina/Eitr, item sets grouped by biome"
+    gameplay_risks: "Dismantle/refund, Shift+E build range cycle, optional auto repair and multicraft; do not change settings without approval"
+    compatibility_to_test: "LzD_StationsCustomRanges, Quads Build Orders, ExtraSlots/EpicLoot and Valheim 1.0.20"
+    installation_verified: false
+    runtime_test: pending
   researched_candidates:
     - name: Workstation Search
       version_seen: "0.6.13"
       link: "https://thunderstore.io/c/valheim/p/ValheimEnthusiestKakimaki/Workstation_Search"
       features: "Search, recipe categories including food, favorites, typo-tolerance"
-      assessment: "First cautious candidate; verify current version and 1.0.20 compatibility"
+      assessment: "Not selected after user chose WorkbenchesPlus; avoid stacking crafting UI mods"
     - name: CraftingSearch
       version_seen: "1.0.2"
       link: "https://thunderstore.io/c/valheim/p/Ab5oluteZer0/CraftingSearch/"
       features: "Search and sorting default, A-Z, Z-A, type, weight; crafting stations and cauldron"
-      assessment: "Alternative; do not stack with Workstation Search without UI conflict test"
+      assessment: "Not selected after user chose WorkbenchesPlus; avoid stacking crafting UI mods"
     - name: CraftIndex
       version_seen: "0.5.8"
       link: "https://thunderstore.io/c/valheim/p/jg224/CraftIndex/"
@@ -488,7 +510,7 @@ next_thread_tasks:
     - "Use Venture Logout Tweaks as chosen Only Client instead of KeepCharacterEffects; only validate/install when user directs."
     - "Prioritize safety of saved character, NPC, world and chests."
   possible_user_requested_followup:
-    - "Evaluate a client-only UI enhancement for crafting and food recipe search/sort, choosing ONE after checking current release and collision with Quads Build Orders"
+    - "Runtime-test selected WorkbenchesPlus 1.0.16 UI and avoid overlapping recipe UI mods; review dismantle/build-range behavior before enabling on a live world"
     - "If asked, help disable Quads NPC Armory and mining using per-NPC Home/Orders UI; distinguish Git CFG from world/ZDO state"
     - "If asked for universal pockets, explain the previously rejected whitelist solution is not an option"
     - "Check Venture effect restoration with modded ForsakenPowersPlusRemastered"
@@ -508,11 +530,11 @@ short_bootstrap_for_new_chat: |
   Мы продолжаем проект VSP Gamer: Valheim 1.0.20/Linux, кооператив трое игроков; хост играет с друзьями peer-to-peer.
   Git: https://github.com/ValentS1997/vsp-gamer-mods/tree/main/Valheim
   Читай HANDOFF_2026-10-22.yaml, CONTINUE_HERE.md и README.md. Выбранный план: 44 обязательных S/C и
-  9 необязательных клиентских DLL (53 всего), DigDug отключён. ExtraSlotsCustomSlots ПРЯМО ОТМЕНЁН;
+  10 необязательных клиентских DLL (54 всего), DigDug отключён. WorkbenchesPlus 1.0.16 выбран ExtraSlotsCustomSlots ПРЯМО ОТМЕНЁН;
   стандартный ExtraSlots остаётся. Хотелось 6 универсальных дополнительных ячеек справа от экипировки,
   но НЕ реализовано. KeepCharacterEffects исключён из-за проблем Nexus, заменён на Only Client
-  Venture Logout Tweaks; пока не проверен в игре. Нужен кандидат Only Client для удобного списка
-  рецептов и еды; пока не выбран. Quads Companion NPC «Татьяна» тестировался и без разрешения
+  Venture Logout Tweaks; пока не проверен в игре. WorkbenchesPlus Only Client для рецептов и еды
+  выбран (новый DLL), но runtime и потенциально меняющие баланс функции не проверены. Quads Companion NPC «Татьяна» тестировался и без разрешения
   брал экипировку из сундуков и колотил киркой по каменному ограждению; Armory нужно выключить
   в меню NPC, Mining Duties/AutoJobs ограничить, а не менять глобальный CFG.
   Последние клавиши: Companion L/K, Party HUD F4 (пользователь настроил на ПК),
