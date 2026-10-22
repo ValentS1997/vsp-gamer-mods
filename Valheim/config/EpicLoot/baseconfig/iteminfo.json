@@ -716,7 +716,9 @@
         "defeated_eikthyr": [
           "Torch"
         ],
-        "defeated_gdking": [],
+        "defeated_gdking": [
+          "HipLantern"
+        ],
         "defeated_bonemass": [],
         "defeated_dragon": [],
         "defeated_goblinking": [],
