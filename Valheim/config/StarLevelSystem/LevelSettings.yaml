@@ -235,7 +235,7 @@ DefaultCreatureLevelUpChance:
 DefaultLevelupGenerators: []
 BossLevelupGenerators:
 - MaxLevel: 4
-  LevelUpChance: 0.2
+  LevelUpChance: 0.4
   LevelupCalculationStyle: Exponential
 EnableDistanceLevelBonus: false
 DistanceLevelBonus:
