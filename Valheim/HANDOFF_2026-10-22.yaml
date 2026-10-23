@@ -15,6 +15,8 @@ handoff:
     proposal: "План или гипотеза; не считать установленным либо одобренным"
     superseded: "Исторические сведения, позже заменены"
   first_read:
+    - "2026-10-23: DoorDirector v0.3.0 SELECTED as 45th required S/C DLL; 45 S/C + 10 C = 55 planned, only 54 verified locally so far. New baseline CFG in Git; no installation on host/friends yet."
+    - "DoorDirector auto-closes doors/gates but does not auto-open. Default delay 5s. Its debug F7 conflicts with Build Orders, so the prepared config sets diagnostic hotkey None; use doordirector_prefab."
     - "ExtraSlotsCustomSlots ОТМЕНЁН пользователем. НЕ устанавливать, НЕ добавлять в манифест, НЕ предлагать снова без нового запроса."
     - "Обычный ExtraSlots остаётся; идея шести универсальных слотов остаётся нереализованной, а не выбранным модом."
     - "KeepCharacterEffects отменён (невозможно скачать Nexus даже через FullVPN); Venture Logout Tweaks 1.0.0 выбран вместо него и помещён в Only Client."
@@ -67,17 +69,27 @@ project:
 
 deployment:
   selected_policy:
-    required_server_and_client: 44
+    required_server_and_client: 45
     optional_only_client: 10
     only_server: 0
-    planned_active_total: 54
+    planned_active_total: 55
     excluded_from_active_total:
       - "DigDug.dll* (intentionally disabled / excluded)"
-    accounted_total_including_excluded: 55
+    accounted_total_including_excluded: 56
     classification_note: "S/C is a chosen distribution policy for this peer host, not a guarantee of headless server compatibility"
-    count_is_plan_not_verified_inventory: true
-    current_local_dll_inventory: "Not freshly audited after all additions/replacements"
+    count_is_plan_not_verified_inventory: true  # 55 is plan; verified local inventory is 54
+    current_local_dll_inventory: "54 DLL verified on local PC in 2026-10-22 split (44 S/C + 10 C); new DoorDirector selected 2026-10-23 not installed/verified"
   selected_recent_changes:
+    - name: "DoorDirector"
+      class: server_client
+      dll: DoorDirector.dll
+      version_selected: "0.3.0"
+      source: "https://thunderstore.io/c/valheim/p/TomTomDK/DoorDirector/"
+      config_baseline: Valheim/config/com.tomtom.doordirector.cfg
+      installation_verified: false
+      settings_verified_from_source: "Enabled=true; Default Auto Close Delay=5; Only Affect Configured Prefabs=false; Prefab Debug Hotkey=None (VSP baseline avoids F7 conflict)"
+      required_by_author: "on peer host and all connecting clients"
+      caveat: "Custom gate behavior, Quads Companion triggering, and game v1.0.20 compatibility await in-game tests; no automatic door opening"
     - name: "FiresGhettoNetworking"
       class: server_client
     - name: "HipLantern"
@@ -128,6 +140,7 @@ deployment:
     quads_companion: "All three human clients including host need same compatible mod; missing prefab can delete saved NPC and inventory"
     bounty_board: "All three humans including host need it; persistent bounty board object depends on registered prefab"
     party_hud: "May be installed selectively; extended remote stat sharing requires the other player's opt-in mod"
+    door_director: "Mandatory for hosting client and both friends (ServerSync version enforcement); installed status is not yet confirmed."
     venture_logout_tweaks: "Client-only; not mandatory for friends"
     extraslots_customslots: "Not selected; do not add to any friend's modpack"
   references:
@@ -150,6 +163,10 @@ decisions_chronology:
     - "Wanted six unrestricted slots for useful items; researched ExtraSlotsCustomSlots and established whitelist-only behavior"
     - "ExtraSlotsCustomSlots explicitly CANCELED by user; existing ExtraSlots retained"
     - "WorkbenchesPlus 1.0.16 chosen Only Client for crafting UI; one additional planned DLL, 44 S/C + 10 C = 54 active. Venture Logout Tweaks already counted; no local installation verified"
+
+  "2026-10-23":
+    - "DoorDirector 0.3.0 selected for defense: automatic closing of doors and gates opened by AI Companion; S/C required for all three humans. Git-only baseline config and README updated, no local DLL installation verified."
+    - "Deployment target now 45 shared + 10 optional clients = 55 selected active DLL; 54 verified in 22.10 split remains historical count."
 
 mod_settings:
   extraslots:
@@ -299,6 +316,9 @@ mod_settings:
     note: "Avoid assuming 1.0.3 installed; original saved game allows map only at cartographic table"
 
 hotkey_registry:
+  LeftShift_G: "DoorDirector player-built door auto-close toggle (new planned mod)"
+  LeftShift_T: "DoorDirector custom delay per player-built door (new planned mod)"
+  DoorDirector_Prefab_Debug_Hotkey: "None in VSP baseline, upstream F7 reserved for Build Orders; console doordirector_prefab"
   F1: "ConfigurationManager"
   F2: "ExtraSlots rebind panel"
   F4: "Quads Party HUD (USER CONFIRMED CONFIGURED LOCALLY)"
