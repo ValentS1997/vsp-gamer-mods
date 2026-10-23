@@ -173,34 +173,23 @@ CustomLevelupGenerators:
     LevelUpChance: 0.35
     LevelupCalculationStyle: Gaussian
     GaussianOffset: 0.25
+# Shared, non-geographic tuning only. Biome star caps/distance adjustments removed.
+# MaxLevel=3 in the main CFG caps all ordinary creatures at 3 stars.
 BiomeConfiguration:
   All:
-    DistanceScaleModifier: 1.5
-    SpawnRateModifier: 1.1
+    SpawnRateModifier: 1.0
     DamageReceivedModifiers:
       Poison: 1.5
     NightSettings:
-      NightLevelUpChanceScaler: 1.5
+      NightLevelUpChanceScaler: 1.0
       CreatureSpawnsDisabled: []
-  Meadows:
-    BiomeMaxLevelOverride: 1
-  BlackForest:
-    BiomeMaxLevelOverride: 1
-  Swamp:
-    BiomeMaxLevelOverride: 2
-  Mountain:
-    BiomeMaxLevelOverride: 2
-  Plains:
-    BiomeMaxLevelOverride: 3
-  Mistlands:
-    BiomeMaxLevelOverride: 3
-  AshLands:
-    BiomeMaxLevelOverride: 4
-    DistanceScaleModifier: 0.5
-  DeepNorth:
-    BiomeMaxLevelOverride: 4
-    DistanceScaleModifier: 0.5
 CreatureConfiguration:
+  dhack_companion:
+    CreatureMaxLevelOverride: 0
+    CreatureBaseValueModifiers:
+      Size: 0.85
+    CreaturePerLevelValueModifiers:
+      SizePerLevel: 0
   piece_TrainingDummy:
     CustomCreatureLevelUpChance:
       1: 100
@@ -232,41 +221,23 @@ CreatureConfiguration:
   Skeleton_Hildir: {}
   Fenring_Cultist_Hildir: {}
   Charred_Melee_Dyrnwyn: {}
+# Thresholds in percent for ZDO levels (not exact star counts).
+# 1 = 0*, 2 = 1*, 3 = 2*, 4 = 3*.
+# On Normal combat: 0*=90%, 1*=9%, 2*=0.95%, 3*=0.05%.
+# On Very Hard: 0*=86%, 1*=12.6%, 2*=1.33%, 3*=0.07%.
+# Raid-specific level tables and boss tables can still override these odds.
 DefaultCreatureLevelUpChance:
-  1: 20
-  2: 10
-  3: 5
-  4: 2
-  5: 1
-  6: 0.5
-  7: 0.25
-  8: 0.125
-  9: 0.0625
-  10: 0.0312
-  11: 0.0156
-  12: 0.0078
-  13: 0.0039
-  14: 0.0019
-  15: 0.0015
-  16: 0.001
-  17: 0.0009
-  18: 0.0008
-  19: 0.0007
-  20: 0.0006
-  21: 0.0005
-  22: 0.0004
-  23: 0.0003
-  24: 0.0002
-  25: 0.0001
-DefaultLevelupGenerators:
-- MaxLevel: 4
-  LevelUpChance: 0.4
-  LevelupCalculationStyle: Exponential
+  1: 10
+  2: 1
+  3: 0.05
+  4: 0
+# Disable generator override; use the explicit 0-3 star table above.
+DefaultLevelupGenerators: []
 BossLevelupGenerators:
 - MaxLevel: 4
   LevelUpChance: 0.2
   LevelupCalculationStyle: Exponential
-EnableDistanceLevelBonus: true
+EnableDistanceLevelBonus: false
 DistanceLevelBonus:
   750:
     1: 15
@@ -374,7 +345,7 @@ DistanceLevelBonus:
     16: 0.25
     17: 0.12
     18: 0.06
-EnableConditionalCreatureLevelupChance: true
+EnableConditionalCreatureLevelupChance: false
 ConditionalCreatureLevelupChance:
   defeated_frozenking_p3:
     Meadows:
