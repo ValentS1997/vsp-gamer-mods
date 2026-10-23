@@ -15,6 +15,7 @@ handoff:
     proposal: "План или гипотеза; не считать установленным либо одобренным"
     superseded: "Исторические сведения, позже заменены"
   first_read:
+    - "2026-10-24 LATEST: user SELECTED PlanBuild 0.20.0 as mandatory S/C (PlanBuild.dll on host plus two clients) to record old house and reconstruct it around many full chests; BepInEx and Jotunn already counted, HookGenPatcher not needed. 47 S/C + 10 optional C = 57 selected DLL, + disabled DigDug = 58 accounted. PlanBuild .blueprint contains snapshot of chest inventories but restores it only in zero-cost Direct Build, which duplicates contents if originals are still present; normal Plan mode makes planned pieces but no inventory copy. Do NOT Cut original full base until backup and test on one small chest. New full instruction Valheim/PLANBUILD_REBUILD_2026-10-24.md. NOT installed, no new CFG, Git-only. ChestSizeConfig remains unselected candidate."
     - "2026-10-24 LATEST selected NEW mod: ModularLadders v1.0.0 (WoodMakeMods, Thunderstore) approved as mandatory S/C: ModularLadders.dll on P2P host plus both friends; BepInEx dependency, no Jotunn required. Adds five vertical wall ladder types using stackable 2m segments; when mod is removed built ladders disappear. Selected only, NOT installed/tested, NO CFG created. Current target 46 S/C + 10 optional C = 56 DLL, + disabled DigDug = 57 accounted; previous 45+10 was state after retiring BossGate. SkillsReworked (M2Valheim) and TalentTree version 2.3.5 (M2Valheim) both DEFERRED, NOT installed or added to counts; TalentTree requires SkillsReworked. Document: Valheim/MOD_DECISIONS_2026-10-24.md."
     - "2026-10-24 LATEST after rebalance v2: BossGate v1.1.2 RETIRED by user, now 45 mandatory S/C + 10 optional client = 55 selected DLL (+ DigDug disabled = 56 accounted). BossGate used PortalItemsRequireBossKill=true; stone portal built after self-obtained Molten Cores transports metals without this mod. Active Valheim/config/Igao.BossGate.cfg moved byte-exact to Valheim/retired-configs/Igao.BossGate.cfg; remove BossGate.dll on P2P host and both clients together. XPortal remains. This is Git-only, no installed DLL removed."
     - "2026-10-24 friends: user replaced MassFarming idea with CLIENT-ONLY Advize PlantEasily v2.3.0 minimal preset at Valheim/client-presets/friends/advize.PlantEasily.cfg. Harvest E (KeyboardHarvestModifierKey=E) AllResources radius 3; ModActive=true, rows/columns=1, SnapActive=false, ReplantOnHarvest=false, hotkeys/UI extras disabled. Host's Valheim/config/advize.PlantEasily.cfg UNCHANGED. Verified matching five-file rebalance and the new friends-only ZIP SHA256 eb47c37eb13c4a3e662daffc8e6906c4ed65cfcb6f24cbfb84e232ee075a5a6e. No new DLL counted, no game runtime test."
@@ -80,16 +81,16 @@ project:
 
 deployment:
   selected_policy:
-    required_server_and_client: 46
+    required_server_and_client: 47
     optional_only_client: 10
     only_server: 0
-    planned_active_total: 56
+    planned_active_total: 57
     excluded_from_active_total:
       - "DigDug.dll* (intentionally disabled / excluded)"
-    accounted_total_including_excluded: 57
+    accounted_total_including_excluded: 58
     classification_note: "S/C is a chosen distribution policy for this peer host, not a guarantee of headless server compatibility"
-    count_is_plan_not_verified_inventory: true  # 56 is latest plan with ModularLadders; historic disk snapshot was 54, before selected mods and including retired BossGate
-    current_local_dll_inventory: "Historic last direct DLL inventory: 54 files on 2026-10-22 including BossGate; DoorDirector and ChilloutForcedPVP user-tested thereafter. BossGate retired in Git only; ModularLadders selected 2026-10-24 and not installed/verified. Final 56 DLL is a target count, not verified live count."
+    count_is_plan_not_verified_inventory: true  # 57 selected plan, NOT a live DLL scan; 22.10 snapshot had 54 files including since-retired BossGate
+    current_local_dll_inventory: "Historic 54 DLL snapshot (22.10) includes retired BossGate; DoorDirector and ChilloutForcedPVP user-tested later. BossGate retired in Git only, ModularLadders and PlanBuild selected but neither verified installed. 57 selected DLL is a deployment plan, not confirmed running binaries."
     deferred_not_selected:
       - name: SkillsReworked
         source: "https://thunderstore.io/c/valheim/p/M2Valheim/SkillsReworked/"
@@ -100,6 +101,17 @@ deployment:
         dependency: SkillsReworked
         status: "Interesting idea, not installed and not counted"
   selected_recent_changes:
+    - name: "PlanBuild"
+      class: server_client
+      dll: PlanBuild.dll
+      version_selected: "0.20.0"
+      source: "https://thunderstore.io/c/valheim/p/MathiasDecrock/PlanBuild/v/0.20.0/"
+      dependencies_already_selected: "BepInExPack>=5.4.2350 and Jotunn>=2.30.1; no HookGenPatcher in 0.20.0"
+      multiplayer_policy: "P2P host and both friends"
+      target_use: "Copy/save current house as persistent blueprint before substantial reconstruction around full chests"
+      safety: "Chest inventory copied into blueprints, restored only in Direct Build; avoid Cut until a test and world backup"
+      installation_verified: false
+      config_committed: false
     - name: "ModularLadders"
       class: server_client
       dll: ModularLadders.dll
@@ -231,6 +243,7 @@ decisions_chronology:
     - "Deployment target now 45 shared + 10 optional clients = 55 selected active DLL; 54 verified in 22.10 split remains historical count."
 
   "2026-10-24":
+    - "PlanBuild 0.20.0 SELECTED for house rebuilding and chest retention: new required S/C, 47+10=57 selected active DLL. ChestSizeConfig stays candidate; no new CFG. Details in Valheim/PLANBUILD_REBUILD_2026-10-24.md."
     - "User selected ModularLadders 1.0.0 as required S/C for all three players; adds 1 selected DLL (46 S/C + 10 C = 56). No CFG created or installed. SkillsReworked and TalentTree v2.3.5 explicitly deferred. See Valheim/MOD_DECISIONS_2026-10-24.md."
     - "PLAYTEST REBALANCE: details in Valheim/PLAYTEST_REBALANCE_2026-10-24.md. Four files changed IN GIT: StarLevelSystem/RaidSettings.yaml, StarLevelSystem/LevelSettings.yaml, MidnightsFX.StarLevelSystem.cfg, MonsterLabZ.cfg. A ZIP of exactly those BepInEx/config paths delivered in chat, SHA256 a7a345af4da9b29fb81fd0ce19deebe78213409023b460b11c218e177784ec62. No automatic installation on player PC. All four Git blob SHA verified identical to ZIP."
     - "UNRESOLVED user priority: HP scaling by total combat party (3 players + 3 Quads NPC) but boss-only; SLS settings are all-enemy and count only human Player. Needs dedicated solution; do not claim fixed. Normal mob stars and EpicLoot/drop gating unchanged."
