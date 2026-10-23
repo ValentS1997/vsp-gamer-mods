@@ -15,14 +15,16 @@ handoff:
     proposal: "План или гипотеза; не считать установленным либо одобренным"
     superseded: "Исторические сведения, позже заменены"
   first_read:
+    - "2026-10-24: User uploaded 128-file game config ZIP. Created a byte-faithful 112-file shareable pre-rebalance ZIP and private original 128-file ZIP (not published in Git). Audited in Valheim/CONFIG_SNAPSHOT_2026-10-24.md. SLS and EpicLoot key current files SHA-identical to Git. Real WorkbenchesPlus v1.0.16 CFG newly added to Git; no rebalance performed."
+    - "2026-10-24: Additional local admin CFGs Server Devcommands v1.116, Upgrade World v1.86 discovered; DLLs not evidenced, DO NOT count them among 56 selected mods. InstantlyDestroyBoatsAndCarts v1.0.5 was already listed; not new. ChilloutForcedPVP still no CFG, wait for user."
     - "2026-10-23: ChilloutForcedPVP 1.1.0 user-selected, REQUIRED S/C on P2P host and both friends. BepInExPack>=5.4.2351 + Jotunn>=2.30.2. No config file added: user will provide later; upstream states no configurable options. 46 S/C + 10 optional C = 56 planned active DLL, local verified remains 54."
-    - "2026-10-23: SLS balance rewritten in Git: 0/1/2/3-star normal spawns, very rare 3-stars, no distance rings or territory scaling or boss-progression tiers, no distance-based loot bonus; NOT applied to local game yet."
+    - "2026-10-23: SLS balance rewritten in Git: 0/1/2/3-star normal spawns, very rare 3-stars, no distance rings or territory scaling or boss-progression tiers, no distance-based loot bonus. 2026-10-24 uploaded CFG/LevelSettings/LootSettings byte-identical to Git; gameplay validation still separate."
     - "2026-10-23: DoorDirector v0.3.0 SELECTED as 45th required S/C DLL; 45 S/C + 10 C = 55 planned, only 54 verified locally so far. New baseline CFG in Git; no installation on host/friends yet."
     - "DoorDirector auto-closes doors/gates but does not auto-open. Default delay 5s. Its debug F7 conflicts with Build Orders, so the prepared config sets diagnostic hotkey None; use doordirector_prefab."
     - "ExtraSlotsCustomSlots ОТМЕНЁН пользователем. НЕ устанавливать, НЕ добавлять в манифест, НЕ предлагать снова без нового запроса."
     - "Обычный ExtraSlots остаётся; идея шести универсальных слотов остаётся нереализованной, а не выбранным модом."
     - "KeepCharacterEffects отменён (невозможно скачать Nexus даже через FullVPN); Venture Logout Tweaks 1.0.0 выбран вместо него и помещён в Only Client."
-    - "WorkbenchesPlus 1.0.16 выбран как новый Only Client для рецептов/еды; runtime не проверен. Его разборка предметов и изменение радиуса станций требуют осторожного теста."
+    - "WorkbenchesPlus 1.0.16 выбран как Only Client; 2026-10-24 получен реальный CFG и добавлен в Git побайтово: Dismantle=true (refund 100%), BuildRangeCycle=true (200m), AutoRepair=false. DLL был включён в проверенный архив split от 22.10; сама работа функций требует проверки."
     - "Quads Companion тестировался: NPC без разрешения забирала экипировку из сундуков и била киркой по каменному ограждению базы."
     - "SolidHitboxes NPC friendly fire включён по прямому решению пользователя; DAMAGE modifier = 1."
     - "Party HUD ToggleKey=F4 уже подтверждён пользователем на его ПК. F11 занят Build Orders, НЕ возвращать HUD на F11."
@@ -80,7 +82,7 @@ deployment:
     accounted_total_including_excluded: 57
     classification_note: "S/C is a chosen distribution policy for this peer host, not a guarantee of headless server compatibility"
     count_is_plan_not_verified_inventory: true  # 56 is plan; verified local inventory is 54
-    current_local_dll_inventory: "54 DLL verified locally 2026-10-22 (44 S/C + 10 C). DoorDirector and ChilloutForcedPVP selected 2026-10-23, neither installed/verified."
+    current_local_dll_inventory: "Last verified binary inventory 54 DLL from 2026-10-22 (44 S/C + 10 C). Current 2026-10-24 ZIP contains configs, not DLLs; DoorDirector CFG now seen but DLL runtime still unverified; ChilloutForcedPVP CFG absent."
   selected_recent_changes:
     - name: "ChilloutForcedPVP"
       class: server_client
@@ -164,6 +166,7 @@ deployment:
     policy: Valheim/DEPLOYMENT_POLICY_2026-10-21.md
     history_yaml: Valheim/HANDOFF_2026-10-21.yaml
     local_archive_audit: Valheim/LOCAL_SNAPSHOT_AUDIT_2026-10-22.md
+    current_pre_rebalance_config_snapshot: Valheim/CONFIG_SNAPSHOT_2026-10-24.md
 
 decisions_chronology:
   "2026-10-21":
@@ -188,6 +191,14 @@ decisions_chronology:
     - "All three changed SLS files (CFG, LevelSettings.yaml, LootSettings.yaml) remain GIT ONLY until safely applied and tested on a copy of user's world."
     - "DoorDirector 0.3.0 selected for defense: automatic closing of doors and gates opened by AI Companion; S/C required for all three humans. Git-only baseline config and README updated, no local DLL installation verified."
     - "Deployment target now 45 shared + 10 optional clients = 55 selected active DLL; 54 verified in 22.10 split remains historical count."
+
+  "2026-10-24":
+    - "Uploaded 128-file current game config ZIP; 112 safe configs preserved byte-exact with checksums and 16 player/runtime/admin files excluded to private unchanged original ZIP. Both delivered to user in current chat, not to public Git."
+    - "SHA check: MidnightsFX.StarLevelSystem.cfg and SLS LevelSettings/LootSettings/RaidSettings match Git; EpicLoot main CFG/baseconfig/patch files match Git. NemesisSettings YAML differs and remains archived, not overwritten."
+    - "WorkbenchesPlus v1.0.16 actual CFG added to Git unchanged. InstantlyDestroyBoatsAndCarts existing CFG v1.0.5 confirmed already listed; no duplicate."
+    - "server_devcommands.cfg v1.116 and upgrade_world.cfg v1.86: only config evidence; admin tools not in shared/client active manifest and not counted in 56; private config not published."
+    - "Real DoorDirector v0.3.0 CFG in archive matches existing Git baseline values but not bytes; game DLL runtime status still unverified. BlindCartographer archive CFG header 1.0.2 differs from Git prepared 1.0.3; do not overwrite."
+    - "No ChilloutForcedPVP CFG in supplied archive; user will provide separately. No rebalance yet."
 
 mod_settings:
   extraslots:
