@@ -15,6 +15,9 @@ handoff:
     proposal: "План или гипотеза; не считать установленным либо одобренным"
     superseded: "Исторические сведения, позже заменены"
   first_read:
+    - "2026-10-24 playtest: user saw approximately 23 trolls in foresttrolls raid after Eikthyr, wanted 3-5 and global proportional decrease. Changed RaidSettings.yaml: density 4->1; all 63 entries ×0.25 for MaxSpawned and SpawnGroupSize; wave cap MaxSpawnTriggers 5 for all formerly unlimited spawners except Hildir bosses/spawner with cap 1; foresttrolls at most five cumulative spawns. 24 raids preserved. Git and verified ZIP, not in-game tested."
+    - "2026-10-24 playtest: Eikthyr easy with three humans plus three Quads NPCs, twice no stars/affixes. BossLevelupGenerators chance 0.2->0.4 and only boss major/minor cap 0->1, chances 0.5->0.65; 0-star bosses still cannot get affixes with LimitCreatureModifiersToCreatureStarLevel=true. Boss modifier chance already 1. Player+NPC boss-only dynamic health scaling UNRESOLVED: SLS multiplayer health counts humans only and applies to ALL enemies, thus left disabled."
+    - "2026-10-24 playtest: MonsterLabZ restored 48 spawn parameters in 29 of 35 sections to # Default value. Exceptions unchanged: Ice Golem, Jumping Spider, Tree Spider, enemy_rainbowbutterfly, Green Butterfly, Silkworm Moth. Other fields unchanged. EpicLoot loot gating appreciated; FreeBuild still requires stonecutter before Elder due Gated Freebuild Mode=BossKillUnlocksCurrentBiomePieces; do not modify. DoorDirector and ChilloutForcedPVP user CONFIRMED working in actual game."
     - "2026-10-24: User uploaded 128-file game config ZIP. Created a byte-faithful 112-file shareable pre-rebalance ZIP and private original 128-file ZIP (not published in Git). Audited in Valheim/CONFIG_SNAPSHOT_2026-10-24.md. SLS and EpicLoot key current files SHA-identical to Git. Real WorkbenchesPlus v1.0.16 CFG newly added to Git; no rebalance performed."
     - "2026-10-24: Additional local admin CFGs Server Devcommands v1.116, Upgrade World v1.86 discovered; DLLs not evidenced, DO NOT count them among 56 selected mods. InstantlyDestroyBoatsAndCarts v1.0.5 was already listed; not new. ChilloutForcedPVP still no CFG, wait for user."
     - "2026-10-23: ChilloutForcedPVP 1.1.0 user-selected, REQUIRED S/C on P2P host and both friends. BepInExPack>=5.4.2351 + Jotunn>=2.30.2. No config file added: user will provide later; upstream states no configurable options. 46 S/C + 10 optional C = 56 planned active DLL, local verified remains 54."
@@ -167,6 +170,7 @@ deployment:
     history_yaml: Valheim/HANDOFF_2026-10-21.yaml
     local_archive_audit: Valheim/LOCAL_SNAPSHOT_AUDIT_2026-10-22.md
     current_pre_rebalance_config_snapshot: Valheim/CONFIG_SNAPSHOT_2026-10-24.md
+    post_playtest_rebalance: Valheim/PLAYTEST_REBALANCE_2026-10-24.md
 
 decisions_chronology:
   "2026-10-21":
@@ -193,6 +197,9 @@ decisions_chronology:
     - "Deployment target now 45 shared + 10 optional clients = 55 selected active DLL; 54 verified in 22.10 split remains historical count."
 
   "2026-10-24":
+    - "PLAYTEST REBALANCE: details in Valheim/PLAYTEST_REBALANCE_2026-10-24.md. Four files changed IN GIT: StarLevelSystem/RaidSettings.yaml, StarLevelSystem/LevelSettings.yaml, MidnightsFX.StarLevelSystem.cfg, MonsterLabZ.cfg. A ZIP of exactly those BepInEx/config paths delivered in chat, SHA256 a7a345af4da9b29fb81fd0ce19deebe78213409023b460b11c218e177784ec62. No automatic installation on player PC. All four Git blob SHA verified identical to ZIP."
+    - "UNRESOLVED user priority: HP scaling by total combat party (3 players + 3 Quads NPC) but boss-only; SLS settings are all-enemy and count only human Player. Needs dedicated solution; do not claim fixed. Normal mob stars and EpicLoot/drop gating unchanged."
+    - "PLAYTEST PASSED according to user: DoorDirector and ChilloutForcedPVP, though binary hashes/versions remain unverified. EpicLoot progression/drop gating acceptable; stonecutter needed for FreeBuild until Elder is upstream progression design."
     - "Uploaded 128-file current game config ZIP; 112 safe configs preserved byte-exact with checksums and 16 player/runtime/admin files excluded to private unchanged original ZIP. Both delivered to user in current chat, not to public Git."
     - "SHA check: MidnightsFX.StarLevelSystem.cfg and SLS LevelSettings/LootSettings/RaidSettings match Git; EpicLoot main CFG/baseconfig/patch files match Git. NemesisSettings YAML differs and remains archived, not overwritten."
     - "WorkbenchesPlus v1.0.16 actual CFG added to Git unchanged. InstantlyDestroyBoatsAndCarts existing CFG v1.0.5 confirmed already listed; no duplicate."
