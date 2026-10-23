@@ -15,6 +15,8 @@ handoff:
     proposal: "План или гипотеза; не считать установленным либо одобренным"
     superseded: "Исторические сведения, позже заменены"
   first_read:
+    - "2026-10-24 LATEST after rebalance v2: BossGate v1.1.2 RETIRED by user, now 45 mandatory S/C + 10 optional client = 55 selected DLL (+ DigDug disabled = 56 accounted). BossGate used PortalItemsRequireBossKill=true; stone portal built after self-obtained Molten Cores transports metals without this mod. Active Valheim/config/Igao.BossGate.cfg moved byte-exact to Valheim/retired-configs/Igao.BossGate.cfg; remove BossGate.dll on P2P host and both clients together. XPortal remains. This is Git-only, no installed DLL removed."
+    - "2026-10-24 friends: user replaced MassFarming idea with CLIENT-ONLY Advize PlantEasily v2.3.0 minimal preset at Valheim/client-presets/friends/advize.PlantEasily.cfg. Harvest E (KeyboardHarvestModifierKey=E) AllResources radius 3; ModActive=true, rows/columns=1, SnapActive=false, ReplantOnHarvest=false, hotkeys/UI extras disabled. Host's Valheim/config/advize.PlantEasily.cfg UNCHANGED. Verified matching five-file rebalance and the new friends-only ZIP SHA256 eb47c37eb13c4a3e662daffc8e6906c4ed65cfcb6f24cbfb84e232ee075a5a6e. No new DLL counted, no game runtime test."
     - "2026-10-24 LATEST v2: user-approved five-config ZIP Valheim_REBALANCE_2026-10-24_v2.zip. SLS BossEnemyHealthMultiplier 0.3 to 0.75 (+75 percent per boss star); EpicLoot Gated Freebuild Mode Unlimited. Previous raids, boss-star and modifiers, MonsterLabZ changes carried unchanged. EpicLoot loot tier restrictions unchanged. Git synchronized. Boss HP scaling by three humans plus NPCs remains unresolved. ZIP SHA-256: 8ae7b835926a707306474a71faa381b279361e8ee9f765771108bc0a37e7c22e. No installation yet."
     - "2026-10-24 playtest: user saw approximately 23 trolls in foresttrolls raid after Eikthyr, wanted 3-5 and global proportional decrease. Changed RaidSettings.yaml: density 4->1; all 63 entries ×0.25 for MaxSpawned and SpawnGroupSize; wave cap MaxSpawnTriggers 5 for all formerly unlimited spawners except Hildir bosses/spawner with cap 1; foresttrolls at most five cumulative spawns. 24 raids preserved. Git and verified ZIP, not in-game tested."
     - "2026-10-24 playtest: Eikthyr easy with three humans plus three Quads NPCs, twice no stars/affixes. BossLevelupGenerators chance 0.2->0.4 and only boss major/minor cap 0->1, chances 0.5->0.65; 0-star bosses still cannot get affixes with LimitCreatureModifiersToCreatureStarLevel=true. Boss modifier chance already 1. Player+NPC boss-only dynamic health scaling UNRESOLVED: SLS multiplayer health counts humans only and applies to ALL enemies, thus left disabled."
@@ -77,17 +79,27 @@ project:
 
 deployment:
   selected_policy:
-    required_server_and_client: 46
+    required_server_and_client: 45
     optional_only_client: 10
     only_server: 0
-    planned_active_total: 56
+    planned_active_total: 55
     excluded_from_active_total:
       - "DigDug.dll* (intentionally disabled / excluded)"
-    accounted_total_including_excluded: 57
+    accounted_total_including_excluded: 56
     classification_note: "S/C is a chosen distribution policy for this peer host, not a guarantee of headless server compatibility"
-    count_is_plan_not_verified_inventory: true  # 56 is plan; verified local inventory is 54
-    current_local_dll_inventory: "Last verified binary inventory 54 DLL from 2026-10-22 (44 S/C + 10 C). Current 2026-10-24 ZIP contains configs, not DLLs; DoorDirector CFG now seen but DLL runtime still unverified; ChilloutForcedPVP CFG absent."
+    count_is_plan_not_verified_inventory: true  # 55 is new plan; 54 was a historical disk inventory including the now-retired BossGate
+    current_local_dll_inventory: "Historic last direct DLL inventory: 54 files on 2026-10-22 including BossGate; user later tested DoorDirector/ChilloutForcedPVP in actual gameplay. 2026-10-24 BossGate removed from selected manifest and Git config only, NOT from local machines; final 55 DLL is a plan until rescan."
   selected_recent_changes:
+    - name: "BossGate"
+      class: retired_from_server_client
+      version_last_cfg: "1.1.2"
+      former_dll: BossGate.dll
+      former_config_archived: Valheim/retired-configs/Igao.BossGate.cfg
+      previous_active_rule: "PortalItemsRequireBossKill=true"
+      retired_on: "2026-10-24"
+      uninstall_on: "P2P host plus both client PCs, together due to KickClientsWithoutMod=true"
+      replacement: "Vanilla portal_stone (Molten Cores); XPortal UI unchanged"
+      live_uninstallation_verified: false
     - name: "ChilloutForcedPVP"
       class: server_client
       dll_expected: ChilloutForcedPVP.dll
@@ -358,6 +370,15 @@ mod_settings:
     toggle_mod: None
     snapping: F10
     auto_replant_toggle: F6
+    host_profile_unchanged: true
+    friends_profile: Valheim/client-presets/friends/advize.PlantEasily.cfg
+    friends_harvest_key: E
+    friends_harvest_radius_m: 3
+    friends_harvest_style: AllResources
+    friends_bulk_planting: false
+    friends_snapping: false
+    friends_replant_on_harvest: false
+    friends_zip_sha256: "eb47c37eb13c4a3e662daffc8e6906c4ed65cfcb6f24cbfb84e232ee075a5a6e"
   achievement_enabler:
     config: Valheim/config/MidnightsFX.AchievementEnabler.cfg
     vanilla_only_requirements: true
@@ -384,11 +405,11 @@ hotkey_registry:
   F1: "ConfigurationManager"
   F2: "ExtraSlots rebind panel"
   F4: "Quads Party HUD (USER CONFIRMED CONFIGURED LOCALLY)"
-  F6: "PlantEasily auto replant"
+  F6: "PlantEasily auto replant — HOST ONLY, friends disabled"
   F7: "Quads Build Orders planning"
   F8: "Forsaken power"
   F9: "Quads Build Orders ghost toggle"
-  F10: "PlantEasily snapping"
+  F10: "PlantEasily snapping — HOST ONLY, friends disabled"
   F11: "Quads Build Orders import plans and blueprints; NOT Party HUD"
   G: "EpicLoot ability 1"
   H: "HipLantern; previously conflicted with Companion/EpicLoot"
