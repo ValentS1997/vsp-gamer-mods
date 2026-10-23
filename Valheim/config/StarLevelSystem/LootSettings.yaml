@@ -117,7 +117,7 @@ NonCharacterSpecificLoot:
       Prefab: AncientSeed
       OnePerPlayer: true
     MaxScaledAmount: 3
-EnableDistanceLootModifier: true
+EnableDistanceLootModifier: false
 DistanceLootModifier:
   1250:
     MinAmountScaleFactorBonus: 0.02
