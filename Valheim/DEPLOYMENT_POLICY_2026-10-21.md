@@ -1,8 +1,10 @@
 # Valheim — deployment policy, user-approved (2026-10-21)
 
-> **FINAL SELECTED STATE 2026-10-22 (updated):** ExtraSlotsCustomSlots **CANCELED**, existing ExtraSlots retained. [WorkbenchesPlus 1.0.16](https://thunderstore.io/c/valheim/p/Morda/WorkbenchesPlus/) selected as new optional **Only Client** crafting UI (DLL `WorkbenchesPlus.dll`, CFG generated as `com.morda.workbenchesplus.cfg`). [Venture Logout Tweaks 1.0.0](https://thunderstore.io/c/valheim/p/VentureValheim/Venture_Logout_Tweaks/) remains already-selected Only Client replacing rejected KeepCharacterEffects; **do not count twice**. **Current plan: 44 required S/C + 10 optional C = 54 selected active DLLs; +1 intentionally disabled DigDug = 55 accounted.** Runtime inventories/compatibility not verified. The two previously researched UI alternatives Workstation Search and CraftingSearch are **not selected**. WorkbenchesPlus extras (dismantle/build-range/auto-repair) can alter gameplay; no CFG or world changes approved. Historical notes below retain earlier 44+9 states for audit.
+> **АКТУАЛЬНО НА 23.10.2026 — НОВЫЙ ПЛАН:** Пользователь выбрал [DoorDirector 0.3.0](https://thunderstore.io/c/valheim/p/TomTomDK/DoorDirector/) для автоматического **закрытия** дверей и ворот за компаньоном. Автор требует мод у **хоста и каждого подключающегося клиента**; `DoorDirector.dll` отнесена к `Server / Client`. **45 обязательных S/C + 10 необязательных C = 55 выбранных активных DLL (+1 исключённый DigDug = 56 учтённых).** Последний **действительно проверенный на диске** комплект от 22.10 — **44 S/C + 10 C = 54 DLL**. DoorDirector на ПК ещё не проверен и мультиплеерные тесты не проведены. [Подготовленный baseline CFG](config/com.tomtom.doordirector.cfg) использует штатное автозакрытие за 5 с; диагностическая `F7` отключена из-за Build Orders (`doordirector_prefab` вместо неё). Никаких DLL или CFG на игровом ПК эта запись не устанавливает. Датированные исторические числа ниже сохранены как история решений.
 
-## Актуальный Only Client-манифест (10 выбранных модов; installation unverified)
+> **ИСТОРИЧЕСКИЙ ВЫБОР 2026-10-22 (updated):** ExtraSlotsCustomSlots **CANCELED**, existing ExtraSlots retained. [WorkbenchesPlus 1.0.16](https://thunderstore.io/c/valheim/p/Morda/WorkbenchesPlus/) selected as new optional **Only Client** crafting UI (DLL `WorkbenchesPlus.dll`, CFG generated as `com.morda.workbenchesplus.cfg`). [Venture Logout Tweaks 1.0.0](https://thunderstore.io/c/valheim/p/VentureValheim/Venture_Logout_Tweaks/) remains already-selected Only Client replacing rejected KeepCharacterEffects; **do not count twice**. **Current plan: 44 required S/C + 10 optional C = 54 selected active DLLs; +1 intentionally disabled DigDug = 55 accounted.** Runtime inventories/compatibility not verified. The two previously researched UI alternatives Workstation Search and CraftingSearch are **not selected**. WorkbenchesPlus extras (dismantle/build-range/auto-repair) can alter gameplay; no CFG or world changes approved. Historical notes below retain earlier 44+9 states for audit.
+
+## Only Client-манифест (10 модов; 22.10.2026 проверены локальные DLL)
 
 ```text
 Advize_PlantEasily.dll
@@ -14,9 +16,10 @@ FirstPersonMode.dll
 GooderAutoShield.dll
 PartyHud.dll
 WorkbenchesPlus.dll              # Morda WorkbenchesPlus 1.0.16; NEW
-Venture Logout Tweaks 1.0.0     # DLL filename [Needs confirmation]; ALREADY COUNTED
+VentureValheim.LogoutTweaks.dll # venture logout tweaks; present in verified snapshot
 ```
 
+- **DoorDirector (добавлен 23.10.2026):** один новый `S/C` мод `DoorDirector.dll`. Требует одинаковую версию у всех трёх игроков, включая хоста, хотя dedicated server не используется. Автозакрытие после 5 с по умолчанию, нет автодверей по приближению. Дополнительный конфиг в Git — [com.tomtom.doordirector.cfg](config/com.tomtom.doordirector.cfg); `Prefab Debug Hotkey=None` сохраняет `F7` для Build Orders. `Shift+G` для отдельной построенной двери, `Shift+T` для её задержки; команда `doordirector_prefab` для имени префаба. Протестировать на обычных воротах, модовых воротах и при открытии Quads Companion; установка пока не подтверждена.
 - **WorkbenchesPlus:** автор заявляет client-side, Valheim 1.0, BepInExPack 5.4.2350+. Генерируемый при запуске CFG: `BepInEx/config/com.morda.workbenchesplus.cfg` (не был получен с ПК). Встроенные dismantle, изменение радиуса станции (`Shift+E`) и auto-repair — потенциальные gameplay changes, а не только UI; перед использованием проверить совместимость с `LzD_StationsCustomRanges`, Quads Build Orders и сохранением мира. Не включать новые функции автоматически в Git.
 - **Venture Logout Tweaks:** автор подтверждает client-only и отсутствие CFG; версии DLL, загрузку плагина и восстановление эффектов в нашей сборке проверить логом и тестом.
 
