@@ -15,6 +15,7 @@ handoff:
     proposal: "План или гипотеза; не считать установленным либо одобренным"
     superseded: "Исторические сведения, позже заменены"
   first_read:
+    - "2026-10-23: SLS balance rewritten in Git: 0/1/2/3-star normal spawns, very rare 3-stars, no distance rings or territory scaling or boss-progression tiers, no distance-based loot bonus; NOT applied to local game yet."
     - "2026-10-23: DoorDirector v0.3.0 SELECTED as 45th required S/C DLL; 45 S/C + 10 C = 55 planned, only 54 verified locally so far. New baseline CFG in Git; no installation on host/friends yet."
     - "DoorDirector auto-closes doors/gates but does not auto-open. Default delay 5s. Its debug F7 conflicts with Build Orders, so the prepared config sets diagnostic hotkey None; use doordirector_prefab."
     - "ExtraSlotsCustomSlots ОТМЕНЁН пользователем. НЕ устанавливать, НЕ добавлять в манифест, НЕ предлагать снова без нового запроса."
@@ -165,6 +166,9 @@ decisions_chronology:
     - "WorkbenchesPlus 1.0.16 chosen Only Client for crafting UI; one additional planned DLL, 44 S/C + 10 C = 54 active. Venture Logout Tweaks already counted; no local installation verified"
 
   "2026-10-23":
+    - "After DoorDirector selection, SLS Git balance redesigned: no geographic distance/zone/boss progression modifiers; old generator disabled; custom chance table makes 3-star normal mobs ~0.07% in Very Hard world."
+    - "Distance loot bonus in LootSettings.yaml turned off and biome SLS extra spawns 1.1->1.0; preserved vanilla-like loot scaling by stars, all raids, pets, Tatiana 0-star/85%-size setting."
+    - "All three changed SLS files (CFG, LevelSettings.yaml, LootSettings.yaml) remain GIT ONLY until safely applied and tested on a copy of user's world."
     - "DoorDirector 0.3.0 selected for defense: automatic closing of doors and gates opened by AI Companion; S/C required for all three humans. Git-only baseline config and README updated, no local DLL installation verified."
     - "Deployment target now 45 shared + 10 optional clients = 55 selected active DLL; 54 verified in 22.10 split remains historical count."
 
@@ -206,6 +210,28 @@ mod_settings:
       relative_weight: 0.1
     patch_folder: Valheim/config/EpicLoot/patches/vsp-gamer/
   star_level_system:
+    latest_git_balance_doc: Valheim/STAR_LEVEL_SYSTEM_BALANCE_2026-10-23.md
+    balance_selected_date: "2026-10-23"
+    git_baseline_updated: true
+    local_application_verified: false
+    normal_spawn_stars_cap: 3
+    default_levelup_chance_thresholds: {1: 10, 2: 1, 3: 0.05, 4: 0}
+    default_levelup_generators: []
+    expected_normal_combat_distribution: {"0star": "90%", "1star": "9%", "2star": "0.95%", "3star": "0.05%"}
+    expected_very_hard_distribution: {"0star": "86%", "1star": "12.6%", "2star": "1.33%", "3star": "0.07%"}
+    enable_distance_level_scaling_bonus: false
+    enable_distance_level_bonus: false
+    enable_zone_scaling_bonus: false
+    enable_conditional_creature_levelup_chance: false
+    enable_distance_loot_modifier: false
+    biome_star_cap_overrides: "removed; global MaxLevel=3"
+    night_level_chance_scaler: 1.0
+    global_spawn_rate_modifier: 1.0
+    addon_companion: {prefab: dhack_companion, star_cap: 0, size: 0.85, size_per_level: 0}
+    offspring_can_be_stronger_than_parents: true
+    offspring_extra_level_chance: 0.05
+    unchanged: "RaidSettings.yaml, Nemesis, EpicLoot rarity, regular star loot scaling, current pet levels"
+    note_farming_loot: "SLS changes reduce stars and extra distance loot; NPC-vs-NPC kills with SolidHitboxes friendly fire and EpicLoot magic drops can still occur"
     cfg_version: "1.26.3"
     config_path: Valheim/config/MidnightsFX.StarLevelSystem.cfg
     raid_file: Valheim/config/StarLevelSystem/RaidSettings.yaml
