@@ -1,6 +1,8 @@
 # VSP Gamer — актуальный DLL-манифест Valheim (24.10.2026)
 
-**Статус:** согласованный целевой состав после отказа от BossGate; список DLL из README, а не повторная проверка диска. **46 общих (хост и оба друга) + 10 необязательных клиентских = 56 активных DLL по плану**; `DigDug.dll*` намеренно выключен (всего 57 учтённых). Реальное удаление DLL у трёх игроков ещё не проверено.
+**Статус:** согласованный целевой состав после отказа от BossGate; список DLL из README, а не повторная проверка диска. **47 общих (хост и оба друга) + 10 необязательных клиентских = 57 активных DLL по плану**; `DigDug.dll*` намеренно выключен (всего 58 учтённых). Реальное удаление DLL у трёх игроков ещё не проверено.
+
+**ДОБАВИТЬ PlanBuild:** `PlanBuild.dll` **0.20.0** на P2P-хосте и обоих друзьях. BepInExPack и Jötunn уже входят в список; HookGenPatcher не требуется. Схемы домов сохраняются в `.blueprint` и могут включать предметы из сундуков, но воспроизведение предметов только через Direct Build (бесплатная постройка/риск дубликатов). **Сначала бэкап мира, тест на одном сундуке; конфиг пока не создавался.** [Подробная процедура](PLANBUILD_REBUILD_2026-10-24.md).
 
 **ДОБАВИТЬ при следующей локальной синхронизации:** `ModularLadders.dll` v1.0.0 на P2P-хосте и у двух друзей. Автор требует присутствия у всех из-за дополнительных строительных объектов. BepInEx уже используется; Jötunn не требуется. Лестницы исчезнут при удалении DLL, поэтому не удалять без бэкапа мира. **CFG не создавать.** [Решение](MOD_DECISIONS_2026-10-24.md).
 
@@ -8,7 +10,7 @@
 
 **PlantEasily для друзей:** `Advize_PlantEasily.dll` уже входит в 10 Only Client. Не добавлять MassFarming одновременно: вместо этого установить [отдельный профиль](client-presets/friends/advize.PlantEasily.cfg) с `E` и радиусом 3 м; у хоста [основной CFG](config/advize.PlantEasily.cfg) без изменений.
 
-## Server / Client — 46
+## Server / Client — 47
 
 | № | Мод | DLL |
 |---:|---|---|
@@ -43,21 +45,22 @@
 | 29 | OdinCampsite | `OdinCampsite.dll` |
 | 30 | OdinRealmFishing | `OdinRealmFishingMod.dll` |
 | 31 | OreMines | `OreMines.dll` |
-| 32 | ProjectileTweaks | `ProjectileTweaks.dll` |
-| 33 | Quick Stack Store | `QuickStackStore.dll` |
-| 34 | Quads Bounty Board | `BountyBoard.dll` |
-| 35 | Quads Companion | `AICompanion.dll` |
-| 36 | Quads Quiver | `Quiver.dll` |
-| 37 | SmartRepair | `SmartRepair.dll` |
-| 38 | SolidHitboxes | `SolidHitboxes.dll` |
-| 39 | Spearfishing | `Spearfishing.dll` |
-| 40 | Stake Tweaks | `StakeTweaks.dll` |
-| 41 | StarLevelSystem | `StarLevelSystem.dll` |
-| 42 | TopMining | `TopMining.dll` |
-| 43 | No Seasonal Restrictions | `VentureValheim.NoSeasonalRestrictions.dll` |
-| 44 | XPortal | `XPortal.dll` |
-| 45 | YamlDotNet — detector | `YamlDotNetDetector.dll` |
-| 46 | YamlDotNet | `YamlDotNet.dll` |
+| 32 | PlanBuild | `PlanBuild.dll` |
+| 33 | ProjectileTweaks | `ProjectileTweaks.dll` |
+| 34 | Quick Stack Store | `QuickStackStore.dll` |
+| 35 | Quads Bounty Board | `BountyBoard.dll` |
+| 36 | Quads Companion | `AICompanion.dll` |
+| 37 | Quads Quiver | `Quiver.dll` |
+| 38 | SmartRepair | `SmartRepair.dll` |
+| 39 | SolidHitboxes | `SolidHitboxes.dll` |
+| 40 | Spearfishing | `Spearfishing.dll` |
+| 41 | Stake Tweaks | `StakeTweaks.dll` |
+| 42 | StarLevelSystem | `StarLevelSystem.dll` |
+| 43 | TopMining | `TopMining.dll` |
+| 44 | No Seasonal Restrictions | `VentureValheim.NoSeasonalRestrictions.dll` |
+| 45 | XPortal | `XPortal.dll` |
+| 46 | YamlDotNet — detector | `YamlDotNetDetector.dll` |
+| 47 | YamlDotNet | `YamlDotNet.dll` |
 
 ## Only Client — 10 (по выбору игроков)
 
