@@ -1,12 +1,15 @@
 # VSP Gamer — актуальный DLL-манифест Valheim (24.10.2026)
 
-**ПОСЛЕДНЕЕ РЕШЕНИЕ 24.10.2026 — ТОЛЬКО СТРЕЛЫ И КОЛЧАН:** `ProjectileTweaks.dll` исключается из целевого состава: отдельные правки угла/траектории/зум/счётчик боеприпасов не нужны. `Quiver.dll` (Quads Quiver) **оставлен** для возврата стрел (земля 100%, противник 75%) и визуального колчана; восстановление болтов выключено. По документации автора Quads Quiver работает **client-only**: переносим его из обязательных S/C в опциональные клиентские (хосту стоит держать его установленным для единой вероятности возврата в P2P). **Последний план: 44 обязательных S/C + 11 необязательных Only Client = 55 выбранных DLL**, + отключённый DigDug = 56 учтённых. Удаление `ProjectileTweaks.dll` со всех ПК и `BountyBoard.dll` — по инструкции, пока **не подтверждено**. [Инструкция и rollback](ARCHERY_QUIVER_ONLY_2026-10-24.md).
+**ПОСЛЕДНЯЯ ПРАВКА — СТРЕЛЫ 75% / 75%, БОЛТЫ И PROJECTILETWEAKS ВОЗВРАЩЕНЫ (24.10.2026):** Подтверждено пользователем: сохранить колчан и возврат стрел Quads Quiver (`ChanceOnGround=0.75`, `ChanceOnCreature=0.75`, `IncludeBolts=true`, `Show=true`, `FireArrowsBurnUp=true`), а также **вернуть `ProjectileTweaks.dll`** с исходным без изменений CFG для зума и настроек полёта снарядов. Quads Bounty Board остаётся исключённым (пользователь сообщил об удалении). **Актуальный целевой состав: 45 обязательных S/C + 11 Only Client = 56 DLL**, плюс выключенный DigDug = 57 учтённых. Quads Quiver остаётся клиентским и желателен на P2P-хосте для синхронизации шанса возврата. [Конфиг и ZIP](ARCHERY_75PERCENT_PROJECTILETWEAKS_2026-10-24.md).
+
+
+**ПОСЛЕДНЕЕ РЕШЕНИЕ 24.10.2026 — ТОЛЬКО СТРЕЛЫ И КОЛЧАН:** `ProjectileTweaks.dll` исключается из целевого состава: отдельные правки угла/траектории/зум/счётчик боеприпасов не нужны. `Quiver.dll` (Quads Quiver) **оставлен** для возврата стрел (земля 100%, противник 75%) и визуального колчана; восстановление болтов выключено. По документации автора Quads Quiver работает **client-only**: переносим его из обязательных S/C в опциональные клиентские (хосту стоит держать его установленным для единой вероятности возврата в P2P). **Исторический план до возврата ProjectileTweaks: 44 обязательных S/C + 11 Only Client = 55 DLL**, + отключённый DigDug = 56 учтённых. Удаление `ProjectileTweaks.dll` со всех ПК и `BountyBoard.dll` — по инструкции, пока **не подтверждено**. [Инструкция и rollback](ARCHERY_QUIVER_ONLY_2026-10-24.md).
 
 
 **ПОСЛЕДНЕЕ РЕШЕНИЕ 24.10.2026 — упрощение SLS и отказ от Quads Bounty Board:** SLS использует ванильные рейды; Nemesis и объектное масштабирование отключены, звёзды, модификаторы обычных мобов и боссов сохранены. **`BountyBoard.dll` исключён из целевого списка на всех трёх ПК**, но удалять его только после демонтажа всех игровых досок и бэкапа контрактов/мира. Quads Companion / Party HUD остаются. **Исторический план до упрощения стрельбы: 46 обязательных S/C + 10 Only Client = 56 DLL; актуальный план: 44 S/C + 11 Only Client = 55 DLL, плюс отключённый DigDug = 56 учтённых.** MissingPieces отдельно в тестировании и сюда НЕ входит. [План миграции и настройки](SLS_VANILLA_RAIDS_AND_BOUNTY_RETIREMENT_2026-10-24.md).
 
 
-**Статус:** согласованный целевой состав после отказа от BossGate; список DLL из README, а не повторная проверка диска. **44 общих (хост и оба друга) + 11 необязательных клиентских = 55 активных DLL по плану**; `DigDug.dll*` намеренно выключен (всего 56 учтённых). Реальное удаление DLL у трёх игроков ещё не проверено.
+**Статус:** согласованный целевой состав после отказа от BossGate; список DLL из README, а не повторная проверка диска. **45 общих (хост и оба друга) + 11 необязательных клиентских = 56 активных DLL по плану**; `DigDug.dll*` намеренно выключен (всего 57 учтённых). Реальное удаление DLL у трёх игроков ещё не проверено.
 
 **ОБНОВЛЕНИЕ СТАТУСА 24.10.2026:** пользователь сообщил, что **PlanBuild и ModularLadders установлены** у него; получен [PlanBuild v0.20.0 CFG](config/marcopogo.PlanBuild.cfg). По одним сообщениям/CFG нельзя подтвердить версию фактической DLL, отсутствие ошибок загрузки и наличие у двух друзей. **MissingPieces 2.3.2 выбран отдельно для ТЕСТА**, пока не считается 48-й S/C DLL. **Cartur's Flooring, Sinka, BronzeAgeChest — только кандидаты.** [Подробности](BUILDING_MODS_TEST_2026-10-24.md). Историческая база до отказа от Bounty Board: **47 S/C + 10 C = 57 DLL**; после отказа **46 S/C + 10 C = 56 DLL**.
 
@@ -20,7 +23,7 @@
 
 **PlantEasily для друзей:** `Advize_PlantEasily.dll` уже входит в 10 Only Client. Не добавлять MassFarming одновременно: вместо этого установить [отдельный профиль](client-presets/friends/advize.PlantEasily.cfg) с `E` и радиусом 3 м; у хоста [основной CFG](config/advize.PlantEasily.cfg) без изменений.
 
-## Server / Client — 44
+## Server / Client — 45
 
 | № | Мод | DLL |
 |---:|---|---|
@@ -56,18 +59,19 @@
 | 30 | OdinRealmFishing | `OdinRealmFishingMod.dll` |
 | 31 | OreMines | `OreMines.dll` |
 | 32 | PlanBuild | `PlanBuild.dll` |
-| 33 | Quick Stack Store | `QuickStackStore.dll` |
-| 34 | Quads Companion | `AICompanion.dll` |
-| 35 | SmartRepair | `SmartRepair.dll` |
-| 36 | SolidHitboxes | `SolidHitboxes.dll` |
-| 37 | Spearfishing | `Spearfishing.dll` |
-| 38 | Stake Tweaks | `StakeTweaks.dll` |
-| 39 | StarLevelSystem | `StarLevelSystem.dll` |
-| 40 | TopMining | `TopMining.dll` |
-| 41 | No Seasonal Restrictions | `VentureValheim.NoSeasonalRestrictions.dll` |
-| 42 | XPortal | `XPortal.dll` |
-| 43 | YamlDotNet — detector | `YamlDotNetDetector.dll` |
-| 44 | YamlDotNet | `YamlDotNet.dll` |
+| 33 | ProjectileTweaks | `ProjectileTweaks.dll` |
+| 34 | Quick Stack Store | `QuickStackStore.dll` |
+| 35 | Quads Companion | `AICompanion.dll` |
+| 36 | SmartRepair | `SmartRepair.dll` |
+| 37 | SolidHitboxes | `SolidHitboxes.dll` |
+| 38 | Spearfishing | `Spearfishing.dll` |
+| 39 | Stake Tweaks | `StakeTweaks.dll` |
+| 40 | StarLevelSystem | `StarLevelSystem.dll` |
+| 41 | TopMining | `TopMining.dll` |
+| 42 | No Seasonal Restrictions | `VentureValheim.NoSeasonalRestrictions.dll` |
+| 43 | XPortal | `XPortal.dll` |
+| 44 | YamlDotNet — detector | `YamlDotNetDetector.dll` |
+| 45 | YamlDotNet | `YamlDotNet.dll` |
 
 ## Only Client — 11 (по выбору игроков)
 
@@ -92,7 +96,7 @@
 
 ## Исключены и архивированы
 
-- `ProjectileTweaks.dll` — исключён 24.10.2026: больше не меняем скорость/прицеливание/зум/счётчик боеприпасов, функции возврата стрел и колчана остаются в `Quiver.dll`. CFG [архивирован](retired-configs/Searica.Valheim.ProjectileTweaks.cfg). Удаление локальной DLL у игроков ещё не проверено.
+- `ProjectileTweaks.dll` — **ИСТОРИЧЕСКАЯ ЗАПИСЬ, СЕЙЧАС СНОВА ВКЛЮЧЁН** по решению пользователя позже 24.10.2026; ранее исключён 24.10.2026: больше не меняем скорость/прицеливание/зум/счётчик боеприпасов, функции возврата стрел и колчана остаются в `Quiver.dll`. CFG [архивирован](retired-configs/Searica.Valheim.ProjectileTweaks.cfg). Удаление локальной DLL у игроков ещё не проверено.
 - `BountyBoard.dll` — исключён из списка ранее 24.10.2026, пользователь приступил к удалению; фактическое удаление на всех ПК и сохранность поставленных досок не подтверждены.
 
 - `BossGate.dll` — **удалён из текущего плана 24.10.2026**. Никакой BossGate-only объект/предмет в мир не добавлялся; сохранять мир и героев всё равно обязательно перед изменением установленных модов.
