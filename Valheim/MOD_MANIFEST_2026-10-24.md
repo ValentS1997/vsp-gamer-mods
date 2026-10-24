@@ -1,6 +1,9 @@
 # VSP Gamer — актуальный DLL-манифест Valheim (24.10.2026)
 
-**КЛАССИФИКАЦИЯ И ПОЛИТИКА МУЛЬТИПЛЕЕРА — ПОДТВЕРЖДЕНО 24.10.2026:** **Quads Quiver (`Quiver.dll`) обязателен на P2P-хосте и у обоих друзей**: это правило нашей сборки для одинаковой возможности возврата стрел/болтов, хотя сам мод допускает клиентскую установку. **45 обязательных Server/Client + 10 необязательных Only Client = 55 выбранных DLL** (отдельно сохранён отключённый `DigDug.dll*`; фактическую установку на трёх ПК ещё сверить). Четыре ключевых игровых мода получают виртуальную категорию **CGM = Core Game Mechanic**: EpicLoot, StarLevelSystem, MonsterLabZ, Quads Companion. **Категории и маркировка хранятся только в манифесте, а не в имени DLL на диске**, чтобы не повторять ошибки поиска библиотек. Последние решения по сборке: MissingPieces не включать (постройки исчезли в пользовательском тесте), Cartur's Flooring — в основном S/C списке под `!!` (`CarturFlooring.dll`), Sinka — для строительного режима вне обязательного состава, ProjectileTweaks и HoeRadius — удалены по сообщению пользователя, DigDug — полезный, но отключённый; локальные названия и содержимое рабочей папки зафиксированы в чате. Последующие правки состава по снимку ПК — отдельная сверка.
+**РЕШЕНИЕ 25.10.2026 — GIZMO И ФИЗИЧЕСКИЕ ПАПКИ ПЛАГИНОВ:** пользователь подтвердил успех теста ComfyGizmo при строительстве из стандартных элементов; **`ComfyGizmo.dll` остаётся постоянно доступным в строительном наборе администратора** (`03-Building/`), но не становится обязательным для друзей. **`CarturFlooring.dll` исключён** из постоянного состава: его необходимо переместить за пределы `BepInEx/plugins/` (пользователь сообщил о намерении удалить, фактическое удаление на диске ещё не подтверждено). **Новый план: 44 обязательных Server/Client + 10 Only Client = 54 DLL**, плюс **1 постоянный инструмент строительства у администратора ComfyGizmo = 55 учтённых в выбранных профилях**; остальные временные инструменты/фактические DLL ПК учитывать отдельно. В последнем снимке от 25.10.2026 00:12 представлены **59 DLL** (перед выключением CarturFlooring), а также `ropesnap.wav` и `Translations/`; физическая сортировка в подпапки на ПК не подтверждена. BepInEx DLL не переименовывать; оригинальные файлы-зависимости двигать отдельно и тестировать запуск. Ни CFG, ни DLL на компьютере это изменение Git не трогает.
+
+
+**КЛАССИФИКАЦИЯ И ПОЛИТИКА МУЛЬТИПЛЕЕРА — ПОДТВЕРЖДЕНО 24.10.2026:** **Quads Quiver (`Quiver.dll`) обязателен на P2P-хосте и у обоих друзей**: это правило нашей сборки для одинаковой возможности возврата стрел/болтов, хотя сам мод допускает клиентскую установку. **Исторический состав до исключения CarturFlooring: 45 обязательных S/C + 10 Only Client = 55 DLL** (отдельно сохранён отключённый `DigDug.dll*`; фактическую установку на трёх ПК ещё сверить). Четыре ключевых игровых мода получают виртуальную категорию **CGM = Core Game Mechanic**: EpicLoot, StarLevelSystem, MonsterLabZ, Quads Companion. **Категории и маркировка хранятся только в манифесте, а не в имени DLL на диске**, чтобы не повторять ошибки поиска библиотек. Последние решения по сборке: MissingPieces не включать (постройки исчезли в пользовательском тесте), Cartur's Flooring — в основном S/C списке под `!!` (`CarturFlooring.dll`), Sinka — для строительного режима вне обязательного состава, ProjectileTweaks и HoeRadius — удалены по сообщению пользователя, DigDug — полезный, но отключённый; локальные названия и содержимое рабочей папки зафиксированы в чате. Последующие правки состава по снимку ПК — отдельная сверка.
 
 **РЕШЕНИЕ О ПАРАМЕТРАХ QUIVER (24.10.2026; КЛАССИФИКАЦИЯ УТОЧНЕНА ВЫШЕ):** стрелы из земли/деревьев и существ с вероятностью **75%**, болты возвращаются (`IncludeBolts=true`), колчан отображается (`Show=true`), огненные стрелы сгорают (`FireArrowsBurnUp=true`). **`ProjectileTweaks.dll` вновь исключён из активного списка** по последнему явному распоряжению пользователя, его оригинальный CFG сохранён в `retired-configs/`. Quads Bounty Board также исключён ранее. **Исторический план до перевода Quiver в обязательные: 44 S/C + 11 Only Client = 55 DLL**, плюс отключённый DigDug = 56 учтённых. Quads Quiver технически допускает клиентскую установку; по последнему решению VSP Gamer обязателен на всех трёх ПК. [Итоговый профиль и откат](ARCHERY_FINAL_QUIVER_ONLY_2026-10-24.md).
 
@@ -14,7 +17,7 @@
 **ПОСЛЕДНЕЕ РЕШЕНИЕ 24.10.2026 — упрощение SLS и отказ от Quads Bounty Board:** SLS использует ванильные рейды; Nemesis и объектное масштабирование отключены, звёзды, модификаторы обычных мобов и боссов сохранены. **`BountyBoard.dll` исключён из целевого списка на всех трёх ПК**, но удалять его только после демонтажа всех игровых досок и бэкапа контрактов/мира. Quads Companion / Party HUD остаются. **Исторический план до упрощения стрельбы: 46 обязательных S/C + 10 Only Client = 56 DLL; актуальный план: 44 S/C + 11 Only Client = 55 DLL, плюс отключённый DigDug = 56 учтённых.** MissingPieces отдельно в тестировании и сюда НЕ входит. [План миграции и настройки](SLS_VANILLA_RAIDS_AND_BOUNTY_RETIREMENT_2026-10-24.md).
 
 
-**Статус:** согласованный целевой состав после отказа от BossGate; список DLL из README, а не повторная проверка диска. **45 общих (хост и оба друга) + 10 необязательных клиентских = 55 активных DLL по плану**; `DigDug.dll*` намеренно выключен (всего 56 учтённых). Реальное удаление DLL у трёх игроков ещё не проверено.
+**Статус:** согласованный целевой состав после отказа от BossGate; список DLL из README, а не повторная проверка диска. **44 общих (хост и оба друга) + 10 необязательных клиентских = 54 DLL по базовому плану, плюс ComfyGizmo у администратора**; `DigDug.dll*` намеренно выключен (всего 56 учтённых). Реальное удаление DLL у трёх игроков ещё не проверено.
 
 **ОБНОВЛЕНИЕ СТАТУСА 24.10.2026:** пользователь сообщил, что **PlanBuild и ModularLadders установлены** у него; получен [PlanBuild v0.20.0 CFG](config/marcopogo.PlanBuild.cfg). По одним сообщениям/CFG нельзя подтвердить версию фактической DLL, отсутствие ошибок загрузки и наличие у двух друзей. **MissingPieces 2.3.2 выбран отдельно для ТЕСТА**, пока не считается 48-й S/C DLL. **Cartur's Flooring, Sinka, BronzeAgeChest — только кандидаты.** [Подробности](BUILDING_MODS_TEST_2026-10-24.md). Историческая база до отказа от Bounty Board: **47 S/C + 10 C = 57 DLL**; после отказа **46 S/C + 10 C = 56 DLL**.
 
@@ -28,7 +31,7 @@
 
 **PlantEasily для друзей:** `Advize_PlantEasily.dll` уже входит в 10 Only Client. Не добавлять MassFarming одновременно: вместо этого установить [отдельный профиль](client-presets/friends/advize.PlantEasily.cfg) с `E` и радиусом 3 м; у хоста [основной CFG](config/advize.PlantEasily.cfg) без изменений.
 
-## Server / Client — 45
+## Server / Client — 44
 
 **Политика маркировки:** `CGM` — Core Game Mechanic, четыре основных игровых мода; `!` — API/библиотека/важный мод, `!!` — строительный мод, `!K-` (только латинская **K**) — клиентский мод, `*.dll*` — намеренно отключённый файл, который хранится у администратора для отдельного режима. Это **учётные обозначения**, не требование переименовывать DLL: библиотеки (`Jotunn.dll`, `YamlDotNet.dll`, `Newtonsoft.Json.dll`, `ConditionalConfigSync*.dll`) должны сохранять штатные имена для совместимости. Обозначения `!` и `!!` здесь описаны как категории и не навязываются спорным модам: `Basements`, `OdinCampsite`, `LzD_StationsCustomRanges`, `FrizzQOL.AreaRepair` оставлены **без дополнительных меток**. Quads Quiver относится к обязательным S/C по политике VSP Gamer, а **не** к `!K-`.
 
@@ -51,34 +54,33 @@
 | 15 | FiresGhettoNetworking | `VAGhettoNetworking.dll` | — |
 | 16 | ForsakenPowersPlusRemastered | `ForsakenPowersPlusRemastered.dll` | — |
 | 17 | Area Repair | `FrizzQOL.AreaRepair.dll` | — |
-| 18 | Cartur's Flooring | `CarturFlooring.dll` | !! |
-| 19 | HipLantern | `HipLantern.dll` | — |
-| 20 | Instantly Destroy Boats And Carts | `InstantlyDestroyBoatsAndCarts.dll` | — |
-| 21 | Jötunn / Valheim Library | `Jotunn.dll` | — |
-| 22 | Stations Custom Ranges | `LzD_StationsCustomRanges.dll` | — |
-| 23 | ModularLadders | `ModularLadders.dll` | — |
-| 24 | MonsterLabZ | `MonsterLabZ.dll` | **CGM** |
-| 25 | JsonDotNET — detector | `NewtonsoftJsonDetector.dll` | — |
-| 26 | JsonDotNET / Newtonsoft.Json | `Newtonsoft.Json.dll` | — |
-| 27 | NoFoodDegradation | `NoFoodDegradation.dll` | — |
-| 28 | BlindCartographer | `BlindCartographer.dll` | — |
-| 29 | OdinCampsite | `OdinCampsite.dll` | — |
-| 30 | OdinRealmFishing | `OdinRealmFishingMod.dll` | — |
-| 31 | OreMines | `OreMines.dll` | — |
-| 32 | PlanBuild | `PlanBuild.dll` | — |
-| 33 | Quick Stack Store | `QuickStackStore.dll` | — |
-| 34 | Quads Quiver | `Quiver.dll` | — |
-| 35 | Quads Companion | `AICompanion.dll` | **CGM** |
-| 36 | SmartRepair | `SmartRepair.dll` | — |
-| 37 | SolidHitboxes | `SolidHitboxes.dll` | — |
-| 38 | Spearfishing | `Spearfishing.dll` | — |
-| 39 | Stake Tweaks | `StakeTweaks.dll` | — |
-| 40 | StarLevelSystem | `StarLevelSystem.dll` | **CGM** |
-| 41 | TopMining | `TopMining.dll` | — |
-| 42 | No Seasonal Restrictions | `VentureValheim.NoSeasonalRestrictions.dll` | — |
-| 43 | XPortal | `XPortal.dll` | — |
-| 44 | YamlDotNet — detector | `YamlDotNetDetector.dll` | — |
-| 45 | YamlDotNet | `YamlDotNet.dll` | — |
+| 18 | HipLantern | `HipLantern.dll` | — |
+| 19 | Instantly Destroy Boats And Carts | `InstantlyDestroyBoatsAndCarts.dll` | — |
+| 20 | Jötunn / Valheim Library | `Jotunn.dll` | — |
+| 21 | Stations Custom Ranges | `LzD_StationsCustomRanges.dll` | — |
+| 22 | ModularLadders | `ModularLadders.dll` | — |
+| 23 | MonsterLabZ | `MonsterLabZ.dll` | **CGM** |
+| 24 | JsonDotNET — detector | `NewtonsoftJsonDetector.dll` | — |
+| 25 | JsonDotNET / Newtonsoft.Json | `Newtonsoft.Json.dll` | — |
+| 26 | NoFoodDegradation | `NoFoodDegradation.dll` | — |
+| 27 | BlindCartographer | `BlindCartographer.dll` | — |
+| 28 | OdinCampsite | `OdinCampsite.dll` | — |
+| 29 | OdinRealmFishing | `OdinRealmFishingMod.dll` | — |
+| 30 | OreMines | `OreMines.dll` | — |
+| 31 | PlanBuild | `PlanBuild.dll` | — |
+| 32 | Quick Stack Store | `QuickStackStore.dll` | — |
+| 33 | Quads Quiver | `Quiver.dll` | — |
+| 34 | Quads Companion | `AICompanion.dll` | **CGM** |
+| 35 | SmartRepair | `SmartRepair.dll` | — |
+| 36 | SolidHitboxes | `SolidHitboxes.dll` | — |
+| 37 | Spearfishing | `Spearfishing.dll` | — |
+| 38 | Stake Tweaks | `StakeTweaks.dll` | — |
+| 39 | StarLevelSystem | `StarLevelSystem.dll` | **CGM** |
+| 40 | TopMining | `TopMining.dll` | — |
+| 41 | No Seasonal Restrictions | `VentureValheim.NoSeasonalRestrictions.dll` | — |
+| 42 | XPortal | `XPortal.dll` | — |
+| 43 | YamlDotNet — detector | `YamlDotNetDetector.dll` | — |
+| 44 | YamlDotNet | `YamlDotNet.dll` | — |
 
 ## Only Client — 10 (по выбору игроков)
 
@@ -99,6 +101,10 @@
 
 ## Строительные и административные моды вне обязательного комплекта
 
+- **Comfy Gizmo** — `ComfyGizmo.dll`, категория **`!!` (постоянный строительный мод администратора)**. Пользователь успешно протестировал поворот исходных prefab для плоской крыши и решил оставить Gizmo в строительной сборке постоянно. Инструмент не добавляет новых prefab для построенной крыши и **не обязан присутствовать у друзей**, но реальные сохранённые постройки нужно проверять на всех клиентах. В последнем локальном снимке DLL активна. [Страница мода](https://thunderstore.io/c/valheim/p/ComfyMods/Gizmo/).
+- **Cartur's Flooring** — **исключён 25.10.2026**, `CarturFlooring.dll` не входит в обязательный набор; переместить за пределы `BepInEx/plugins/`. Выбор сделан после удачного теста стандартной крыши с Comfy Gizmo.
+
+
 - **Sinka** — `!!Sinka.dll` (категория `!!`, строительный режим администратора). По пользовательскому тесту закреплённые сундуки сохраняются после отключения, незакреплённые разваливаются. В последнем снимке ПК 24.10.2026 DLL присутствует активной, но она **не навязывается двум друзьям и не входит в 55 выбранных обязательных/клиентских DLL**. Для сохранения мира перед отключением проверить закрепление и сделать бэкап.
 - **PlanBuild** — `!!PlanBuild.dll*` в последнем снимке: отключённый строительный инструмент администратора. Старый план считать обязательным для друзей **не подтверждён текущим локальным снимком**; вопрос совместимости построек/планов решать перед включением.
 - **DigDug** — `!!DigDug.dll*`: выключен, но сохранён как инструмент ландшафтного редактирования; пользователь подтвердил сохранение изменений ландшафта после отключения.
@@ -107,7 +113,7 @@
 - **ModularLadders** — значился в старом целевом перечне, но **не обнаружен в предоставленном локальном `ls -la`** от 24.10.2026. В перечне пока сохранён как ранее выбранный, требующий сверки фактической установки и безопасного обращения с возможными сохранёнными лестницами.
 - **HoeRadius** — удалён пользователем и больше не входит в основную таблицу.
 
-**Учёт:** 45 выбранных S/C (включая Cartur's Flooring и Quads Quiver) + 10 клиентских = 55 DLL по плану. Отдельные инструменты из этого раздела не прибавлять автоматически к постоянному базовому набору. Сам последний снимок папки ПК содержит как активные, так и отключённые DLL, поэтому его физическая численность и плановые 55 DLL — разные показатели.
+**Учёт (актуальное):** 44 выбранных S/C (включая Quads Quiver, но без Cartur's Flooring) + 10 клиентских = 54 DLL базового плана; отдельно постоянный админский ComfyGizmo = 55 модов в выбранных профилях. Отдельные инструменты из этого раздела не прибавлять автоматически к постоянному базовому набору. Сам последний снимок папки ПК содержит как активные, так и отключённые DLL, поэтому его физическая численность и плановые 55 DLL — разные показатели.
 
 ## Отложено — не входит в число DLL
 
