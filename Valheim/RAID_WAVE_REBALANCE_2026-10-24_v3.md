@@ -1,5 +1,7 @@
 # VSP Gamer — StarLevelSystem raid wave rebalance v3 (24 October 2026)
 
+> **HISTORICAL / NOT ACTIVE FROM LATEST USER DECISION (24.10.2026):** The [SLS simplified profile](SLS_VANILLA_RAIDS_AND_BOUNTY_RETIREMENT_2026-10-24.md) sets `UseVanillaRaidConfiguration=true` and returns Valheim vanilla raids. This earlier 24-event v3 YAML wave balance remains preserved for rollback/future opt-in, but **does not govern current planned raid spawns**. Keep this report solely as the historical v3 reference.
+
 **Status:** revised in Git `main`, **NOT confirmed deployed, loaded, or playtested** on P2P host / friends. This version **supersedes the prior blanket 25%-density reduction** but preserves the separately approved foresttrolls correction. No DLL count changes.
 
 **Scope:** 24 raid definitions, 63 spawn entries reviewed. **21 raids modified, 3 preserved** (`pre_eikthyr_pack`, `foresttrolls`, `army_charred_spawners`). Across **51 spawn entries**, **103 scalar lines** changed: 29 `SpawnGroupSize`, 23 `MaxSpawned`, 51 `MaxSpawnTriggers`. Unchanged: all `Activation` rules, global keys, cooldowns, spawn intervals, spawn chances, event `Duration`, AI/factions/levels, boss levels/modifiers, music/environments, `RaidVersion=3`, `RaidCreatureDensity=1`, EpicLoot and MonsterLabZ. There are 63 spawn entries total, but some remain intentionally fixed for unique/boss events.
