@@ -182,9 +182,9 @@ Raids:
   Spawns:
   - PrefabName: Troll
     SpawnInterval: 40
-    MaxSpawned: 2
+    MaxSpawned: 5
     MaxSpawnTriggers: 5
-    SpawnGroupSize: 1
+    SpawnGroupSize: 3
     LevelMax: 3
     CustomCreatureLevelUpChance:
       1: 50
