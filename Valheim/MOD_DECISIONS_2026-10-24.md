@@ -39,3 +39,11 @@
 
 
 **Обновление состава после выбора PlanBuild:** 47 обязательных Server/Client + 10 Only Client = **57 выбранных DLL**, плюс один выключенный DigDug (58 учтённых). ChestSizeConfig остаётся кандидатом; SkillsReworked и TalentTree отложены. Предыдущие цифры 46+10 относятся к более раннему решению. [Манифест](MOD_MANIFEST_2026-10-24.md).
+
+
+## Решение о строительных модах и новые сведения об установке — 24.10.2026 (ПОСЛЕДНЕЕ)
+
+- [BentoG MissingPieces](https://thunderstore.io/c/valheim/p/BentoG/MissingPieces/) — **выбран для тестирования**, **не подтверждён установленным** и **не прибавлен** к базовому счёту 57 DLL.
+- **Сохранить в кандидатах:** [Cartur's Flooring](https://thunderstore.io/c/valheim/p/Cartur/Carturs_Flooring/), [Sinka](https://thunderstore.io/c/valheim/p/Ezomic/Sinka/), [BronzeAgeChest](https://thunderstore.io/c/valheim/p/probablykory/BronzeAgeChest/). Прежний MissingPiecesFix — deprecated fork, не устанавливать одновременно с основным.
+- **PlanBuild и ModularLadders:** пользователь сообщил об установке у себя. [PlanBuild CFG](config/marcopogo.PlanBuild.cfg) заголовок v0.20.0, по нему нельзя доказать версию загруженной DLL. У друзей версии и присутствие не проверены. PlanBuild Mirror=H может конфликтовать с HipLantern/EpicLoot.
+- **Итоговый каталог:** 47 общих + 10 клиентских = 57 в составе; MissingPieces — отдельно в тесте, три других кандидата не считаются. [Полный реестр](BUILDING_MODS_TEST_2026-10-24.md).
