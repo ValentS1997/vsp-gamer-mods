@@ -57,3 +57,12 @@
 ## Повторный ребаланс всех рейдов StarLevelSystem — v3, 24.10.2026 (ПОСЛЕДНЕЕ)
 
 По запросу пользователя после одного Troll в «Земля трясётся» выполнен **полный аудит 24 рейдов / 63 записей спавна**, 21 рейд скорректирован, 3 специальных оставлены. В 51 записи изменены 103 числовых поля размеров групп, одновременно живых и количества повторных попыток. Рейд `foresttrolls` уже ранее исправлен и оставлен `SpawnGroupSize=3, MaxSpawned=5, MaxSpawnTriggers=5`. Предыдущая единообразная схема ×0.25 заменена распределением по опасности мобов. Исходная версия YAML [архивирована](raid-backups/RaidSettings_before_wave_rebalance_2026-10-24.yaml). Все подробности, ограничения (это не рандомный диапазон), таблица и rollback — в [отчёте](RAID_WAVE_REBALANCE_2026-10-24_v3.md). Git-only; проверка работы на хосте и клиентах **[Pending]**.
+
+
+## ПОСЛЕДНЕЕ: Vanilla raids, ordinary & boss modifiers retained; Quads Bounty Board retired (24.10.2026)
+
+- User selects `UseVanillaRaidConfiguration=true` (the earlier 24-raid custom wave v3 is archived/historical, not deleted), `EnableNemesisSystem=false`, and turns off birds/fish/trees SLS scaling.
+- **Keep** ordinary creature Major/Minor modifiers, starred mob distributions, extended starred boss HP `BossEnemyHealthMultiplier=0.75`, and boss modifier settings unchanged. Original balance, loot tables, NPC exception and night spawns are not overwritten.
+- Standalone **Quads Bounty Board** `BountyBoard.dll` retired (uninstall on P2P host and both clients only after manually removing any constructed boards and backing up contract/world data); Quads Companion `AICompanion.dll` and Party HUD remain. CFG byte-identically archived at [retired-configs/com.quad.bountyboard.cfg](retired-configs/com.quad.bountyboard.cfg).
+- New intended count **46 mandatory S/C + 10 optional C = 56 DLL**, DigDug still disabled; MissingPieces test remains outside core tally. This supersedes historic 47+10/57 active DLL declarations. 
+- Git config and manifest updated, gameplay state not modified. [Exact six CFG changes, safety procedure, rollback](SLS_VANILLA_RAIDS_AND_BOUNTY_RETIREMENT_2026-10-24.md).
