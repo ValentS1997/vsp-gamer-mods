@@ -6,6 +6,16 @@
 
 This file records the **latest explicit user decision** and overrides older pending-mod notes. Scope: Valheim 1.0.20, native Linux, 3 human players, P2P host. User-reported installation is **not** proof of runtime DLL metadata or installation on all three peers.
 
+## Проверено пользователем 24.10.2026 — мосты Quads Build Orders сохраняются без DLL
+
+**Правильная атрибуция — Quads Build Orders (`BuildOrders.dll`), НЕ PlanBuild.** Пользователь построил округлённые/арочные мосты через инструмент Bridge в BuildOrders, затем отключил мод и наблюдал, что **построенные мосты сохранились в мире**. Это **пользовательский локальный тест**, не полная гарантия для всех вариантов моста, обновлений игры или иной модификации объектов.
+
+Причина, подтверждённая [исходным кодом BuildOrders](https://github.com/HardHeadHackerHead/valheim-mods/blob/main/mods/BuildOrders/Plugin.BridgeDesign.cs): генератор мостов собирает конструкцию из **стандартных Valheim prefab** (`wood_floor`, `wood_beam`, `wood_pole`, `wood_roof` и др.) с разными позициями и углами (`Quaternion.Euler`); отдельная уникальная 3D-модель моста для построенных частей не требуется. Арочная форма — комбинация обычных деталей под наклоном, а **не изменение сетки (mesh) одного prefab**. Поэтому результат может переживать удаление строительного инструмента. Ghost-планы/меню инструмента, в отличие от уже построенных стандартных деталей, не обязательно сохранят функциональность после удаления DLL.
+
+**Исследование плоской крыши:** попробовать повернуть оригинальный `wood_roof` или `darkwood_roof` по дополнительной оси до горизонтального положения с помощью временного инструмента 3D-поворота, например [ComfyMods Gizmo](https://thunderstore.io/c/valheim/p/ComfyMods/Gizmo/). Использование исходного prefab с сохранёнными position/rotation безопаснее постоянной зависимости от новых `roof_wood_2m` prefab MissingPieces. Это **не утверждение, что крыша прошла тест**: на КОПИИ мира проверить ориентацию, стыки, опоры, `Shelter`/защиту от дождя, сохранение после перезагрузки и после отключения поворотного мода; вход второго игрока без этого мода. Не путать изменение `Transform.rotation` со `MeshFilter.mesh` или принудительным масштабированием: последнее обычно требует runtime-мода и откатывается при его отсутствии.
+
+**Политика VSP Gamer:** отдавать предпочтение модам-инструментам, создающим/расставляющим **vanilla-prefab**, а не добавляющим новые строительные prefab ID. `MissingPieces` не переводить в базовую сборку: после отключения пользователь наблюдал исчезновение его уникальных строительных элементов. `BuildOrders.dll*` остаётся временным строительным инструментом; факт сохранности округлённых мостов относится именно к нему, не к PlanBuild. Никаких CFG, DLL, настроек мира этим документированием не изменяется.
+
 ## Latest decision: MissingPieces test
 
 - **[BentoG / MissingPieces](https://thunderstore.io/c/valheim/p/BentoG/MissingPieces/)** — **USER SELECTED FOR TESTING**, reference version **2.3.2** (previously researched, recheck before download).
