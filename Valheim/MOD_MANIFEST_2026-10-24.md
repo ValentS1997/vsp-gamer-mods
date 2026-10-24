@@ -1,6 +1,8 @@
 # VSP Gamer — актуальный DLL-манифест Valheim (24.10.2026)
 
-**АКТУАЛЬНОЕ РЕШЕНИЕ — QUIVER БЕЗ PROJECTILETWEAKS (24.10.2026):** стрелы из земли/деревьев и существ с вероятностью **75%**, болты возвращаются (`IncludeBolts=true`), колчан отображается (`Show=true`), огненные стрелы сгорают (`FireArrowsBurnUp=true`). **`ProjectileTweaks.dll` вновь исключён из активного списка** по последнему явному распоряжению пользователя, его оригинальный CFG сохранён в `retired-configs/`. Quads Bounty Board также исключён ранее. **Текущий план: 44 обязательных S/C + 11 Only Client = 55 DLL**, плюс отключённый DigDug = 56 учтённых. Quads Quiver — клиентский мод, на P2P-хосте рекомендован для единого шанса возврата. [Итоговый профиль и откат](ARCHERY_FINAL_QUIVER_ONLY_2026-10-24.md).
+**КЛАССИФИКАЦИЯ И ПОЛИТИКА МУЛЬТИПЛЕЕРА — ПОДТВЕРЖДЕНО 24.10.2026:** **Quads Quiver (`Quiver.dll`) обязателен на P2P-хосте и у обоих друзей**: это правило нашей сборки для одинаковой возможности возврата стрел/болтов, хотя сам мод допускает клиентскую установку. **45 обязательных Server/Client + 10 необязательных Only Client = 55 выбранных DLL** (отдельно сохранён отключённый `DigDug.dll*`; фактическую установку на трёх ПК ещё сверить). Четыре ключевых игровых мода получают виртуальную категорию **CGM = Core Game Mechanic**: EpicLoot, StarLevelSystem, MonsterLabZ, Quads Companion. **Категории и маркировка хранятся только в манифесте, а не в имени DLL на диске**, чтобы не повторять ошибки поиска библиотек. Последние решения по сборке: MissingPieces не включать (постройки исчезли в пользовательском тесте), Cartur's Flooring — одобрен в основную сборку (в данном старом перечне DLL ещё не отражён), Sinka — для строительного режима, ProjectileTweaks и HoeRadius — удалены по сообщению пользователя, DigDug — полезный, но отключённый; локальные названия и содержимое рабочей папки зафиксированы в чате. Последующие правки состава по снимку ПК — отдельная сверка.
+
+**РЕШЕНИЕ О ПАРАМЕТРАХ QUIVER (24.10.2026; КЛАССИФИКАЦИЯ УТОЧНЕНА ВЫШЕ):** стрелы из земли/деревьев и существ с вероятностью **75%**, болты возвращаются (`IncludeBolts=true`), колчан отображается (`Show=true`), огненные стрелы сгорают (`FireArrowsBurnUp=true`). **`ProjectileTweaks.dll` вновь исключён из активного списка** по последнему явному распоряжению пользователя, его оригинальный CFG сохранён в `retired-configs/`. Quads Bounty Board также исключён ранее. **Исторический план до перевода Quiver в обязательные: 44 S/C + 11 Only Client = 55 DLL**, плюс отключённый DigDug = 56 учтённых. Quads Quiver технически допускает клиентскую установку; по последнему решению VSP Gamer обязателен на всех трёх ПК. [Итоговый профиль и откат](ARCHERY_FINAL_QUIVER_ONLY_2026-10-24.md).
 
 
 **ИСТОРИЧЕСКАЯ ПРАВКА (ОТМЕНЕНА): СТРЕЛЫ 75% / 75%, БОЛТЫ И PROJECTILETWEAKS ВОЗВРАЩЕНЫ (24.10.2026):** Подтверждено пользователем: сохранить колчан и возврат стрел Quads Quiver (`ChanceOnGround=0.75`, `ChanceOnCreature=0.75`, `IncludeBolts=true`, `Show=true`, `FireArrowsBurnUp=true`), а также **вернуть `ProjectileTweaks.dll`** с исходным без изменений CFG для зума и настроек полёта снарядов. Quads Bounty Board остаётся исключённым (пользователь сообщил об удалении). **Тогдашний, уже отменённый целевой состав: 45 обязательных S/C + 11 Only Client = 56 DLL**, плюс выключенный DigDug = 57 учтённых. Quads Quiver остаётся клиентским и желателен на P2P-хосте для синхронизации шанса возврата. [Конфиг и ZIP](ARCHERY_75PERCENT_PROJECTILETWEAKS_2026-10-24.md).
@@ -12,7 +14,7 @@
 **ПОСЛЕДНЕЕ РЕШЕНИЕ 24.10.2026 — упрощение SLS и отказ от Quads Bounty Board:** SLS использует ванильные рейды; Nemesis и объектное масштабирование отключены, звёзды, модификаторы обычных мобов и боссов сохранены. **`BountyBoard.dll` исключён из целевого списка на всех трёх ПК**, но удалять его только после демонтажа всех игровых досок и бэкапа контрактов/мира. Quads Companion / Party HUD остаются. **Исторический план до упрощения стрельбы: 46 обязательных S/C + 10 Only Client = 56 DLL; актуальный план: 44 S/C + 11 Only Client = 55 DLL, плюс отключённый DigDug = 56 учтённых.** MissingPieces отдельно в тестировании и сюда НЕ входит. [План миграции и настройки](SLS_VANILLA_RAIDS_AND_BOUNTY_RETIREMENT_2026-10-24.md).
 
 
-**Статус:** согласованный целевой состав после отказа от BossGate; список DLL из README, а не повторная проверка диска. **44 общих (хост и оба друга) + 11 необязательных клиентских = 55 активных DLL по плану**; `DigDug.dll*` намеренно выключен (всего 56 учтённых). Реальное удаление DLL у трёх игроков ещё не проверено.
+**Статус:** согласованный целевой состав после отказа от BossGate; список DLL из README, а не повторная проверка диска. **45 общих (хост и оба друга) + 10 необязательных клиентских = 55 активных DLL по плану**; `DigDug.dll*` намеренно выключен (всего 56 учтённых). Реальное удаление DLL у трёх игроков ещё не проверено.
 
 **ОБНОВЛЕНИЕ СТАТУСА 24.10.2026:** пользователь сообщил, что **PlanBuild и ModularLadders установлены** у него; получен [PlanBuild v0.20.0 CFG](config/marcopogo.PlanBuild.cfg). По одним сообщениям/CFG нельзя подтвердить версию фактической DLL, отсутствие ошибок загрузки и наличие у двух друзей. **MissingPieces 2.3.2 выбран отдельно для ТЕСТА**, пока не считается 48-й S/C DLL. **Cartur's Flooring, Sinka, BronzeAgeChest — только кандидаты.** [Подробности](BUILDING_MODS_TEST_2026-10-24.md). Историческая база до отказа от Bounty Board: **47 S/C + 10 C = 57 DLL**; после отказа **46 S/C + 10 C = 56 DLL**.
 
@@ -26,70 +28,74 @@
 
 **PlantEasily для друзей:** `Advize_PlantEasily.dll` уже входит в 10 Only Client. Не добавлять MassFarming одновременно: вместо этого установить [отдельный профиль](client-presets/friends/advize.PlantEasily.cfg) с `E` и радиусом 3 м; у хоста [основной CFG](config/advize.PlantEasily.cfg) без изменений.
 
-## Server / Client — 44
+## Server / Client — 45
 
-| № | Мод | DLL |
-|---:|---|---|
-| 1 | AchievementEnabler | `AchievementEnabler.dll` |
-| 2 | AutomaticFuel | `AutomaticFuel.dll` |
-| 3 | AzuCraftyBoxes | `AzuCraftyBoxes.dll` |
-| 4 | Basements | `Basements.dll` |
-| 5 | BetterTames | `BetterTames.dll` |
-| 6 | BiggerPickupRadius | `BiggerPickupRadius.dll` |
-| 7 | BuyableExtractors | `BuyableExtractors.dll` |
-| 8 | ConditionalConfigSync | `ConditionalConfigSync.dll` |
-| 9 | ConditionalConfigSync.Plugin | `ConditionalConfigSync.Plugin.dll` |
-| 10 | Chain Manager | `Digitalroot.Valheim.ChainManager.dll` |
-| 11 | ChilloutForcedPVP | `ChilloutForcedPVP.dll` |
-| 12 | DoorDirector | `DoorDirector.dll` |
-| 13 | EpicLoot | `EpicLoot.dll` |
-| 14 | ExtraSlots | `ExtraSlots.dll` |
-| 15 | FiresGhettoNetworking | `VAGhettoNetworking.dll` |
-| 16 | ForsakenPowersPlusRemastered | `ForsakenPowersPlusRemastered.dll` |
-| 17 | Area Repair | `FrizzQOL.AreaRepair.dll` |
-| 18 | HoeRadius | `HoeRadius.dll` |
-| 19 | HipLantern | `HipLantern.dll` |
-| 20 | Instantly Destroy Boats And Carts | `InstantlyDestroyBoatsAndCarts.dll` |
-| 21 | Jötunn / Valheim Library | `Jotunn.dll` |
-| 22 | Stations Custom Ranges | `LzD_StationsCustomRanges.dll` |
-| 23 | ModularLadders | `ModularLadders.dll` |
-| 24 | MonsterLabZ | `MonsterLabZ.dll` |
-| 25 | JsonDotNET — detector | `NewtonsoftJsonDetector.dll` |
-| 26 | JsonDotNET / Newtonsoft.Json | `Newtonsoft.Json.dll` |
-| 27 | NoFoodDegradation | `NoFoodDegradation.dll` |
-| 28 | BlindCartographer | `BlindCartographer.dll` |
-| 29 | OdinCampsite | `OdinCampsite.dll` |
-| 30 | OdinRealmFishing | `OdinRealmFishingMod.dll` |
-| 31 | OreMines | `OreMines.dll` |
-| 32 | PlanBuild | `PlanBuild.dll` |
-| 33 | Quick Stack Store | `QuickStackStore.dll` |
-| 34 | Quads Companion | `AICompanion.dll` |
-| 35 | SmartRepair | `SmartRepair.dll` |
-| 36 | SolidHitboxes | `SolidHitboxes.dll` |
-| 37 | Spearfishing | `Spearfishing.dll` |
-| 38 | Stake Tweaks | `StakeTweaks.dll` |
-| 39 | StarLevelSystem | `StarLevelSystem.dll` |
-| 40 | TopMining | `TopMining.dll` |
-| 41 | No Seasonal Restrictions | `VentureValheim.NoSeasonalRestrictions.dll` |
-| 42 | XPortal | `XPortal.dll` |
-| 43 | YamlDotNet — detector | `YamlDotNetDetector.dll` |
-| 44 | YamlDotNet | `YamlDotNet.dll` |
+**Политика маркировки:** `CGM` — Core Game Mechanic, четыре основных игровых мода; `!` — API/библиотека/важный мод, `!!` — строительный мод, `!K-` (только латинская **K**) — клиентский мод, `*.dll*` — намеренно отключённый файл, который хранится у администратора для отдельного режима. Это **учётные обозначения**, не требование переименовывать DLL: библиотеки (`Jotunn.dll`, `YamlDotNet.dll`, `Newtonsoft.Json.dll`, `ConditionalConfigSync*.dll`) должны сохранять штатные имена для совместимости. Обозначения `!` и `!!` здесь описаны как категории и не навязываются спорным модам: `Basements`, `OdinCampsite`, `LzD_StationsCustomRanges`, `FrizzQOL.AreaRepair` оставлены **без дополнительных меток**. Quads Quiver относится к обязательным S/C по политике VSP Gamer, а **не** к `!K-`.
 
-## Only Client — 11 (по выбору игроков)
+| № | Мод | DLL | Класс |
+|---:|---|---|---|
+| 1 | AchievementEnabler | `AchievementEnabler.dll` | — |
+| 2 | AutomaticFuel | `AutomaticFuel.dll` | — |
+| 3 | AzuCraftyBoxes | `AzuCraftyBoxes.dll` | — |
+| 4 | Basements | `Basements.dll` | — |
+| 5 | BetterTames | `BetterTames.dll` | — |
+| 6 | BiggerPickupRadius | `BiggerPickupRadius.dll` | — |
+| 7 | BuyableExtractors | `BuyableExtractors.dll` | — |
+| 8 | ConditionalConfigSync | `ConditionalConfigSync.dll` | — |
+| 9 | ConditionalConfigSync.Plugin | `ConditionalConfigSync.Plugin.dll` | — |
+| 10 | Chain Manager | `Digitalroot.Valheim.ChainManager.dll` | — |
+| 11 | ChilloutForcedPVP | `ChilloutForcedPVP.dll` | — |
+| 12 | DoorDirector | `DoorDirector.dll` | — |
+| 13 | EpicLoot | `EpicLoot.dll` | **CGM** |
+| 14 | ExtraSlots | `ExtraSlots.dll` | — |
+| 15 | FiresGhettoNetworking | `VAGhettoNetworking.dll` | — |
+| 16 | ForsakenPowersPlusRemastered | `ForsakenPowersPlusRemastered.dll` | — |
+| 17 | Area Repair | `FrizzQOL.AreaRepair.dll` | — |
+| 18 | HoeRadius | `HoeRadius.dll` | — |
+| 19 | HipLantern | `HipLantern.dll` | — |
+| 20 | Instantly Destroy Boats And Carts | `InstantlyDestroyBoatsAndCarts.dll` | — |
+| 21 | Jötunn / Valheim Library | `Jotunn.dll` | — |
+| 22 | Stations Custom Ranges | `LzD_StationsCustomRanges.dll` | — |
+| 23 | ModularLadders | `ModularLadders.dll` | — |
+| 24 | MonsterLabZ | `MonsterLabZ.dll` | **CGM** |
+| 25 | JsonDotNET — detector | `NewtonsoftJsonDetector.dll` | — |
+| 26 | JsonDotNET / Newtonsoft.Json | `Newtonsoft.Json.dll` | — |
+| 27 | NoFoodDegradation | `NoFoodDegradation.dll` | — |
+| 28 | BlindCartographer | `BlindCartographer.dll` | — |
+| 29 | OdinCampsite | `OdinCampsite.dll` | — |
+| 30 | OdinRealmFishing | `OdinRealmFishingMod.dll` | — |
+| 31 | OreMines | `OreMines.dll` | — |
+| 32 | PlanBuild | `PlanBuild.dll` | — |
+| 33 | Quick Stack Store | `QuickStackStore.dll` | — |
+| 34 | Quads Quiver | `Quiver.dll` | — |
+| 35 | Quads Companion | `AICompanion.dll` | **CGM** |
+| 36 | SmartRepair | `SmartRepair.dll` | — |
+| 37 | SolidHitboxes | `SolidHitboxes.dll` | — |
+| 38 | Spearfishing | `Spearfishing.dll` | — |
+| 39 | Stake Tweaks | `StakeTweaks.dll` | — |
+| 40 | StarLevelSystem | `StarLevelSystem.dll` | **CGM** |
+| 41 | TopMining | `TopMining.dll` | — |
+| 42 | No Seasonal Restrictions | `VentureValheim.NoSeasonalRestrictions.dll` | — |
+| 43 | XPortal | `XPortal.dll` | — |
+| 44 | YamlDotNet — detector | `YamlDotNetDetector.dll` | — |
+| 45 | YamlDotNet | `YamlDotNet.dll` | — |
 
-| № | Мод | DLL |
-|---:|---|---|
-| 1 | PlantEasily | `Advize_PlantEasily.dll` |
-| 2 | BetterPickupNotifications | `BetterPickupNotifications.dll` |
-| 3 | Quads Build Orders | `BuildOrders.dll` |
-| 4 | Cartur's Compass and Clock | `CarturCompassAndClock.dll` |
-| 5 | ConfigurationManager | `ConfigurationManager.dll` |
-| 6 | FirstPersonMode | `FirstPersonMode.dll` |
-| 7 | Quads Party HUD | `PartyHud.dll` |
-| 8 | Venture Logout Tweaks | `VentureValheim.LogoutTweaks.dll` |
-| 9 | WorkbenchesPlus | `WorkbenchesPlus.dll` |
-| 10 | GooderAutoShield | `GooderAutoShield.dll` |
-| 11 | Quads Quiver | `Quiver.dll` |
+## Only Client — 10 (по выбору игроков)
+
+`!K-` в столбце «Класс» — только **маркировка манифеста**; физические имена DLL лучше оставлять исходными.
+
+| № | Мод | DLL | Класс |
+|---:|---|---|---|
+| 1 | PlantEasily | `Advize_PlantEasily.dll` | !K- |
+| 2 | BetterPickupNotifications | `BetterPickupNotifications.dll` | !K- |
+| 3 | Quads Build Orders | `BuildOrders.dll` | !K- |
+| 4 | Cartur's Compass and Clock | `CarturCompassAndClock.dll` | !K- |
+| 5 | ConfigurationManager | `ConfigurationManager.dll` | !K- |
+| 6 | FirstPersonMode | `FirstPersonMode.dll` | !K- |
+| 7 | Quads Party HUD | `PartyHud.dll` | !K- |
+| 8 | Venture Logout Tweaks | `VentureValheim.LogoutTweaks.dll` | !K- |
+| 9 | WorkbenchesPlus | `WorkbenchesPlus.dll` | !K- |
+| 10 | GooderAutoShield | `GooderAutoShield.dll` | !K- |
 
 ## Отложено — не входит в число DLL
 
