@@ -75,3 +75,10 @@
 - Official author says Quads Quiver is **client-only**, so move `Quiver.dll` from S/C mandatory to client-optional; host should keep it for consistent return percentages. New target **44 S/C + 11 client-only = 55 DLL**, plus inactive DigDug = 56 accounted. Quiver not required on friends who do not want it. If missing on host, clients use own recovery config. MissingPieces stays test-only outside totals.
 - **Quads Bounty Board user reports “удаляю”** (in process, **NOT proof completed**). `BountyBoard.dll` is already out of selection from earlier step; do not subtract twice. Remind to dismantle boards, claim rewards and back up world/contract state before removing DLL at all peers.
 - See [full design / deployment / rollback](ARCHERY_QUIVER_ONLY_2026-10-24.md). All Git-only, host/game still unverified.
+
+
+## ИТОГОВОЕ РЕШЕНИЕ 24.10.2026: Quads Quiver 75/75, болты включены, ProjectileTweaks исключён
+
+Пользователь **явно подтвердил создать конфиг, обновить Git и выдать ZIP**. `com.quad.quiver.cfg` должен содержать `PickUpArrows=true`, `ChanceOnGround=0.75`, `ChanceOnCreature=0.75`, `IncludeBolts=true`, `FireArrowsBurnUp=true`, `Show=true`. Параметры уже соответствовали заданным, подтверждена идентичность Git blob `3feae119987c2a75b894996b4ddfa8167d75facd` с переданным ZIP.
+
+`ProjectileTweaks.dll` исключён из целевого списка, активный Git `config/Searica.Valheim.ProjectileTweaks.cfg` удалён после проверки архива `retired-configs/Searica.Valheim.ProjectileTweaks.cfg`. Это отменяет промежуточный выбор вернуть ProjectileTweaks. Quads Bounty Board также исключён ранее. **Итого 44 обязательных S/C + 11 Only Client = 55 выбранных DLL**, плюс DigDug отключён. [Итоговая инструкция и откат](ARCHERY_FINAL_QUIVER_ONLY_2026-10-24.md). Изменения Git и ZIP — да; фактическое состояние игровых папок не подтверждено.
