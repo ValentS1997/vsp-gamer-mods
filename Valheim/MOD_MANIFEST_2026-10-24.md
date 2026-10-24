@@ -1,8 +1,11 @@
 # VSP Gamer — актуальный DLL-манифест Valheim (24.10.2026)
 
-**Статус:** согласованный целевой состав после отказа от BossGate; список DLL из README, а не повторная проверка диска. **47 общих (хост и оба друга) + 10 необязательных клиентских = 57 активных DLL по плану**; `DigDug.dll*` намеренно выключен (всего 58 учтённых). Реальное удаление DLL у трёх игроков ещё не проверено.
+**ПОСЛЕДНЕЕ РЕШЕНИЕ 24.10.2026 — упрощение SLS и отказ от Quads Bounty Board:** SLS использует ванильные рейды; Nemesis и объектное масштабирование отключены, звёзды, модификаторы обычных мобов и боссов сохранены. **`BountyBoard.dll` исключён из целевого списка на всех трёх ПК**, но удалять его только после демонтажа всех игровых досок и бэкапа контрактов/мира. Quads Companion / Party HUD остаются. **Актуальный план 46 обязательных S/C + 10 Only Client = 56 DLL; плюс отключённый DigDug = 57 учтённых.** MissingPieces отдельно в тестировании и сюда НЕ входит. [План миграции и настройки](SLS_VANILLA_RAIDS_AND_BOUNTY_RETIREMENT_2026-10-24.md).
 
-**ОБНОВЛЕНИЕ СТАТУСА 24.10.2026:** пользователь сообщил, что **PlanBuild и ModularLadders установлены** у него; получен [PlanBuild v0.20.0 CFG](config/marcopogo.PlanBuild.cfg). По одним сообщениям/CFG нельзя подтвердить версию фактической DLL, отсутствие ошибок загрузки и наличие у двух друзей. **MissingPieces 2.3.2 выбран отдельно для ТЕСТА**, пока не считается 48-й S/C DLL. **Cartur's Flooring, Sinka, BronzeAgeChest — только кандидаты.** [Подробности](BUILDING_MODS_TEST_2026-10-24.md). Базовый манифест остаётся **47 S/C + 10 C = 57 DLL**.
+
+**Статус:** согласованный целевой состав после отказа от BossGate; список DLL из README, а не повторная проверка диска. **46 общих (хост и оба друга) + 10 необязательных клиентских = 56 активных DLL по плану**; `DigDug.dll*` намеренно выключен (всего 57 учтённых). Реальное удаление DLL у трёх игроков ещё не проверено.
+
+**ОБНОВЛЕНИЕ СТАТУСА 24.10.2026:** пользователь сообщил, что **PlanBuild и ModularLadders установлены** у него; получен [PlanBuild v0.20.0 CFG](config/marcopogo.PlanBuild.cfg). По одним сообщениям/CFG нельзя подтвердить версию фактической DLL, отсутствие ошибок загрузки и наличие у двух друзей. **MissingPieces 2.3.2 выбран отдельно для ТЕСТА**, пока не считается 48-й S/C DLL. **Cartur's Flooring, Sinka, BronzeAgeChest — только кандидаты.** [Подробности](BUILDING_MODS_TEST_2026-10-24.md). Историческая база до отказа от Bounty Board: **47 S/C + 10 C = 57 DLL**; после отказа **46 S/C + 10 C = 56 DLL**.
 
 **ИСТОРИЧЕСКОЕ РАСПОРЯЖЕНИЕ (теперь сообщено об установке) — PlanBuild:** `PlanBuild.dll` **0.20.0** на P2P-хосте и обоих друзьях. BepInExPack и Jötunn уже входят в список; HookGenPatcher не требуется. Схемы домов сохраняются в `.blueprint` и могут включать предметы из сундуков, но воспроизведение предметов только через Direct Build (бесплатная постройка/риск дубликатов). **Сначала бэкап мира, тест на одном сундуке; позднее пользователь прислал CFG, см. ссылку выше.** [Подробная процедура](PLANBUILD_REBUILD_2026-10-24.md).
 
@@ -10,9 +13,11 @@
 
 **УДАЛИТЬ при следующей локальной синхронизации:** `BossGate.dll` у хоста и обоих игроков. Конфиг удалён из активной папки Git и сохранён в [архиве](retired-configs/Igao.BossGate.cfg); не копировать его обратно в `BepInEx/config/`. **XPortal.dll остаётся.** Каменные порталы позволяют переносить руду/металлы без BossGate. EpicLoot-гейтинг добычи не изменён.
 
+**ИСКЛЮЧЁН Quads Bounty Board:** `BountyBoard.dll` (прошлый №35) удалить/перенести в отключённые DLL **только после демонтажа игровых досок**, закрытия или сохранения групповых контрактов и резервной копии мира. [Архив бывшего CFG](retired-configs/com.quad.bountyboard.cfg); не копировать обратно в рабочий `BepInEx/config/`. `AICompanion.dll` и Party HUD оставить. В Git игровой мир не меняется.
+
 **PlantEasily для друзей:** `Advize_PlantEasily.dll` уже входит в 10 Only Client. Не добавлять MassFarming одновременно: вместо этого установить [отдельный профиль](client-presets/friends/advize.PlantEasily.cfg) с `E` и радиусом 3 м; у хоста [основной CFG](config/advize.PlantEasily.cfg) без изменений.
 
-## Server / Client — 47
+## Server / Client — 46
 
 | № | Мод | DLL |
 |---:|---|---|
@@ -50,19 +55,18 @@
 | 32 | PlanBuild | `PlanBuild.dll` |
 | 33 | ProjectileTweaks | `ProjectileTweaks.dll` |
 | 34 | Quick Stack Store | `QuickStackStore.dll` |
-| 35 | Quads Bounty Board | `BountyBoard.dll` |
-| 36 | Quads Companion | `AICompanion.dll` |
-| 37 | Quads Quiver | `Quiver.dll` |
-| 38 | SmartRepair | `SmartRepair.dll` |
-| 39 | SolidHitboxes | `SolidHitboxes.dll` |
-| 40 | Spearfishing | `Spearfishing.dll` |
-| 41 | Stake Tweaks | `StakeTweaks.dll` |
-| 42 | StarLevelSystem | `StarLevelSystem.dll` |
-| 43 | TopMining | `TopMining.dll` |
-| 44 | No Seasonal Restrictions | `VentureValheim.NoSeasonalRestrictions.dll` |
-| 45 | XPortal | `XPortal.dll` |
-| 46 | YamlDotNet — detector | `YamlDotNetDetector.dll` |
-| 47 | YamlDotNet | `YamlDotNet.dll` |
+| 35 | Quads Companion | `AICompanion.dll` |
+| 36 | Quads Quiver | `Quiver.dll` |
+| 37 | SmartRepair | `SmartRepair.dll` |
+| 38 | SolidHitboxes | `SolidHitboxes.dll` |
+| 39 | Spearfishing | `Spearfishing.dll` |
+| 40 | Stake Tweaks | `StakeTweaks.dll` |
+| 41 | StarLevelSystem | `StarLevelSystem.dll` |
+| 42 | TopMining | `TopMining.dll` |
+| 43 | No Seasonal Restrictions | `VentureValheim.NoSeasonalRestrictions.dll` |
+| 44 | XPortal | `XPortal.dll` |
+| 45 | YamlDotNet — detector | `YamlDotNetDetector.dll` |
+| 46 | YamlDotNet | `YamlDotNet.dll` |
 
 ## Only Client — 10 (по выбору игроков)
 
