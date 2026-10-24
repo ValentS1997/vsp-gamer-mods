@@ -66,3 +66,12 @@
 - Standalone **Quads Bounty Board** `BountyBoard.dll` retired (uninstall on P2P host and both clients only after manually removing any constructed boards and backing up contract/world data); Quads Companion `AICompanion.dll` and Party HUD remain. CFG byte-identically archived at [retired-configs/com.quad.bountyboard.cfg](retired-configs/com.quad.bountyboard.cfg).
 - New intended count **46 mandatory S/C + 10 optional C = 56 DLL**, DigDug still disabled; MissingPieces test remains outside core tally. This supersedes historic 47+10/57 active DLL declarations. 
 - Git config and manifest updated, gameplay state not modified. [Exact six CFG changes, safety procedure, rollback](SLS_VANILLA_RAIDS_AND_BOUNTY_RETIREMENT_2026-10-24.md).
+
+
+## ПОСЛЕДНЕЕ 24.10.2026 — только возвращаемые стрелы и косметический колчан
+
+- User wants only chance to recover shot arrows and cosmetic quiver. Keep **Quads Quiver / Quiver.dll**, remove **ProjectileTweaks.dll** (tweaked aim/trajectory, zoom and ammo counter no longer wanted), archive the old config in [retired-configs/Searica.Valheim.ProjectileTweaks.cfg](retired-configs/Searica.Valheim.ProjectileTweaks.cfg) after a byte-for-byte comparison.
+- New `com.quad.quiver.cfg`: `PickUpArrows=true`, `ChanceOnGround=1`, `ChanceOnCreature=0.75`, `Show=true`, `FireArrowsBurnUp=true`. Only actual config edit: **`IncludeBolts=true→false`**; original saved at `config-backups/com.quad.quiver_before_arrows_only_2026-10-24.cfg`.
+- Official author says Quads Quiver is **client-only**, so move `Quiver.dll` from S/C mandatory to client-optional; host should keep it for consistent return percentages. New target **44 S/C + 11 client-only = 55 DLL**, plus inactive DigDug = 56 accounted. Quiver not required on friends who do not want it. If missing on host, clients use own recovery config. MissingPieces stays test-only outside totals.
+- **Quads Bounty Board user reports “удаляю”** (in process, **NOT proof completed**). `BountyBoard.dll` is already out of selection from earlier step; do not subtract twice. Remind to dismantle boards, claim rewards and back up world/contract state before removing DLL at all peers.
+- See [full design / deployment / rollback](ARCHERY_QUIVER_ONLY_2026-10-24.md). All Git-only, host/game still unverified.
