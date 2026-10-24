@@ -47,3 +47,8 @@
 - **Сохранить в кандидатах:** [Cartur's Flooring](https://thunderstore.io/c/valheim/p/Cartur/Carturs_Flooring/), [Sinka](https://thunderstore.io/c/valheim/p/Ezomic/Sinka/), [BronzeAgeChest](https://thunderstore.io/c/valheim/p/probablykory/BronzeAgeChest/). Прежний MissingPiecesFix — deprecated fork, не устанавливать одновременно с основным.
 - **PlanBuild и ModularLadders:** пользователь сообщил об установке у себя. [PlanBuild CFG](config/marcopogo.PlanBuild.cfg) заголовок v0.20.0, по нему нельзя доказать версию загруженной DLL. У друзей версии и присутствие не проверены. PlanBuild Mirror=H может конфликтовать с HipLantern/EpicLoot.
 - **Итоговый каталог:** 47 общих + 10 клиентских = 57 в составе; MissingPieces — отдельно в тесте, три других кандидата не считаются. [Полный реестр](BUILDING_MODS_TEST_2026-10-24.md).
+
+
+## Коррекция рейда foresttrolls — 24.10.2026 (ПОСЛЕДНЕЕ)
+
+По фактическому тесту пользователя SLS `foresttrolls` («Земля трясётся») атаковал одним троллем, требуется 3–5 за волну. В Git точечно изменены `SpawnGroupSize: 1→3`, `MaxSpawned: 2→5`. Параметры `SpawnInterval: 40`, `MaxSpawnTriggers: 5`, `Duration: 180` сохранены; другие рейды/баланс без изменений. **3 за полную волну, максимум 5 живых, а не гарантированный случайный диапазон 3–5.** Установка в игре и тест пока не подтверждены. [Решение и rollback](FORESTTROLLS_RAID_TUNING_2026-10-24.md).
