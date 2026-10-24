@@ -1,5 +1,7 @@
 # Valheim VSP Gamer — SLS lean profile and Bounty Board retirement (24.10.2026)
 
+> **Later change on 2026-10-24:** archery was simplified by removing `ProjectileTweaks.dll` and moving `Quiver.dll` to client-only. The **latest planned count is 44 shared + 11 client = 55**, not 46+10=56 below (that is this document's historical count). Bounty Board removal is **in progress per user**, not confirmed finished; SLS changes and board-retirement safety protocol in this document still apply. [Details](ARCHERY_QUIVER_ONLY_2026-10-24.md).
+
 **Status:** USER-APPROVED configuration direction, Git baseline updated only; NOT confirmed copied into the host's Valheim folders, NOT yet playtested. This supersedes earlier proposals to disable ordinary creature modifiers. The world, player saves, plugin binaries, and installed local config files were not touched.
 
 ## Explicit user decisions
