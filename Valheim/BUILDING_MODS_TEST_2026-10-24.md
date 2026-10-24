@@ -1,5 +1,7 @@
 # Valheim — Building mods: test selection and saved candidates (2026-10-24)
 
+> **LATEST GLOBAL COUNT (24.10.2026):** After retiring `ProjectileTweaks.dll` and reclassifying Quads Quiver as client-only, target now **44 S/C + 11 C = 55 chosen DLL**; the older 46+10=56 and 47+10=57 totals below are historical. [Archery decision](ARCHERY_QUIVER_ONLY_2026-10-24.md). MissingPieces still test-only and not included. No local installation implied.
+
 > **CURRENT GLOBAL DLL COUNT UPDATE (24.10.2026):** With Quads Bounty Board retired after this earlier building-mod selection, core target is now **46 S/C + 10 client-only = 56 DLL**, not the **47+10=57** shown below in historical accounting sections. MissingPieces remains test-only (not promoted), Cartur's Flooring / Sinka / BronzeAgeChest still candidates. See [latest decision](SLS_VANILLA_RAIDS_AND_BOUNTY_RETIREMENT_2026-10-24.md). The rest of this test audit remains unchanged.
 
 This file records the **latest explicit user decision** and overrides older pending-mod notes. Scope: Valheim 1.0.20, native Linux, 3 human players, P2P host. User-reported installation is **not** proof of runtime DLL metadata or installation on all three peers.
