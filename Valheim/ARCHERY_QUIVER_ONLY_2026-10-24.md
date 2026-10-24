@@ -1,5 +1,7 @@
 # VSP Gamer — Archery simplified to Quads Quiver (2026-10-24)
 
+> **SUPERSEDED by [the final user-approved Quiver-only 75/75 profile](ARCHERY_FINAL_QUIVER_ONLY_2026-10-24.md) on 2026-10-24.** This document's `ChanceOnGround=1` and `IncludeBolts=false` were temporary intermediate choices; the FINAL values are `ChanceOnGround=0.75`, `ChanceOnCreature=0.75`, `IncludeBolts=true`. ProjectileTweaks stays excluded.
+
 ## Decision
 
 User wants only (1) a chance to **recover fired arrows** and (2) a **visual quiver**. All other ProjectileTweaks gameplay changes are unnecessary. User also reported **"Quads Bounty Board удаляю"** — removal is **IN PROGRESS as reported**, not verified completed on all three PCs or in-world boards.
