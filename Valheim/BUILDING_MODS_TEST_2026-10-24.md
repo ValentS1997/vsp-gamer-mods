@@ -1,5 +1,7 @@
 # Valheim — Building mods: test selection and saved candidates (2026-10-24)
 
+> **CURRENT GLOBAL DLL COUNT UPDATE (24.10.2026):** With Quads Bounty Board retired after this earlier building-mod selection, core target is now **46 S/C + 10 client-only = 56 DLL**, not the **47+10=57** shown below in historical accounting sections. MissingPieces remains test-only (not promoted), Cartur's Flooring / Sinka / BronzeAgeChest still candidates. See [latest decision](SLS_VANILLA_RAIDS_AND_BOUNTY_RETIREMENT_2026-10-24.md). The rest of this test audit remains unchanged.
+
 This file records the **latest explicit user decision** and overrides older pending-mod notes. Scope: Valheim 1.0.20, native Linux, 3 human players, P2P host. User-reported installation is **not** proof of runtime DLL metadata or installation on all three peers.
 
 ## Latest decision: MissingPieces test
