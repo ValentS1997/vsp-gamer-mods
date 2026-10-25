@@ -345,7 +345,7 @@ DistanceLevelBonus:
     16: 0.25
     17: 0.12
     18: 0.06
-EnableConditionalCreatureLevelupChance: false
+EnableConditionalCreatureLevelupChance: true
 ConditionalCreatureLevelupChance:
   defeated_frozenking_p3:
     Meadows:
