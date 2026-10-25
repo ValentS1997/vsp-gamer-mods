@@ -90,7 +90,7 @@ RaidVersion: 3
 GlobalSettings:
   GlobalRaidIntervalScalar: 2
   GlobalRaidChanceScalar: 0.5
-  RaidCreatureDensity: 1
+  RaidCreatureDensity: 2
 Raids:
 # VSP Gamer: beginner raid before Eikthyr, a single mixed pack of 13.
 # One spawn trigger per creature entry: no replacements within this raid.
