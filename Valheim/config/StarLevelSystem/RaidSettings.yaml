@@ -136,18 +136,21 @@ Raids:
   Spawns:
   - PrefabName: Greyling
     SpawnInterval: 5
-    MaxSpawned: 9
+    MaxSpawned: 15
     MaxSpawnTriggers: 3
+    SpawnGroupSize: 5
     LevelMax: 5
   - PrefabName: Neck
     SpawnInterval: 8
-    MaxSpawned: 5
+    MaxSpawned: 15
     MaxSpawnTriggers: 2
+    SpawnGroupSize: 5
     LevelMax: 5
   - PrefabName: Boar
     SpawnInterval: 8
-    MaxSpawned: 5
+    MaxSpawned: 15
     MaxSpawnTriggers: 2
+    SpawnGroupSize: 5
     LevelMax: 5
   StartMessage: $event_eikthyrarmy_start
   EndMessage: $event_eikthyrarmy_end
@@ -191,18 +194,18 @@ Raids:
   Spawns:
   - PrefabName: Greydwarf
     SpawnInterval: 4
-    MaxSpawned: 9
+    MaxSpawned: 15
     MaxSpawnTriggers: 3
     SpawnGroupSize: 2
     LevelMax: 5
   - PrefabName: Greydwarf_Elite
     SpawnInterval: 10
-    MaxSpawned: 3
+    MaxSpawned: 8
     MaxSpawnTriggers: 2
     LevelMax: 5
   - PrefabName: Greydwarf_Shaman
     SpawnInterval: 10
-    MaxSpawned: 2
+    MaxSpawned: 3
     MaxSpawnTriggers: 2
     LevelMax: 5
   StartMessage: $event_gdkingarmy_start
@@ -219,13 +222,13 @@ Raids:
   Spawns:
   - PrefabName: Skeleton
     SpawnInterval: 5
-    MaxSpawned: 9
+    MaxSpawned: 15
     MaxSpawnTriggers: 3
     SpawnGroupSize: 2
     UseRaidLevelSystem: false
   - PrefabName: Skeleton_Poison
     SpawnInterval: 8
-    MaxSpawned: 4
+    MaxSpawned: 6
     MaxSpawnTriggers: 2
     UseRaidLevelSystem: false
   StartMessage: $event_skeletons_start
@@ -243,12 +246,12 @@ Raids:
   Spawns:
   - PrefabName: Blob
     SpawnInterval: 5
-    MaxSpawned: 9
+    MaxSpawned: 15
     MaxSpawnTriggers: 3
     LevelMax: 12
   - PrefabName: BlobElite
     SpawnInterval: 10
-    MaxSpawned: 4
+    MaxSpawned: 8
     MaxSpawnTriggers: 2
     LevelMax: 12
   StartMessage: $SLS_event_blobs_start
@@ -263,12 +266,12 @@ Raids:
   Spawns:
   - PrefabName: Ghost
     SpawnInterval: 40
-    MaxSpawned: 5
+    MaxSpawned: 8
     MaxSpawnTriggers: 3
     LevelMax: 16
   - PrefabName: Wraith
     SpawnInterval: 40
-    MaxSpawned: 5
+    MaxSpawned: 8
     MaxSpawnTriggers: 2
     LevelMax: 16
   StartMessage: $event_ghosts_start
@@ -288,7 +291,7 @@ Raids:
   Spawns:
   - PrefabName: Surtling
     SpawnInterval: 5
-    MaxSpawned: 18
+    MaxSpawned: 25
     MaxSpawnTriggers: 3
     UseRaidLevelSystem: false
     RequiredModifiers:
@@ -308,26 +311,26 @@ Raids:
   Spawns:
   - PrefabName: Skeleton
     SpawnInterval: 5
-    MaxSpawned: 13
+    MaxSpawned: 20
     MaxSpawnTriggers: 2
     LevelMax: 12
   - PrefabName: Blob
     SpawnInterval: 8
-    MaxSpawned: 5
+    MaxSpawned: 10
     MaxSpawnTriggers: 2
     LevelMax: 12
   - PrefabName: Draugr
     SpawnInterval: 8
-    MaxSpawned: 5
+    MaxSpawned: 10
     MaxSpawnTriggers: 2
     LevelMax: 12
   - PrefabName: Draugr_Elite
-    MaxSpawned: 2
+    MaxSpawned: 4
     MaxSpawnTriggers: 1
     LevelMax: 12
   - PrefabName: Draugr_Ranged
     SpawnInterval: 10
-    MaxSpawned: 4
+    MaxSpawned: 5
     MaxSpawnTriggers: 2
     LevelMax: 12
   StartMessage: $event_bonemassarmy_start
@@ -343,13 +346,13 @@ Raids:
   Spawns:
   - PrefabName: Wolf
     SpawnInterval: 5
-    MaxSpawned: 9
+    MaxSpawned: 12
     MaxSpawnTriggers: 3
     SpawnGroupSize: 2
     LevelMax: 16
   - PrefabName: Fenring
     SpawnInterval: 16
-    MaxSpawned: 4
+    MaxSpawned: 5
     MaxSpawnTriggers: 2
     LevelMax: 16
   StartMessage: $event_wolves_start
@@ -367,13 +370,13 @@ Raids:
   Spawns:
   - PrefabName: Ulv
     SpawnInterval: 5
-    MaxSpawned: 9
+    MaxSpawned: 15
     MaxSpawnTriggers: 3
     SpawnGroupSize: 2
     LevelMax: 20
   - PrefabName: Fenring_Cultist
     SpawnInterval: 16
-    MaxSpawned: 3
+    MaxSpawned: 5
     MaxSpawnTriggers: 2
     LevelMax: 20
   StartMessage: $event_caves_start
@@ -391,12 +394,12 @@ Raids:
   Spawns:
   - PrefabName: Hatchling
     SpawnInterval: 8
-    MaxSpawned: 5
+    MaxSpawned: 7
     MaxSpawnTriggers: 2
     LevelMax: 16
   - PrefabName: Wolf
     SpawnInterval: 8
-    MaxSpawned: 5
+    MaxSpawned: 7
     MaxSpawnTriggers: 2
     SpawnGroupSize: 2
     LevelMax: 16
@@ -420,21 +423,21 @@ Raids:
   Spawns:
   - PrefabName: Goblin
     SpawnInterval: 5
-    MaxSpawned: 7
+    MaxSpawned: 15
     MaxSpawnTriggers: 3
     LevelMax: 20
   - PrefabName: GoblinArcher
     SpawnInterval: 8
-    MaxSpawned: 5
+    MaxSpawned: 10
     MaxSpawnTriggers: 2
     LevelMax: 20
   - PrefabName: GoblinShaman
-    MaxSpawned: 2
+    MaxSpawned: 5
     MaxSpawnTriggers: 1
     LevelMax: 20
   - PrefabName: GoblinBrute
     SpawnInterval: 16
-    MaxSpawned: 1
+    MaxSpawned: 3
     MaxSpawnTriggers: 1
     LevelMax: 20
   StartMessage: $event_goblinarmy_start
@@ -450,7 +453,7 @@ Raids:
   Spawns:
   - PrefabName: Bat
     SpawnInterval: 4
-    MaxSpawned: 9
+    MaxSpawned: 25
     MaxSpawnTriggers: 3
     SpawnGroupSize: 2
     LevelMax: 30
@@ -469,7 +472,7 @@ Raids:
   Spawns:
   - PrefabName: Gjall
     SpawnInterval: 16
-    MaxSpawned: 2
+    MaxSpawned: 5
     MaxSpawnTriggers: 1
     LevelMax: 26
   - PrefabName: Tick
@@ -494,17 +497,17 @@ Raids:
   Spawns:
   - PrefabName: Seeker
     SpawnInterval: 5
-    MaxSpawned: 5
+    MaxSpawned: 8
     MaxSpawnTriggers: 3
     LevelMax: 26
   - PrefabName: SeekerBrute
     SpawnInterval: 16
-    MaxSpawned: 1
+    MaxSpawned: 2
     MaxSpawnTriggers: 1
     LevelMax: 26
   - PrefabName: Tick
     SpawnInterval: 10
-    MaxSpawned: 3
+    MaxSpawned: 5
     MaxSpawnTriggers: 2
     LevelMax: 26
   StartMessage: $event_seekerarmy_start
@@ -522,18 +525,18 @@ Raids:
   Spawns:
   - PrefabName: Charred_Twitcher
     SpawnInterval: 5
-    MaxSpawned: 7
+    MaxSpawned: 15
     MaxSpawnTriggers: 3
     SpawnGroupSize: 2
     LevelMax: 30
   - PrefabName: Charred_Archer
     SpawnInterval: 16
-    MaxSpawned: 3
+    MaxSpawned: 5
     MaxSpawnTriggers: 2
     LevelMax: 30
   - PrefabName: Charred_Melee
     SpawnInterval: 10
-    MaxSpawned: 2
+    MaxSpawned: 5
     MaxSpawnTriggers: 2
     LevelMax: 30
   StartMessage: $event_charredarmy_start
@@ -571,19 +574,19 @@ Raids:
   Spawns:
   - PrefabName: Elaking
     SpawnInterval: 5
-    MaxSpawned: 9
+    MaxSpawned: 15
     MaxSpawnTriggers: 3
     SpawnGroupSize: 2
     LevelMax: 30
   - PrefabName: ElakingLantern
     SpawnInterval: 10
     SpawnChance: 60
-    MaxSpawned: 3
+    MaxSpawned: 5
     MaxSpawnTriggers: 2
     LevelMax: 30
   - PrefabName: ElakingMole
     SpawnInterval: 20
-    MaxSpawned: 2
+    MaxSpawned: 5
     MaxSpawnTriggers: 1
     LevelMax: 30
   StartMessage: $event_elakingarmy_start
@@ -610,12 +613,12 @@ Raids:
   Spawns:
   - PrefabName: JotunWarrior
     SpawnInterval: 20
-    MaxSpawned: 3
+    MaxSpawned: 5
     MaxSpawnTriggers: 2
     LevelMax: 30
   - PrefabName: Elaking
     SpawnInterval: 8
-    MaxSpawned: 5
+    MaxSpawned: 10
     MaxSpawnTriggers: 3
     LevelMax: 30
   StartMessage: $event_jotunarmy_start
@@ -636,12 +639,12 @@ Raids:
     LevelMax: 30
   - PrefabName: Skeleton
     SpawnInterval: 8
-    MaxSpawned: 7
+    MaxSpawned: 15
     MaxSpawnTriggers: 2
     SpawnGroupSize: 2
     LevelMax: 30
   - PrefabName: Skeleton_Poison
-    MaxSpawned: 3
+    MaxSpawned: 5
     MaxSpawnTriggers: 2
     LevelMax: 30
   StartMessage: $event_hildirboss1_start
@@ -662,12 +665,12 @@ Raids:
     LevelMax: 30
   - PrefabName: Ulv
     SpawnInterval: 8
-    MaxSpawned: 7
+    MaxSpawned: 12
     MaxSpawnTriggers: 2
     SpawnGroupSize: 2
     LevelMax: 30
   - PrefabName: Fenring_Cultist
-    MaxSpawned: 2
+    MaxSpawned: 5
     MaxSpawnTriggers: 1
     LevelMax: 30
   StartMessage: $event_hildirboss2_start
@@ -688,12 +691,12 @@ Raids:
     LevelMax: 30
   - PrefabName: Goblin
     SpawnInterval: 8
-    MaxSpawned: 7
+    MaxSpawned: 10
     MaxSpawnTriggers: 2
     SpawnGroupSize: 2
     LevelMax: 30
   - PrefabName: GoblinShaman
-    MaxSpawned: 1
+    MaxSpawned: 3
     MaxSpawnTriggers: 1
     LevelMax: 30
   StartMessage: $event_hildirboss3_start
