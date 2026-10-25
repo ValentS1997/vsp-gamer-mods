@@ -310,7 +310,7 @@ ChanceChanges:
     Ocean Serpent Attack:
       RequiredGlobalKeys:
       - defeated_gdking
-      Chance: 0.3
+      Chance: 0.4015625
       DeniedBiomes:
       - None
       AllowedBiomes:
@@ -328,7 +328,7 @@ ChanceChanges:
     Ocean Serpent Ambush:
       RequiredGlobalKeys:
       - defeated_bonemass
-      Chance: 0.3
+      Chance: 0.4015625
       DeniedBiomes:
       - None
       AllowedBiomes:
@@ -593,7 +593,7 @@ ChanceChanges:
       ScoreThreshold: 2000
       ScoreChange: 400
     IncreaseCreatureLevel:
-      Chance: 0.25
+      Chance: 0.3046875
       LevelBonus: 1
       DeniedBiomes:
       - None
@@ -608,7 +608,7 @@ ChanceChanges:
       ScoreThreshold: 8000
       ScoreChange: -500
     NemesisMiniboss1:
-      Chance: 0.05
+      Chance: 0.096875
       LevelBonus: 7
       DeniedBiomes:
       - None
