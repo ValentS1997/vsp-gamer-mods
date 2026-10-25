@@ -1,0 +1,175 @@
+<color="white">***</color>
+
+######################################
+РЯД №1################################
+######################################
+
+<color="red">ДЕРЕВО</color>
+<color="white">Древесина</color>
+<color="white">Цельная древесина</color>
+<color="white">Качественная древесина</color>
+<color="white">Древняя кора</color>
+<color="white">Древо Игдрасиль</color>
+<color="white">Пепельная Древесина</color>
+<color="white">Морозная Ель</color>
+
+<color="red">ЦВЕТЫ И САЖЕНЦЫ</color>
+<color="white">Семена: Бук и Береза</color>
+<color="white">Семена: Пихта и Сосна</color>
+<color="white">Семена: Дуб и Древнее древо</color>
+<color="white">Цветы: Одуванчик И Чертополох</color>
+<color="white">Цветы: Рахис</color>
+
+<color="red">ТКАНЬ И ШКУРЫ</color>
+<color="white">Перья и Обрывки</color>
+<color="white">Смола и Кости</color>
+<color="white">Шкуры: Олень</color>
+<color="white">Шкуры: Медведь и Троль</color>
+<color="white">Шкуры: Волк и Быкоящер</color>
+<color="white">Шкуры: Заяц и Пеплосвин</color>
+<color="white">Шкуры: Тюлень и Лось</color>
+<color="white">Льняная нить</color>
+<color="white">Ткань: Синий и Красный Джут</color>
+
+<color="red">МЯСО</color>
+<color="white">Рыба: Сырая</color>
+<color="white">Рыба: Целая</color>
+<color="white">Мясо: Никс и Медведь</color>
+<color="white">Мясо: Кабан</color>
+<color="white">Мясо: Олень</color>
+<color="white">Мясо: Волк</color>
+<color="white">Мясо: Курица</color>
+<color="white">Мясо: Быкоящер</color>
+<color="white">Мясо: Искатель и Заяц</color>
+<color="white">Мясо: Пеплосвин и Стервятник</color>
+<color="white">Мясо: Тюлень и Лось</color>
+<color="white">Мясо: Змей и Костепасть</color>
+
+<color="red">ГРИБЫ</color>
+<color="white">Грибы: Красные и Желтые</color>
+<color="white">Грибы: Голубые и Волшебные</color>
+<color="white">Грибы: Йотун и Дымчатые</color>
+
+<color="red">ЯГОДЫ</color>
+<color="white">Ягоды: Малина и Черника</color>
+<color="white">Ягоды: Тошника и Морошка</color>
+<color="white">Ягоды: Брусника</color>
+
+######################################
+РЯД №2################################
+######################################
+
+<color="red">СЕМЕНА</color>
+<color="white">Морковь: семена и плоды</color>
+<color="white">Репа: семена и плоды</color>
+<color="white">Лук: семена и плоды</color>
+<color="white">Лен и Ячмень</color>
+<color="white">Лозовые ягоды: семена и плоды</color>
+<color="white">Овес: семена и плоды</color>
+<color="white">Картофель: семена и плоды</color>
+<color="white">Капуста: семена и плоды</color>
+<color="white">Мука</color>
+<color="white">Тесто</color>
+<color="white">Мед</color>
+<color="white">Травы</color>
+<color="white">Яйца: Курица</color>
+<color="white">Яйца: Пеплозавр и Стервятник</color>
+<color="white">Пищевые заготовки</color>
+<color="white">Пиры</color>
+<color="white">Потроха</color>
+<color="white">Гнилое мясо</color>
+<color="white">Наживка</color>
+
+
+
+######################################
+РЯД №3################################
+######################################
+
+<color="red">КАМНИ</color>
+<color="white">Камень и Кремень</color>
+<color="white">Уголь и Деготь</color>
+<color="white">Обсидиан и Кристалл</color>
+<color="white">Мрамор и Серокамень</color>
+
+
+<color="red">СЛИТКИ</color>
+<color="white">Слитки: Олово и Медь</color>
+<color="white">Слитки: Бронза и Железо</color>
+<color="white">Слитки: Серебро и Чернометалл</color>
+<color="white">Слитки: Огнеметалл и Кровометалл</color>
+<color="white">Хитин и Панцирь</color>
+
+
+<color="red">МЕХАНИЗМЫ</color>
+<color="white">Плоть Имира и Гром-Камни</color>
+<color="white">Гвозди и Цепи</color>
+<color="white">Ядра Суртлингов</color>
+<color="white">Глаза леших</color>
+<color="white">Ядра Щита</color>
+<color="white">Ключи и разные механизмы</color>
+<color="white">Мягкая ткань и Живица</color>
+<color="white">Огоньки и Эйтр</color>
+
+<color="red">СОКРОВИЩА</color>
+<color="white">Золото</color>
+<color="white">Драгоценности</color>
+<color="white">Тотемы</color>
+
+
+<color="red">ТРОФЕИ</color>
+<color="white">Трофеи: Луга</color>
+<color="white">Трофеи: Темный Лес</color>
+<color="white">Трофеи: Болота</color>
+<color="white">Трофеи: Горы</color>
+<color="white">Трофеи: Равнины</color>
+<color="white">Трофеи: Туман</color>
+<color="white">Трофеи: Ад</color>
+<color="white">Трофеи: Север</color>
+<color="white">Трофеи: Море</color>
+<color="white">Трофеи: Боссы</color>
+
+<color="red">ОСТАНКИ</color>
+<color="white">Останки: Луга</color>
+<color="white">Останки: Темный Лес</color>
+<color="white">Останки: Болота</color>
+<color="white">Останки: Горы</color>
+<color="white">Останки: Равнины</color>
+<color="white">Останки: Туман</color>
+<color="white">Останки: Ад</color>
+<color="white">Останки: Север</color>
+<color="white">Останки: Море</color>
+<color="white">Останки: Боссы</color>
+
+######################################
+РЯД №4 Иное и Моды####################
+######################################
+<color="white">***</color>
+<color="orange">***</color>
+
+<color="orange">Магическая пыль и Эссенция</color>
+<color="orange">Реагент и Осколок</color>
+<color="orange">Рунный камень и Вытравленная руна</color>
+<color="orange">Осколочные камни: Обычные и Тёмные</color>
+<color="orange">Осколочные камни: Светлые и Уникальные</color>
+<color="orange">Осколочные камни: Боссов</color>
+<color="orange">Жетоны: Лесной и Железный</color>
+<color="orange">Жетоны: Золотой</color>
+<color="orange">Дар Брокка: Легенд, Миф, Древн</color>
+
+
+######################################
+Дом###################################
+######################################
+<color="red">ДОМ</color>
+<color="green">***</color>
+<color="red">ХЛАМ СЮДА</color>
+<color="green">ЕДА</color>
+<color="green">Медовуха</color>
+<color="green">Зелья</color>
+<color="green">Стрелы</color>
+<color="green">Болты</color>
+<color="green">Бомбы</color>
+
+
+<color="white">...</color>
