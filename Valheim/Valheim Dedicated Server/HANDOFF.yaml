@@ -1,0 +1,32 @@
+# VSP Gamer / Valheim Dedicated Server
+# Переход в отдельный ChatGPT-чат. Непроверенное отмечено явно.
+handoff:
+  schema: "vsp-gamer/valheim-dedicated-server/v1"
+  date: "2026-10-28"
+  language: "ru-RU"
+  chat_name: "Valheim Dedicated Server"
+  project: "VSP Gamer"
+  scope: "Проектирование и эксплуатация Valheim Dedicated Server"
+  status: "concept_pending"
+  github:
+    repository: "ValentS1997/vsp-gamer-mods"
+    branch: "main"
+    directory: "Valheim/Valheim Dedicated Server/"
+    readme: "Valheim/Valheim Dedicated Server/README.md"
+    handoff: "Valheim/Valheim Dedicated Server/HANDOFF.yaml"
+  verified:
+    - "Репозиторий существует; доступ к main подтверждён."
+    - "Работа над VSP Sleep находится в отдельной папке Valheim/Разработка модов/VSP-Sleep/."
+  needs_confirmation:
+    - "Концепт и цель выделенного сервера."
+    - "Серверная ОС, хостинг/железо и ресурсы."
+    - "Число игроков, режим доступа, сеть, firewall и VPN."
+    - "Игровая версия, моды и политика их обновления."
+    - "Миры, миграция, бэкапы, restore и мониторинг."
+    - "Требования к uptime, защите и эксплуатации."
+  rules:
+    - "Не выдумывать IP, хосты, версии, доступы или результаты проверок."
+    - "Сначала read-only discovery; любые изменения — после согласования."
+    - "Перед изменениями нужны backup, rollback и acceptance criteria."
+    - "Не затрагивать P2P, VSP Sleep и существующие миры без отдельного разрешения."
+  next_action: "Получить от пользователя концепт сервера и построить план на основе проверенных вводных."
