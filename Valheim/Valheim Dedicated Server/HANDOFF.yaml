@@ -1,32 +1,293 @@
-# VSP Gamer / Valheim Dedicated Server
-# Переход в отдельный ChatGPT-чат. Непроверенное отмечено явно.
+# VSP Gamer / Valheim Dedicated Server — canonical state snapshot
+# НЕТ паролей, ключей, содержимого миров или конфиденциальных credentials.
+# Статус по результатам команд/логов владельца и handoff PVE-LAB/OpenWrt.
 handoff:
-  schema: "vsp-gamer/valheim-dedicated-server/v1"
-  date: "2026-10-28"
+  schema: "vsp-gamer/valheim-dedicated-server/v2"
+  date: "2026-11-01"
   language: "ru-RU"
   chat_name: "Valheim Dedicated Server"
   project: "VSP Gamer"
-  scope: "Проектирование и эксплуатация Valheim Dedicated Server"
-  status: "concept_pending"
+  stage: "Stage 5 — public test-run"
+  status: "TEST_RUN_OPERATIONAL_SECURITY_AND_DR_PENDING"
+  confidence: "Owner test and logs; no direct live VM inspection from GitHub"
   github:
     repository: "ValentS1997/vsp-gamer-mods"
     branch: "main"
     directory: "Valheim/Valheim Dedicated Server/"
-    readme: "Valheim/Valheim Dedicated Server/README.md"
-    handoff: "Valheim/Valheim Dedicated Server/HANDOFF.yaml"
-  verified:
-    - "Репозиторий существует; доступ к main подтверждён."
-    - "Работа над VSP Sleep находится в отдельной папке Valheim/Разработка модов/VSP-Sleep/."
-  needs_confirmation:
-    - "Концепт и цель выделенного сервера."
-    - "Серверная ОС, хостинг/железо и ресурсы."
-    - "Число игроков, режим доступа, сеть, firewall и VPN."
-    - "Игровая версия, моды и политика их обновления."
-    - "Миры, миграция, бэкапы, restore и мониторинг."
-    - "Требования к uptime, защите и эксплуатации."
-  rules:
-    - "Не выдумывать IP, хосты, версии, доступы или результаты проверок."
-    - "Сначала read-only discovery; любые изменения — после согласования."
-    - "Перед изменениями нужны backup, rollback и acceptance criteria."
-    - "Не затрагивать P2P, VSP Sleep и существующие миры без отдельного разрешения."
-  next_action: "Получить от пользователя концепт сервера и построить план на основе проверенных вводных."
+    readme: "README.md"
+    as_built: "AS_BUILT_2026-11-01.md"
+    operations: "OPERATIONS_AND_ACCEPTANCE_2026-11-01.md"
+    client_mod_manifest: "../MOD_MANIFEST_2026-10-24.md"
+
+  goal:
+    scope: "Linux dedicated server for modded multiplayer Valheim"
+    public_endpoint: "valheim.vsp-corp.ru:2456"
+    game_backend: "Steam"
+    test_run: true
+    production_acceptance: "PENDING"
+
+  infrastructure:
+    virtualization: "Proxmox VE"
+    vmid: 9001
+    pve_name: "game-server-01"
+    hostname: "valheim-server"
+    os: "Debian 13 Trixie"
+    vcpu: 4
+    ram_gib: 12
+    guest_user: "vspadmin"
+    ipv4: "10.97.1.20"
+    prefix: 24
+    gateway: "10.97.1.1"
+    interface: "eth0"
+    zone: "lab"
+    storage:
+      os_disk: "/dev/sda1 (~20 GB, root)"
+      data_disk: "/dev/sdb (~20 GB, ext4)"
+      data_mount: "/srv/valheim"
+      data_mount_after_reboot: "PASS"
+      data_free_before_mod_migration_gib_approx: 13
+      data_free_after_mod_migration: "[Needs confirmation]"
+
+  docker:
+    engine: "29.9.2 (earlier verified)"
+    compose: "v5.6.1 (earlier verified)"
+    image: "ghcr.io/community-valheim-tools/valheim-server:1.4.0"
+    service: "valheim"
+    container: "valheim-server"
+    compose_path: "/srv/valheim/compose/compose.yaml"
+    state_after_migration: "RUNNING_OWNER_CONNECTED"
+    startup_after_reboot_before_migration: "PASS"
+    startup_after_reboot_after_migration: "PENDING"
+    mounts:
+      config: "/srv/valheim/config:/config"
+      server_data: "/srv/valheim/server-data:/opt/valheim"
+      server_password_secret: "/srv/valheim/compose/secrets/server_pass:/run/secrets/server_pass:ro"
+    published_udp:
+      - "10.97.1.20:2456->2456/udp"
+      - "10.97.1.20:2457->2457/udp"
+    port_2458_host_published: false
+    password:
+      mode: "SERVER_PASS_FILE=/run/secrets/server_pass"
+      captured_in_git: false
+      note: "Historical valheim.env is not the active password source"
+    auto_update_policy: "[Needs verification]"
+
+  game:
+    version_pre_migration: "1.0.21 (last reported baseline)"
+    version_post_migration: "[Needs confirmation]"
+    backend: "Steam"
+    crossplay: false
+    server_name: "VSP Valheim"
+    world_name_in_compose: "Valheim"
+    local_test_world_preserved: "VSP_DS_TEST"
+    public_name: "valheim.vsp-corp.ru:2456"
+    owner_connection: "PASS"
+    user_performance_observation: "No noticeable slowdowns; subjective"
+    current_world_and_assets_integrity: "PARTIAL_GAME_TEST_ONLY"
+
+  modding:
+    loader: "BepInEx 5"
+    previously_observed_loader_version: "5.4.23.6"
+    previously_observed_bepinex_pack: "5.4.2360"
+    original_client_staging: "/srv/valheim/share/BepInExPack_Valheim/BepInEx"
+    active_server_config: "/srv/valheim/config/bepinex"
+    active_plugins: "/srv/valheim/config/bepinex/plugins"
+    source_plugin_dll_count: 43
+    source_plugin_tree_file_count: 50
+    source_config_file_count: 130
+    core_game_mods:
+      - "EpicLoot.dll"
+      - "StarLevelSystem.dll"
+      - "MonsterLabZ.dll"
+      - "AICompanion.dll"
+    library_examples:
+      - "Jotunn.dll"
+      - "Newtonsoft.Json.dll"
+      - "YamlDotNet.dll"
+      - "VAGhettoNetworking.dll"
+      - "ConditionalConfigSync.dll"
+    bepinex_log:
+      timestamp_local: "2026-11-01 11:03:35"
+      discovered_plugins: 40
+      loaded: 39
+      skipped: 1
+      failed: 0
+      chainloader: "PASS"
+    skipped_plugin_identity: "[Needs confirmation]"
+    notes:
+      - "DLL count is not the plugin count; some DLL are libraries"
+      - "Manifest plans and imported on-disk inventory are separate states"
+      - "Client-only mods must be verified before replication to the server"
+
+  world_migration:
+    original_world: "/srv/valheim/share/worlds_local/Valheim"
+    original_size_approx_mib: 20
+    revision_files: "_main.398.db2, _main.398.fwl2, _main.398.chunks, _main.398.ok"
+    format: "Chunk-based world save"
+    active_world: "/srv/valheim/config/worlds_local/Valheim"
+    operation: "Copied originals, did not delete staging; config/compose changed"
+    command_execution: "PASS"
+    compose_validation: "PASS"
+    owner_play_test: "PASS"
+    original_preserved: true
+    rollback_tar: "/srv/valheim/rollback/pre-migration-20261101-110140/pre-migration.tar.gz"
+    restore_drill: "PENDING"
+    full_in_game_asset_audit: "PENDING"
+
+  samba:
+    host_share:
+      service: "smbd"
+      share_name: "valheim-share"
+      path: "/srv/valheim/share"
+      allowed_user: "vspadmin"
+      force_user: "vspadmin"
+      guest_access: false
+      read_only: false
+      status_after_reboot: "PASS"
+    remote:
+      unc: "//10.97.253.10/pve-net-smb"
+      mountpoint: "/mnt/pve-net-smb"
+      credentials_file: "/etc/samba/credentials/pve-net-smb"
+      credentials_file_mode: "0600"
+      domain: "WORKGROUP"
+      mount_options: "_netdev,nofail,x-systemd.automount"
+      negotiated_smb_version: "3.1.1"
+      read_write_delete: "PASS"
+      automount_after_reboot: "PASS"
+      remote_outage_recovery: "PENDING"
+      note: "CIFS mount is operational; not itself an off-host backup"
+    incident:
+      id: "VSP-VALHEIM-SMB-20261101"
+      network_phase: "TCP 445 refused due to src allowlist, resolved by OpenWrt"
+      authentication_phase: "Interactive smbclient PASS, stored authfile initially NT_STATUS_LOGON_FAILURE; corrected and verified"
+      openwrt_smb_acl_source: "10.97.1.0/24"
+      openwrt_backup: "/root/firewall-before-lab-smb-20261101-160924"
+
+  network:
+    internal:
+      request: "VSP-VALHEIM-NET-20261101-001"
+      status: "PASS_OWNER_CONFIRMED_NO_CHANGE_REQUIRED"
+      already_existing_rule: "firewall.prowrt_home_to_lab_initial"
+      source_zone: "lan"
+      source_subnet: "10.97.0.0/24"
+      destination_subnet: "10.97.1.0/24"
+      protocol: "all"
+      risk: "Broad HOME->LAB ACL remains open"
+      exact_game_client_source_ip: "[Needs confirmation]"
+    public:
+      request: "VSP-VALHEIM-WAN-20261101-001"
+      implementation: "PASS_OWNER_CONFIRMED"
+      edge_hostname: "OpenWrt-vm"
+      edge_vmid: 9100
+      wan_ipv4: "92.255.183.46"
+      fqdn: "valheim.vsp-corp.ru"
+      dns_type: "CNAME"
+      dns_target: "edge.vsp-corp.ru"
+      dns_resolver_checked: "1.1.1.1"
+      rule: "firewall.prowrt_valheim_wan"
+      rule_name: "Valheim-WAN-UDP"
+      protocol: "udp"
+      external_ports: [2456, 2457]
+      internal_ip: "10.97.1.20"
+      internal_ports: [2456, 2457]
+      nat_reflection: false
+      dnat_hits_after_external_test: 2
+      game_connection: "PASS_OWNER_CONFIRMED"
+      wan_negative_security_tests: "PENDING"
+      lan_regression_after_dnat: "PENDING"
+      wan_backup: "/root/firewall-before-valheim-wan-20261101-175257"
+    edge_security:
+      ssh_wan_exposure_added: false
+      smb_wan_exposure_added: false
+      docker_api_wan_exposure_added: false
+
+  host_security:
+    ufw_package_version: "0.36.2-9"
+    ufw_status: "active"
+    ufw_startup_enabled: true
+    systemd_current_boot: "inactive/dead (oneshot not run by systemd; ENABLED=yes)"
+    rules:
+      default_in: "deny"
+      default_out: "allow"
+      default_routed: "deny"
+      ssh_from:
+        - "10.97.0.10/32"
+        - "10.97.1.0/24"
+      smb_from:
+        - "10.97.0.0/24"
+        - "10.97.1.0/24"
+    after_reboot: "PENDING"
+    docker:
+      iptables_version: "1.8.11 (nf_tables)"
+      docker_user_chain: "Present, referenced before DOCKER-FORWARD, empty"
+      expected_dnat_target: "172.18.0.2 (runtime as observed; dynamic)"
+      direct_container_forward_rules_customized: false
+      risk: "UFW INPUT rules do not directly filter Docker-published UDP; OpenWrt is perimeter control"
+
+  backup:
+    local_automatic_backup: "Observed zip creation by valheim-backup"
+    example_archive: "/srv/valheim/config/backups/worlds-20261101-110204.zip"
+    observed_retention_log: "Keep newest 6; remove older than 3 days"
+    local_backup_after_migration: "PASS_ARCHIVE_CREATED"
+    off_host_to_cifs: "NOT_CONFIGURED"
+    full_restore_test: "PENDING"
+    rpo: "[Needs confirmation]"
+    rto: "[Needs confirmation]"
+
+  stage_plan:
+    - stage: "Stage 1 — VM and Docker"
+      status: "PASS"
+      last_verified: "Debian 13 VM9001 + Docker/Compose installed; persistent disk and container operational"
+      changed_files_configs: ["Docker installation", "/srv/valheim/compose/compose.yaml"]
+      rollback_point: "[Needs confirmation]"
+    - stage: "Stage 2 — Storage / Samba / CIFS"
+      status: "PASS_REBOOT_TEST"
+      last_verified: "CIFS SMB 3.1.1 auto-mounted after reboot; R/W/delete PASS; Samba active"
+      changed_files_configs: ["/etc/fstab", "/etc/samba/credentials/pve-net-smb", "Samba share config"]
+      rollback_point: "/etc/fstab.bak.valheim-smb"
+    - stage: "Stage 3 — Internal network"
+      status: "PASS_OWNER_CONFIRMED"
+      last_verified: "Existing HOME->LAB ACL provides routing; no new game rule"
+      changed_files_configs: ["OpenWrt SMB source allow widened in separate earlier incident"]
+      rollback_point: "/root/firewall-before-lab-smb-20261101-160924"
+    - stage: "Stage 4 — World and mod migration"
+      status: "PASS_RUNTIME_AND_OWNER_TEST"
+      last_verified: "43 DLL copied; 39 plugins loaded, 1 skipped, 0 failed; game client joined"
+      changed_files_configs: ["config/worlds_local/Valheim", "config/bepinex", "compose/compose.yaml", "compose/secrets/server_pass"]
+      rollback_point: "/srv/valheim/rollback/pre-migration-20261101-110140/pre-migration.tar.gz"
+    - stage: "Stage 5 — UFW / WAN"
+      status: "CONNECTIVITY_PASS_SECURITY_PENDING"
+      last_verified: "UFW active; WAN DNS/DNAT/counters PASS; owner connected externally"
+      changed_files_configs: ["/etc/ufw", "firewall.prowrt_valheim_wan"]
+      rollback_point: "/root/firewall-before-valheim-wan-20261101-175257"
+
+  open_risks:
+    - id: "P0-OFFHOST-BACKUP"
+      status: "OPEN"
+      detail: "No automated off-host copy or restore drill"
+    - id: "P0-WAN-NEGATIVE"
+      status: "OPEN"
+      detail: "WAN SSH/SMB and unrelated-port denial not tested"
+    - id: "P0-LAN-REGRESSION"
+      status: "OPEN"
+      detail: "Internal game connection after WAN DNAT not retested"
+    - id: "P1-REBOOT-PERSISTENCE"
+      status: "OPEN"
+      detail: "UFW and migrated Compose after reboot not tested"
+    - id: "P1-MOD-COMPAT"
+      status: "OPEN"
+      detail: "Identify skipped plugin; validate mod assets and multiple simultaneous players"
+    - id: "P2-HOME-LAB-ACL"
+      status: "OPEN"
+      detail: "Allow-HOME-to-LAB-Initial permits all IPv4 HOME->LAB"
+    - id: "P2-SMB-SOURCE"
+      status: "OPEN"
+      detail: "LAB /24 can access remote SMB 445, wider than VM /32"
+
+  next_checkpoint: "Set up and verify off-host backups to pve-net-smb without impacting the live test-run; then WAN negative tests and reboot verification."
+  change_rules:
+    - "No changes to live world or server modpack without preflight backup and rollback."
+    - "Do not treat Git manifests as deployed DLL version proof."
+    - "No secret values, credentials files, private game saves or tar/zip backups in Git."
+    - "Keep exact unknown facts tagged [Needs confirmation]."
+    - "Preserve existing OpenWrt firewall policies without separately authorized change."
