@@ -73,24 +73,38 @@ sudo docker exec valheim-server supervisorctl status
 
 **Если `findmnt` не показывает отдельный диск в `/srv/valheim`, остановитесь и сначала разберитесь с подключением диска.**
 
+### Docker Compose без root-shell и без `cd`
+
+Проверенное состояние прав: `/srv/valheim/compose` — `750 root:root`, `compose.yaml` — `640 root:root`. Пользователь `vspadmin` не может войти в этот каталог обычным `cd`. **Не менять права ради удобства и не использовать `sudo -i` для повседневной работы.** `sudo cd` не работает, поскольку `cd` — встроенная команда оболочки.
+
+Используйте штатный Docker Compose с `sudo` и абсолютным путём через `-f`, оставаясь в оболочке `vspadmin`:
+
+```bash
+sudo docker compose \
+  -f /srv/valheim/compose/compose.yaml \
+  ps
+```
+
+Перед первым запуском и после изменений проверяйте корректность Compose (без вывода секретов):
+
+```bash
+sudo docker compose -f /srv/valheim/compose/compose.yaml config -q
+```
+
+Команда `-f` указывает Compose-файл; базовая директория относительных путей обычно определяется по расположению этого файла. Если используются дополнительные `--env-file`, override-файлы или зависимости от текущего каталога, предварительно проверьте их фактическое расположение. **Результат выполнения этих команд на VM после изменения руководства: [Needs verification].**
+
 ### Запустить сервер
 
-Все команды `docker compose` ниже выполняйте из рабочего каталога:
+Сначала убедитесь, что `/srv/valheim` смонтирован с отдельного диска, и проверьте состояние контейнера. Для запуска существующего остановленного сервиса:
 
 ```bash
-cd /srv/valheim/compose
+sudo docker compose -f /srv/valheim/compose/compose.yaml start valheim
 ```
 
-Запуск с созданием контейнера, если он отсутствует:
+Если контейнер отсутствует либо необходимо применить изменения Compose (команда может создать/пересоздать контейнер):
 
 ```bash
-sudo docker compose up -d
-```
-
-Если контейнер уже существует и был просто остановлен:
-
-```bash
-sudo docker compose start valheim
+sudo docker compose -f /srv/valheim/compose/compose.yaml up -d valheim
 ```
 
 ### Остановить или перезапустить
@@ -98,14 +112,16 @@ sudo docker compose start valheim
 Предупредите игроков и дождитесь их выхода. Затем выберите нужную команду:
 
 ```bash
-# Корректная остановка
-sudo docker compose stop -t 120 valheim
+# Корректная остановка с ожиданием до 120 секунд
+sudo docker compose -f /srv/valheim/compose/compose.yaml stop -t 120 valheim
 
 # Корректный перезапуск
-sudo docker compose restart -t 120 valheim
+sudo docker compose -f /srv/valheim/compose/compose.yaml restart -t 120 valheim
 ```
 
-После изменения `compose.yaml` используйте `sudo docker compose up -d`: команда `restart` не применяет новое определение контейнера.
+После изменения `compose.yaml` используйте `up -d valheim`: `restart` не применяет новое определение контейнера.
+
+**Граница привилегий:** `sudo docker compose` запускает Docker с административными полномочиями; это не ограниченная роль оператора. Права `sudo` на этой VM необходимо проверять отдельно через `sudo -l`. В штатной работе не добавлять пользователя в группу `docker` только ради отказа от `sudo`.
 
 Для штатной остановки **не используйте** `docker kill`, `docker compose down -v` и `docker system prune -a`.
 
