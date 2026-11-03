@@ -9,6 +9,7 @@
 
 | Файл | Что содержит |
 |---|---|
+| [PVE_LAB_POWER_CYCLE_2026-11-04.md](PVE_LAB_POWER_CYCLE_2026-11-04.md) | **Порядок включения PVE-LAB → разблокировки → VM 9001 → Docker → безопасного выключения**, проверенный вывод `qm list/start` от 04.11 |
 | [ADMIN_GUIDE.md](ADMIN_GUIDE.md) | **Инструкция администратора:** запуск/остановка, пути, настройки, моды, обновления, пароль, backup и reboot |
 | [AS_BUILT_2026-11-01.md](AS_BUILT_2026-11-01.md) | История создания: Proxmox VM, Debian 13, storage, Docker, конфигурация Valheim, BepInEx, импорт мира и 43 DLL, Samba/CIFS, сетевые инциденты, UFW, WAN DNAT/DNS, подтверждённые тесты и rollback |
 | [OPERATIONS_AND_ACCEPTANCE_2026-11-01.md](OPERATIONS_AND_ACCEPTANCE_2026-11-01.md) | Read-only диагностика, reboot и game acceptance, backup/restore plan, firewall security, обслуживание и приоритеты рисков |

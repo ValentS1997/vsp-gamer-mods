@@ -291,3 +291,19 @@ handoff:
     - "No secret values, credentials files, private game saves or tar/zip backups in Git."
     - "Keep exact unknown facts tagged [Needs confirmation]."
     - "Preserve existing OpenWrt firewall policies without separately authorized change."
+
+  pve_lab_power_cycle:
+    documented_on: "2026-11-04"
+    runbook: "PVE_LAB_POWER_CYCLE_2026-11-04.md"
+    source: "User terminal output from pve-lab"
+    observed_before_start:
+      vm_9000: "tpl-debian13-cloudinit stopped, 2048 MB, bootdisk 11 GB"
+      vm_9001: "valheim-server stopped, 12288 MB, bootdisk 20 GB"
+    start_command: "sudo qm start 9001"
+    start_output: "generating cloud-init ISO; shell prompt returned"
+    running_status_after_start: "[Needs confirmation]"
+    order_start: ["Power on PVE-LAB", "Unlock PVE-LAB", "Start VM 9001", "Start/check Docker and Valheim game service"]
+    order_stop: ["Players leave", "Graceful stop game/Compose", "Graceful shutdown VM 9001 and verify stopped", "Power off PVE-LAB"]
+    unlock_method: "[Needs confirmation]"
+    docker_autostart_after_pve_boot: "[Needs confirmation]"
+    vsp_server_alias: "User term; VM named valheim-server in qm list"
