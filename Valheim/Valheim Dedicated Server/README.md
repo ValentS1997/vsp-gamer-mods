@@ -11,6 +11,7 @@
 |---|---|
 | [PVE_LAB_POWER_CYCLE_2026-11-04.md](PVE_LAB_POWER_CYCLE_2026-11-04.md) | **Порядок включения PVE-LAB → разблокировки → VM 9001 → Docker → безопасного выключения**, проверенный вывод `qm list/start` от 04.11 |
 | [config-snapshot-2026-11-04/README.md](config-snapshot-2026-11-04/README.md) | **Экспорт серверных BepInEx конфигов от 04.11:** 43 DLL в инвентаре, выборочные CFG, отличия и исключённые runtime-данные |
+| [INTERVIEW_ARCHITECTURE_DEEP_DIVE_2026-11-08.md](INTERVIEW_ARCHITECTURE_DEEP_DIVE_2026-11-08.md) | **Подробная архитектура для собеседования:** PVE-NET/PVE-LAB, 10 визуальных Mermaid-схем, WAN→Docker UDP-path, службы, хранилище, backups, RCA и interview Q&A |
 | [ADMIN_GUIDE.md](ADMIN_GUIDE.md) | **Инструкция администратора:** запуск/остановка, пути, настройки, моды, обновления, пароль, backup и reboot |
 | [AS_BUILT_2026-11-01.md](AS_BUILT_2026-11-01.md) | История создания: Proxmox VM, Debian 13, storage, Docker, конфигурация Valheim, BepInEx, импорт мира и 43 DLL, Samba/CIFS, сетевые инциденты, UFW, WAN DNAT/DNS, подтверждённые тесты и rollback |
 | [OPERATIONS_AND_ACCEPTANCE_2026-11-01.md](OPERATIONS_AND_ACCEPTANCE_2026-11-01.md) | Read-only диагностика, reboot и game acceptance, backup/restore plan, firewall security, обслуживание и приоритеты рисков |
