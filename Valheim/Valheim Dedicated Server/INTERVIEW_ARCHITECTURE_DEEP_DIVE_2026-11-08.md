@@ -1,14 +1,16 @@
-# VSP Infrastructure → Valheim Dedicated Server
+# Архитектура сервера Valheim: от железа до входа игрока
 
-**Инженерный архитектурный разбор: от физического Proxmox до игровой сессии**  
-**Снимок:** 2026-11-08 · **Версия:** 1.0 · **Аудитория:** Infrastructure Support L2 / Linux / Technical Operations / Junior DevOps  
-**Режим:** as-built + операционная история; это **не** подтверждение production-grade HA/DR.
+**Архитектурный разбор для выступления: физическая сеть, виртуализация, контейнер и игровой мир**  
+**Основа:** технический снимок 2026-11-08 · **Аудитория:** Infrastructure Support L2 / Linux / Technical Operations / Junior DevOps  
+**Формат:** путь игрока через все слои системы; схемы и таблицы сохранены.
 
-> **Главная идея:** игровой сервер — отдельная Debian VM на физическом PVE-LAB, а публичный интернет-доступ проходит через OpenWrt VM на **другом** физическом Proxmox-хосте PVE-NET. Две последовательные DNAT-трансляции доставляют UDP к контейнеру. Игровые сохранения вынесены из контейнера на persistent ext4-диск. Последний успешный внешний игровой тест подтверждён владельцем 2026-11-01; после восстановления процесса 2026-11-02 новое подтверждение входа в игру отсутствует.
+> **С чего начать рассказ.** Игрок видит один адрес Valheim. За ним стоят два физических Proxmox-хоста: PVE-NET держит сеть и OpenWrt, PVE-LAB запускает Debian VM с игровым контейнером. Пакет проходит два DNAT, а мир и конфигурация лежат на отдельном ext4-диске. Дальше пройдём этот путь по слоям — от кабеля до состояния мира.
 
-**Легенда доказательств:** **PASS** — подтверждено предоставленным выводом или owner test; **DESIGN** — утверждённое решение без доказанной реализации; **PENDING** — тест или внедрение не завершены; **[Needs confirmation]** — нет точного значения. Примеры команд только для чтения отмечены отдельно. Конфигурации и секреты не публикуются.
+**Как читать статусы:** **PASS** — подтверждённый вывод или тест владельца; **DESIGN** — принятое решение без подтверждённого внедрения; **PENDING** — ещё не проверено; **[Needs confirmation]** — точное значение неизвестно. Эти метки показывают, где заканчиваются факты архитектурного снимка.
 
 ## 1. Архитектура одним взглядом: физические узлы, зоны и приложение
+
+Начну с простой карты. Слева игрок, справа игровой мир. Между ними две физические машины с разными обязанностями. Если слушатель запомнит эту схему, остальная история сложится сама.
 
 ```mermaid
 flowchart TB
@@ -35,7 +37,7 @@ flowchart TB
     VM -.->|"SMB 3.1.1"| SMB["PVE-NET SMB / SERVICES<br/>10.97.253.10:445"]
 ```
 
-**Зачем два гипервизора.** PVE-NET предназначен для постоянно работающего edge-сервиса: маршрутизации, межзонального firewall и инфраструктурного управления. PVE-LAB — отдельный on-demand host для игровых и лабораторных нагрузок. Когда PVE-LAB отключён, Valheim недоступен; при этом домашняя сеть архитектурно не должна зависеть от его питания. Полный эксперимент «LAB OFF, все production-контуры PASS» отдельно не зарегистрирован.
+**Почему две машины?** PVE-NET работает постоянно: он держит маршрутизацию, правила между зонами и управление сетью. PVE-LAB включается под игровые и лабораторные задачи. Если выключить LAB, Valheim пропадёт, но домашняя сеть по архитектуре должна продолжить работать. Отдельный полный тест «LAB выключен, все остальные контуры проверены» пока не зафиксирован.
 
 | Физическая машина | Реальная роль | Последняя подтверждённая конфигурация |
 |---|---|---|
@@ -47,6 +49,8 @@ flowchart TB
 Точки источников: [PVE-LAB Stage001](https://github.com/ValentS1997/pve-lab-vsp/blob/main/stages/001.Stage-Baseline/BASELINE-EVIDENCE-2026-10-28.md), [PVE-LAB Stage002](https://github.com/ValentS1997/pve-lab-vsp/blob/main/stages/002.Stage-PVE-Core/PVE-CORE-EVIDENCE-2026-10-29.md), [PrOWRT PVE-NET rename/port mapping](https://github.com/ValentS1997/PrOWRT/blob/main/docs/STAGE002-PVE-NET-RENAME-ACCEPTANCE-2026-10-29.md).
 
 ## 2. PVE-NET: четыре порта, PCI passthrough, VM bridge и сетевые зоны
+
+На сетевой машине важно не количество портов само по себе, а то, кому принадлежит каждый путь. Один порт смотрит к провайдеру, два ведут домой, ещё один — в лабораторный хост.
 
 ```mermaid
 flowchart LR
@@ -63,7 +67,7 @@ flowchart LR
     M["PVE vmbr10<br/>MGMT 10.97.254.2"] <-->|"OpenWrt mgmt0 / 10.97.254.1"| MG["Management zone"]
 ```
 
-**Разница технологий:** Linux bridge обслуживает L2-коммутацию между интерфейсами одного сегмента; OpenWrt выполняет L3-маршрутизацию между подсетями и применяет межзональные правила `fw4`. PCI passthrough отдаёт физический WAN-интерфейс гостю OpenWrt; нельзя без проверки считать, что Proxmox host владеет адресом WAN. PVE-NET MGMT и USB OOB независимы от WAN.
+**Что делает каждый слой.** Linux bridge соединяет интерфейсы внутри одного L2-сегмента, как виртуальный коммутатор. OpenWrt маршрутизирует между подсетями и применяет правила `fw4`. Публичный WAN-порт отдан виртуальной машине OpenWrt через PCI passthrough, поэтому нельзя автоматически приписывать WAN-адрес самому Proxmox. Для управления PVE-NET есть отдельные MGMT и USB OOB пути.
 
 **Сегменты/подсети** (не называть их все «VLAN» без вывода `ip -d link`/802.1Q):
 
@@ -77,9 +81,11 @@ flowchart LR
 | DMZ | `10.97.30.0/24` | Сегмент отдельных публичных сервисов | Не используется в текущем игровом маршруте |
 | Physical OOB | `10.97.255.0/30` | Прямой USB-Ethernet PC → PVE-NET | `10.97.255.2` ↔ `10.97.255.1`, не routed gateway |
 
-Проверенный снимок PVE-NET от 29 октября фиксирует OpenWrt VM9100: `net0/vmbr10/mgmt0`, `net1/vmbr1/homeap0`, `net2/vmbr2/homesw0`, `net3/vmbr3/lab0`, `hostpci0/wan0`. Для управления PVE-LAB физический хост имел `vmbr0=10.97.1.2/24` на `nic1`, однако **точная строка `net0` для VM9001 ещё [Needs confirmation]**. Проверять на PVE-LAB: `qm config 9001`.
+Здесь у меня есть снимок конфигурации PVE-NET от 29 октября: `net0/vmbr10/mgmt0`, `net1/vmbr1/homeap0`, `net2/vmbr2/homesw0`, `net3/vmbr3/lab0`, `hostpci0/wan0`. На PVE-LAB зафиксирован `vmbr0=10.97.1.2/24` на `nic1`. А вот точную строку `net0` у VM9001 ещё нужно получить: **[Needs confirmation]**, команда на PVE-LAB — `qm config 9001`.
 
 ## 3. Полный путь игрового UDP-пакета: две NAT-трансляции
+
+Теперь проследим один пакет так, как будто мы идём рядом с ним. Игрок набирает имя сервера, DNS находит публичный адрес, а дальше адрес назначения меняется два раза.
 
 ```mermaid
 flowchart TB
@@ -103,11 +109,13 @@ flowchart TB
 | Application | `172.18.0.2:2456` | Valheim process | Внутри контейнера | Успешная игровая сессия 2026-11-01 |
 | Обратный путь | Ответ контейнера | Reply к внешнему клиенту | Conntrack/NAT | Подтверждено функционально, отдельный packet trace не проводили |
 
-Схема для 2457 аналогична. Порт 2458, хотя присутствует как `EXPOSE` контейнерного образа, **не публиковался** через Docker на гостевом хосте. TCP 80/9001 также были только container EXPOSE, без host binding.
+Для UDP 2457 путь такой же. Важно не перепутать объявленный контейнером порт и опубликованный на хосте: 2458 есть в `EXPOSE` образа, но через Docker на Debian он **не публиковался**. TCP 80/9001 тоже оставались только `EXPOSE`, без host binding.
 
-**Почему работает UDP:** нет TCP three-way handshake. Сетевая система отслеживает UDP flows через connection tracking; возвратный трафик преобразуется по созданным NAT mappings. Проверка `nft counter` сама по себе не доказывает игровой handshake; отдельный external game join — доказательство выше уровня пакета.
+**Как приходит ответ.** У UDP нет TCP three-way handshake, но conntrack запоминает поток и выполняет обратное преобразование NAT. Счётчик `nft` показывает, что пакеты прошли правило; он ещё не доказывает, что человек вошёл в игру. Поэтому 1 ноября я проверил именно внешний игровой вход. Отдельную трассировку ответного пакета не проводили.
 
 ## 4. Межзональные политики и три точки фильтрации
+
+Здесь легко сказать «у меня есть firewall» и пропустить главное. Фильтрация происходит на разных участках пути, и правило на Debian не обязательно управляет трафиком, который Docker уже отправил в контейнер.
 
 ```mermaid
 flowchart LR
@@ -120,15 +128,17 @@ flowchart LR
     U --> SMB["Samba TCP 445"]
 ```
 
-**OpenWrt edge:** UCI rule `firewall.prowrt_valheim_wan`, `Valheim-WAN-UDP`, `wan → lab`, UDP 2456–2457, `nat_reflection=false`. Public IP WAN `92.255.183.46/23`, gateway `92.255.183.254`; CGNAT на WAN interface не обнаружен. Из HOME локальный join лучше проверять на `10.97.1.20:2456`, поскольку hairpin NAT выключен.
+**На внешней границе** OpenWrt направляет только UDP 2456–2457 из `wan` в `lab`: правило `firewall.prowrt_valheim_wan` / `Valheim-WAN-UDP`, `nat_reflection=false`. WAN имел публичный `92.255.183.46/23`, gateway `92.255.183.254`; CGNAT на интерфейсе не обнаружен. Из HOME игру разумнее проверять напрямую по `10.97.1.20:2456`: отражение NAT выключено.
 
-**Debian host UFW:** version `0.36.2-9`, `active`, defaults `deny incoming / allow outgoing / deny routed`, low logging; SSH TCP 22 от `10.97.0.10` и `10.97.1.0/24`, SMB TCP 445 от HOME `/24` и LAB `/24`. `ufw.service enabled`, `ENABLED=yes`; в исходной сессии systemd unit показывал `inactive/dead` при активном firewall — post-reboot persistence ещё PENDING.
+**На самой Debian VM** UFW `0.36.2-9` был `active`, с `deny incoming / allow outgoing / deny routed` и low logging. SSH TCP 22 разрешён от `10.97.0.10` и `10.97.1.0/24`; SMB TCP 445 — от HOME `/24` и LAB `/24`. Это правила для самого хоста; опубликованные Docker порты проходят через другой путь.
 
-**Docker firewall:** `iptables v1.8.11 (nf_tables)`; filter FORWARD начинается с `DOCKER-USER` и затем `DOCKER-FORWARD`. `DOCKER-USER` существовала, но была пустой. Docker DNAT пропускает опубликованные порты через FORWARD, не обычную host UFW INPUT policy. Вручную редактировать Docker-managed nftables rules нельзя.
+**На пути к контейнеру** Docker использует `iptables v1.8.11 (nf_tables)`: FORWARD проходит через `DOCKER-USER`, затем `DOCKER-FORWARD`. `DOCKER-USER` была пустой. Опубликованный Docker порт идёт через DNAT/FORWARD, а не через обычную UFW INPUT policy для самого хоста. Поэтому наличие UFW нельзя выдавать за доказательство фильтрации контейнера; Docker-managed nftables rules вручную не правят.
 
-**Security debt:** `firewall.prowrt_home_to_lab_initial` даёт весь IPv4 HOME→LAB; в отдельном SMB incident разрешение исходника LAB→SERVICES TCP445 расширено до `10.97.1.0/24` вместо одной VM. Эти политики следует сужать только после инвентаризации потребителей и отдельного change request. **Не заявлять**, что TCP22/445 из WAN уже отрицательно протестированы: статус `PENDING`.
+**Граница политики.** `firewall.prowrt_home_to_lab_initial` разрешает весь IPv4 HOME→LAB; LAB→SERVICES TCP445 разрешён для `10.97.1.0/24`. Это фактические границы доступа на снимке, а не утверждение, что разрешён только трафик одной VM.
 
 ## 5. VM9001: Debian, виртуальные диски, Docker и управление доступом
+
+Когда пакет добрался до LAB, он попадает в обычную Debian VM. Её удобно представлять как три части: система, данные мира и способ запустить контейнер.
 
 ```mermaid
 flowchart TB
@@ -143,24 +153,9 @@ flowchart TB
     DATA --> ROLL["rollback/ → migration snapshot"]
 ```
 
-**Гостевая ОС:** Debian 13 Trixie, user `vspadmin`; зафиксированные Docker Engine 29.9.2, Compose v5.6.1, image `ghcr.io/community-valheim-tools/valheim-server:1.4.0`. Системный и дата-диски логически разделены. **Физический backend virtual disk на PVE-LAB [Needs confirmation]**: второй guest `/dev/sdb` не означает второй физический failure domain.
+**Что внутри VM.** Debian 13 Trixie, пользователь `vspadmin`; зафиксированы Docker Engine 29.9.2, Compose v5.6.1 и образ `ghcr.io/community-valheim-tools/valheim-server:1.4.0`. ОС и данные мира логически лежат на разных виртуальных дисках. Физический backend на PVE-LAB ещё **[Needs confirmation]**: второй `/dev/sdb` внутри VM сам по себе не означает второй независимый диск.
 
-Подтверждение mount после reboot: `/dev/sdb` → `/srv/valheim` ext4 `rw`. Обязательный preflight **до запуска**:
-
-```bash
-findmnt /srv/valheim
-sudo docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'
-sudo docker exec valheim-server supervisorctl status
-```
-
-На Debian root-only Compose directory из вывода 2 ноября: `/srv/valheim/compose` = `drwxr-x--- root:root`, `compose.yaml` = `-rw-r----- root:root`. Поэтому `vspadmin` получил `cd: Permission denied`. Это Linux DAC, не ошибка Docker; **не менять права массово**. Работать с Compose по точному пути:
-
-```bash
-sudo docker compose -f /srv/valheim/compose/compose.yaml ps
-sudo docker compose -f /srv/valheim/compose/compose.yaml up -d valheim
-```
-
-Последняя команда изменяет runtime (создание/запуск контейнера); запускать только после проверки mount и в согласованное окно. Простой `docker compose up -d` из `$HOME` сообщил `no configuration file provided` — Compose не нашёл YAML.
+Данные мира смонтированы из `/dev/sdb` в `/srv/valheim` как ext4 `rw`. Каталог Compose принадлежит `root:root`: `/srv/valheim/compose` имеет `drwxr-x---`, `compose.yaml` — `-rw-r-----`. Секрет пароля передаётся контейнеру как файл только для чтения.
 
 | Роль | Путь или параметр |
 |---|---|
@@ -172,11 +167,12 @@ sudo docker compose -f /srv/valheim/compose/compose.yaml up -d valheim
 | Local ZIP backups | `/srv/valheim/config/backups/` |
 | Docker persisted binaries | `/srv/valheim/server-data/` |
 | Local staging | `/srv/valheim/share/` |
-| Pre-migration archive | `/srv/valheim/rollback/pre-migration-20261101-110140/pre-migration.tar.gz` |
 
-Итоговый Compose не был выгружен целиком в Git как security-reviewed as-built artifact. Из runtime точно известны `SERVER_NAME=VSP Valheim`, `WORLD_NAME=Valheim`, `CROSSPLAY=false`, `BEPINEX=true`, `SERVER_PASS_FILE=/run/secrets/server_pass`, публикация двух UDP-портов. `SERVER_PUBLIC`, restart policy, `UPDATE_CRON`, фактический image digest **[Needs confirmation]**.
+Полного security-reviewed Compose в Git нет. Из runtime подтверждены `SERVER_NAME=VSP Valheim`, `WORLD_NAME=Valheim`, `CROSSPLAY=false`, `BEPINEX=true`, `SERVER_PASS_FILE=/run/secrets/server_pass` и публикация двух UDP-портов. `SERVER_PUBLIC`, restart policy, `UPDATE_CRON` и фактический image digest пока **[Needs confirmation]**.
 
-## 6. Контейнерный startup: почему «Docker Up» не равно «игра готова»
+## 6. Как контейнер открывает игровой мир
+
+Контейнер — не один процесс. Supervisor запускает вспомогательные службы, SteamCMD готовит игру, BepInEx загружает моды, а игровой процесс открывает мир и сетевой endpoint.
 
 ```mermaid
 flowchart TB
@@ -186,27 +182,18 @@ flowchart TB
     BOOT --> UP["valheim-updater"]
     UP --> STEAM["SteamCMD app 896660<br/>download / verify Valheim"]
     STEAM --> MOD["BepInEx updater<br/>Thunderstore metadata/API"]
-    MOD --> DEC{Установка готова?}
-    DEC -->|да| RUN["supervisorctl start valheim-server"]
-    DEC -->|ошибка| ERR["Лог ошибки / retry policy<br/>не гарантирует readiness"]
+    MOD --> RUN["supervisorctl start valheim-server"]
     RUN --> CHAIN["BepInEx Chainloader<br/>plugins loaded"]
     CHAIN --> WORLD["Открытие мира Valheim"]
     WORLD --> PORT["Steam server opened<br/>игровой клиент подключился"]
 ```
 
-Внутри image есть не один процесс, а supervisor-managed службы: `valheim-server`, `valheim-updater`, `valheim-backup`, `crond`, `syslogd`, `valheim-bootstrap` (ожидаемо `EXITED` после bootstrap). Исходно наблюдали `40 plugins to load` → `39 loaded, 1 skipped, 0 failed` → `Opened Steam server` (2026-11-01). **43 DLL — исходный инвентарь файлов, а не 43 загруженных плагина**: есть библиотеки и один skipped.
+Внутри контейнера работают `valheim-server`, `valheim-updater`, `valheim-backup`, `crond`, `syslogd` и `valheim-bootstrap` под supervisor. BepInEx загружает плагины перед открытием мира. В исходном наборе было 43 DLL; это число файлов, включая библиотеки, а не число загруженных плагинов.
 
-| Проверяемый уровень | Команда | Реальный смысл |
-|---|---|---|
-| Docker daemon | `systemctl is-active docker` | Работает engine |
-| Контейнер | `sudo docker ps` | Запущен container main process |
-| Supervisor | `sudo docker exec valheim-server supervisorctl status` | Запущены нужные internal services |
-| Game readiness | `sudo docker logs ...` и реальный join | BepInEx/Steam завершили startup, игра доступна |
-| Persistence | `findmnt /srv/valheim` + после reboot | Данные сохранены на нужном диске |
-
-Upstream image умеет автоматически обновлять игру/BepInEx; обычно проверяет обновления раз в 15 минут при простое, но **runtime расписание и выключение автообновлений на этой VM не проверены**. Для тестового модпака обновление должно иметь maintenance window и backup/rollback.
 
 ## 7. Моды, игровой мир и путь игровой сессии
+
+После сетевой и системной части наконец появляется то, ради чего всё затевалось: игрок входит в мир, сервер обрабатывает действия через моды и сохраняет состояние.
 
 ```mermaid
 sequenceDiagram
@@ -228,13 +215,13 @@ sequenceDiagram
     Server-->>Player: Синхронизация игрового состояния
 ```
 
-**Мир:** `/srv/valheim/config/worlds_local/Valheim/`, формат Valheim 1.0 chunk-based: `_main.<revision>.db2`, `_main.<revision>.fwl2`, `_main.<revision>.chunks`, `_main.<revision>.ok`, файлы `*.chunk`. При миграции был `revision 398`, в логе backup 2 ноября наблюдали файлы `revision 414`. Номер в имени — **ревизия сохранения, не версия игры**.
+**Где живёт мир.** Путь — `/srv/valheim/config/worlds_local/Valheim/`; формат Valheim 1.0 chunk-based использует `_main.<revision>.db2`, `_main.<revision>.fwl2`, `_main.<revision>.chunks`, `_main.<revision>.ok` и `*.chunk`. Номер в имени — ревизия сохранения, не версия игры.
 
-**Migration steps:** preflight mount и исходников → graceful stop → rollback archive → copy оригинального мира в live → импорт 43 DLL, 130 конфигов → `WORLD_NAME=Valheim` и secret-файл → `docker compose config -q` → `up -d` → лог BepInEx/Steam → тест игрока. Исходный мир сохранился отдельно в `/srv/valheim/share/worlds_local/Valheim`; тестовый `VSP_DS_TEST` тоже сохранён.
-
-**Modded environment:** Jötunn, Epic Loot, Star Level System, MonsterLabZ, AICompanion, AutomaticFuel, AzuCraftyBoxes, XPortal и другие. Модовый пакет разделён по библиотекам/контенту/gameplay/QoL/automation/object. На сервер перенесена фактическая копия DLL+CFG; плановый client manifest и runtime inventory **не идентичны автоматически**. Полный audit конкретных игровых модовых объектов, сетевой синхронизации и нескольких игроков — PENDING.
+**Что с модами.** В наборе есть Jötunn, Epic Loot, Star Level System, MonsterLabZ, AICompanion, AutomaticFuel, AzuCraftyBoxes, XPortal и другие. На сервере используются DLL и CFG в каталоге BepInEx. Набор разделён на библиотеки, контент, gameplay, QoL, automation и object-моды.
 
 ## 8. Samba staging и CIFS mount: два разных назначения SMB
+
+Для обмена файлами здесь два направления SMB. Одно доставляет подготовленные файлы с ПК на сервер. Другое связывает сервер с сетевым хранилищем. Путать эти роли опасно, особенно когда речь о живом мире.
 
 ```mermaid
 flowchart LR
@@ -246,152 +233,30 @@ flowchart LR
     LIVE -.->|"Внешний backup: ещё не внедрён"| MOUNT
 ```
 
-**SMB server на VM:** `smbd` раздаёт `/srv/valheim/share` через `\\10.97.1.20\valheim-share`, user `vspadmin`, `force user=vspadmin`, `read only=no`, file/directory masks 0600/0700, `follow symlinks=no`. Назначение — **staging**, а не live edit мира с ПК.
+**Первое направление — файлы с ПК на VM.** `smbd` отдаёт `/srv/valheim/share` через `\\10.97.1.20\valheim-share`: пользователь `vspadmin`, `force user=vspadmin`, `read only=no`, masks 0600/0700, `follow symlinks=no`. Это площадка для загрузки и проверки файлов, а не место для прямого редактирования активного мира с ПК.
 
-**SMB client на VM:** `//10.97.253.10/pve-net-smb` → `/mnt/pve-net-smb`; credentials `/etc/samba/credentials/pve-net-smb` `0600 root-only`, `WORKGROUP`; fstab использует `_netdev,nofail,x-systemd.automount`, `uid=1000,gid=1000`, file_mode 0600 / dir_mode 0700. SMB negotiated `3.1.1`, read/write/delete PASS, automount после reboot PASS.
+**Второе направление — VM к сетевой службе.** `//10.97.253.10/pve-net-smb` монтируется в `/mnt/pve-net-smb`; credentials лежат в `/etc/samba/credentials/pve-net-smb` с `0600 root-only`. В fstab используются `_netdev,nofail,x-systemd.automount`, `uid=1000,gid=1000`, file_mode 0600 / dir_mode 0700, `WORKGROUP`. Согласован SMB 3.1.1; read/write/delete и automount после reboot — **PASS**.
 
-**Значимый инцидент:** сначала `Connection refused`/CIFS `error(111)` — не проходил TCP445 через межзональную ACL; после изменения разрешения появился `STATUS_LOGON_FAILURE`/`error(13)` — транспорт заработал, но credentials-файл не проходил SMB authentication. Ручной пароль через `smbclient -U` работал, файл через `smbclient -A` — нет; authfile пересоздали и проверили **до** замены. Это разные причины, которые не надо лечить одним способом.
 
-## 9. Резервное копирование, failure domains и restore
+## 9. Где хранятся данные и резервные копии
+
+Последняя часть архитектуры — путь данных. Игровой мир и локальные ZIP находятся на одном гостевом диске. Сетевой CIFS путь есть, но автоматическая off-host копия на этом снимке ещё не реализована.
 
 ```mermaid
 flowchart TB
     WORLD["Live world + config<br/>/srv/valheim/config/worlds_local"] --> LOCAL["valheim-backup<br/>ZIP /srv/valheim/config/backups"]
-    WORLD --> PRE["Pre-migration rollback tar<br/>/srv/valheim/rollback"]
     LOCAL -.->|"PENDING: проверенная off-host copy"| REMOTE["CIFS /mnt/pve-net-smb"]
-    REMOTE -.->|"PENDING"| TEST["Checksum + retention<br/>изолированный restore drill"]
     DISK["Общий guest data disk /dev/sdb"] --- WORLD
     DISK --- LOCAL
-    DISK --- PRE
 ```
 
-**PASS:** локальный worker `valheim-backup` создавал ZIP мира; в логах retention «newest 6» и «older than 3 days». До миграции создан archive `/srv/valheim/rollback/pre-migration-20261101-110140/pre-migration.tar.gz`. После reboot CIFS mount работал, но автоматическое копирование туда не сделано.
+**Текущее размещение.** `valheim-backup` создаёт локальные ZIP в `/srv/valheim/config/backups/`. CIFS смонтирован в `/mnt/pve-net-smb`, но автоматическое копирование ZIP на другой хост ещё не внедрено.
 
-**P0 открытый риск:** мир и локальный ZIP находятся на одном гостевом диске / одном логическом failure domain. Отдельный guest disk не доказывает независимое физическое хранилище. Требуются off-host copy, контроль целостности, retention, restore drill и документированные RPO/RTO. Сам по себе Proxmox snapshot не заменяет независимую резервную копию.
+**Граница отказа.** Мир и локальный ZIP лежат на одном гостевом диске и поэтому разделяют логический failure domain. Отдельный виртуальный data disk не доказывает независимость физического хранилища. Сетевая копия показана на схеме как планируемый путь.
 
-**Избегать:** `docker compose down -v`, опасных mass chmod/chown, `rsync --delete` без dry-run, восстановления поверх live-мирa при работающем сервере. Обновление игрового мира новым build может быть несовместимо со старой версией, поэтому rollback DLL/контейнера не является восстановлением формата мира.
+## 10. Источники архитектурного снимка
 
-## 10. RCA / Incident 2026-11-02: Docker Up, но игровой процесс STOPPED
-
-```mermaid
-flowchart TB
-    A["Симптом: контейнер Up<br/>но valheim-server STOPPED"] --> B["Проверка mount<br/>/dev/sdb ext4 rw PASS"]
-    B --> C["SteamCMD verification<br/>App 896660 installed PASS"]
-    C --> D["BepInEx updater<br/>curl (6): DNS thunderstore.io"]
-    D --> E["Позже DNS + HTTPS retest<br/>host/container PASS, HTTP/2 200"]
-    E --> F["BepInEx server executable<br/>в контейнере присутствует"]
-    F --> G["supervisorctl start valheim-server"]
-    G --> H["Процесс RUNNING pid 409<br/>новая игровая сессия PENDING"]
-    H --> I["RCA root cause / auto-recovery<br/>[Needs confirmation]"]
-```
-
-**Факты инцидента:** `docker compose up -d` вернул `Container Running`, но `supervisorctl status` показал `valheim-server STOPPED Not started`; updater/backup работали. SteamCMD вывел `Success! App '896660' fully installed` и `already the latest version`. Updater записал `Could not resolve host: thunderstore.io`, `could not retrieve BepInEx release info`, затем `retrying later`. DNS/HTTPS позднее работали как на Debian, так и в Docker (`127.0.0.53` systemd-resolved на хосте, `127.0.0.11` embedded Docker DNS в контейнере; HTTPS `HTTP/2 200`). Запуск `sudo docker exec valheim-server supervisorctl start valheim-server` вернул `started`; процесс позднее был `RUNNING pid 409`.
-
-**Вывод для интервью:** container liveness ≠ application readiness. Точная первопричина временного DNS-отказа и факт отсутствия автоматического старта после fallback **не доказаны**. В upstream-коде updater fallback при наличии установленного BepInEx предусмотрен, но поведение конкретного image tag 1.4.0 после ошибки нужно исследовать отдельно. Изменять DNS/firewall наугад было бы необоснованно. После ручного recovery подтвержден только process start, не новый внешний game join.
-
-## 11. Operations и lifecycle: как правильно обслуживать сервер
-
-| Действие | Рабочая команда / процесс | Проверка и откат |
-|---|---|---|
-| Посмотреть контейнер | `sudo docker compose -f /srv/valheim/compose/compose.yaml ps` | Docker ps + supervisor status |
-| Запустить при смонтированном data disk | `sudo docker compose -f /srv/valheim/compose/compose.yaml up -d valheim` | BepInEx + Steam logs + игровой join |
-| Остановить после выхода игроков | `sudo docker compose -f /srv/valheim/compose/compose.yaml stop -t 120 valheim` | Состояние stopped; сохранения закрыты |
-| Перезапустить | `sudo docker compose -f /srv/valheim/compose/compose.yaml restart -t 120 valheim` | Конфиг Compose не пересоздаётся автоматически |
-| Проверить internal processes | `sudo docker exec valheim-server supervisorctl status` | `valheim-server RUNNING`, updater/backup RUNNING |
-| Смотреть логи | `sudo docker logs -f --tail 100 valheim-server` | `Ctrl+C` выходит только из просмотра |
-| Проверить конфиг | `sudo docker compose -f /srv/valheim/compose/compose.yaml config -q` | Exit status 0, без вывода секретов |
-| Локальный backup (modifies backup state) | `sudo docker exec valheim-server supervisorctl restart valheim-backup` | Проверить новый ZIP + ошибки |
-| Запросить update check (модификация!) | `sudo docker exec valheim-server supervisorctl signal HUP valheim-updater` | Backup, no players; logs/version/regression |
-| Изменить моды | Stop → snapshot DLL+CFG+world → заменить → start | Проверить логи и модовые объекты; rollback DLL+CFG |
-| Изменить Compose | Backup YAML → edit → `config -q` → `up -d` | Вернуть предыдущий YAML при ошибке |
-
-**Обновление Docker image** отдельно от update SteamCMD: `docker compose pull` и recreate только в согласованное окно после записи предыдущего digest/tag и offline backup. Политики `restart:`, `UPDATE_CRON`, реальная версия игры на день интервью — [Needs confirmation].
-
-**Права:** `/srv/valheim/compose` закрыт для пользователя `vspadmin`; `sudo cd` нельзя использовать, поскольку `cd` — shell builtin. Для команд Compose всегда удобен абсолютный `-f`; не понижать права к каталогу/секретам ради запуска.
-
-**Аварийное восстановление:** PVE-LAB имеет физическую консоль; PVE-NET имеет USB OOB `10.97.255.1` и локальный COM. Не публиковать напрямую Proxmox Management в WAN. Полный disaster recovery всей цепочки пока не тестирован.
-
-## 12. Как убедиться в работоспособности по слоям: acceptance matrix
-
-| Слой | Read-only команда/метод | Проверенное состояние / ожидание |
-|---|---|---|
-| PVE-LAB guest config | `qm config 9001` на PVE-LAB | **PENDING**: точный virtual NIC, backend storage, boot/restart |
-| PVE-LAB storage | `pvesm status`, `lvs` (read-only) | **PENDING**: точный backend диска VM9001 |
-| Debian storage | `findmnt /srv/valheim` | **PASS**: `/dev/sdb ext4 rw` |
-| Debian routing | `ip route` | Gateway `10.97.1.1` — ранее зафиксировано |
-| UFW | `sudo ufw status verbose` | **PASS runtime** active; reboot persistence PENDING |
-| Docker NAT | `sudo iptables -t nat -S` | **PASS**: UDP 2456/2457 → `172.18.0.2` в исходном снимке |
-| Docker status | `sudo docker ps` | **PASS**: контейнер Up; недостаточно для game readiness |
-| Supervisor | `sudo docker exec valheim-server supervisorctl status` | 2 Nov recovery: game RUNNING, но краткий uptime |
-| Mod loader | `sudo docker logs ...` | 1 Nov: 39 loaded / 1 skipped / 0 failed |
-| Steam | лог `Opened Steam server` | 1 Nov PASS; после recovery PENDING |
-| OpenWrt NAT | `uci show firewall.prowrt_valheim_wan`, `fw4 check` | 1 Nov PASS |
-| Public DNS | `dig valheim.vsp-corp.ru @1.1.1.1` | 1 Nov PASS, CNAME→A |
-| WAN game join | Подключение реального клиента | 1 Nov `PASS_OWNER_CONFIRMED` |
-| WAN negatives | TCP22/445/unrelated ports извне | **PENDING** |
-| LAN regression | Игрок из HOME на `10.97.1.20:2456` после DNAT | **PENDING** |
-| CIFS persistence | `findmnt -t cifs /mnt/pve-net-smb` после обращения | **PASS**: SMB 3.1.1 после reboot |
-| Restore | Изолированное восстановление ZIP/мира | **PENDING** |
-| Metrics | CPU/RAM/disk/RTT/packet loss во время нагрузки | **PENDING**, наблюдались только субъективные ощущения |
-
-## 13. Что сказать на собеседовании: 90 секунд и deep dive
-
-**Короткий рассказ (точные формулировки):**
-
-> Я собрал собственную инфраструктуру с двумя отдельными Proxmox-хостами: постоянно работающий Firebat PVE-NET обслуживает OpenWrt в VM и сетевые зоны, а вычислительный PVE-LAB на Ryzen запускает Debian VM9001 с модифицированным Valheim Dedicated Server. На VM я установил Docker Compose, отделил persistent data на ext4-диск, подключил игру через Steam backend и BepInEx, перенёс игровой мир и 43 DLL с предварительным rollback. Публичный доступ проходит через DNS и OpenWrt DNAT UDP 2456–2457 на адрес Debian, затем через Docker DNAT на контейнер. Внешний игровой вход подтверждён практическим тестом. Также настроил UFW, Samba staging и CIFS automount, а в ходе эксплуатации диагностировал ошибку, при которой контейнер был Up, но game process STOPPED из-за сбоя BepInEx updater/DNS. Систему сопровождаю с логами, контрольными точками и разделением функциональных PASS от непроверенных DR/security требований.
-
-**Deep dive — 6 переходов:**
-
-1. **Физика и виртуализация:** зачем PVE-NET и PVE-LAB разделены; on-demand vs always-on, аппаратная конфигурация и виртуальные диски VM9001.
-2. **L2/L3 и безопасность:** bridge vs router, PCI passthrough WAN, HOME/LAB, OpenWrt fw4, UFW vs Docker FORWARD.
-3. **Путь пакета:** DNS CNAME→A, public UDP, OpenWrt DNAT на VM, Docker DNAT на контейнер, conntrack обратного потока.
-4. **Приложение:** Debian, Compose, persistent mounts, Supervisor, SteamCMD, BepInEx, запуск мира, проверка клиентом.
-5. **Операции:** staged migration и rollback, SMB source/auth incidents, access rights, updates, log filtering.
-6. **Reliability:** почему 2 virtual disks не backup, P0 off-host copy/restore, auto-recovery, отрицательные security-тесты и мониторинг.
-
-**10 типовых интервью-вопросов:** чем отличается bridge от router; почему два DNAT; зачем `127.0.0.11`; что означает `docker ps Up`; почему UFW не ограничивает Docker published port автоматически; как отличить `Connection refused` от SMB `LOGON_FAILURE`; что будет при отключении PVE-LAB; зачем отдельный виртуальный data disk; как делается rollback модов; какие проверки нужны до заявления production readiness.
-
-## 14. Риски, неизвестные и следующие точки проверки
-
-| Важность | Действие | Статус |
-|---|---|---|
-| P0 | Off-host backup на CIFS + checksum + проверенный restore drill | PENDING |
-| P0 | WAN negative tests TCP 22/445 и пост-DNAT LAN regression | PENDING |
-| P1 | `qm config 9001` + storage mapping → точная схема VM disks/NIC | `[Needs confirmation]` |
-| P1 | Docker restart policy, UFW/Compose readiness после нового reboot | PENDING |
-| P1 | Устранить зависимость game start от временного DNS/Thunderstore failure | RCA OPEN |
-| P1 | Выяснить skipped plugin и проверить нескольких игроков/модовые объекты | PENDING |
-| P2 | Измерить CPU/RAM/IO/latency/packet loss под игровой нагрузкой | PENDING |
-| P2 | Сузить чрезмерно широкие HOME→LAB и SMB source ACL | Change request PENDING |
-
-### Команды только для чтения, чтобы закрыть непроверенные значения
-
-**На физическом PVE-LAB (`pve-lab`, не на Debian VM):**
-
-```bash
-sudo qm config 9001
-sudo qm status 9001
-sudo pvesm status
-ip -br addr
-ip route
-```
-
-**Внутри Debian VM9001:**
-
-```bash
-findmnt /srv/valheim
-lsblk -f
-ip -br addr
-ip route
-sudo docker inspect valheim-server --format 'Restart={{.HostConfig.RestartPolicy.Name}}'
-sudo docker ps
-sudo docker exec valheim-server supervisorctl status
-sudo ufw status verbose
-```
-
-Проверять вывод на credentials/токены, прежде чем публиковать. Эти проверки не заменяют restore drill или независимые внешние сетевые тесты.
-
-## 15. Проверенные источники и provenance
+Здесь можно сверить физическую схему, сетевые решения и конфигурацию Valheim.
 
 - [PVE-LAB Stage001 — физический baseline, диски, сеть](https://github.com/ValentS1997/pve-lab-vsp/blob/main/stages/001.Stage-Baseline/BASELINE-EVIDENCE-2026-10-28.md).
 - [PVE-LAB Stage002 — SSH, PVE RBAC, UEFI recovery](https://github.com/ValentS1997/pve-lab-vsp/blob/main/stages/002.Stage-PVE-Core/PVE-CORE-EVIDENCE-2026-10-29.md).
@@ -402,8 +267,3 @@ sudo ufw status verbose
 - [Valheim — operations and acceptance](https://github.com/ValentS1997/vsp-gamer-mods/blob/main/Valheim/Valheim%20Dedicated%20Server/OPERATIONS_AND_ACCEPTANCE_2026-11-01.md).
 - [Valheim — administrator guide](https://github.com/ValentS1997/vsp-gamer-mods/blob/main/Valheim/Valheim%20Dedicated%20Server/ADMIN_GUIDE.md).
 - [Upstream Docker image — update, backup, Supervisor, BepInEx](https://github.com/community-valheim-tools/valheim-server-docker).
-- Ранее предоставленные владельцем терминальные выводы VM9001 и owner-handoff `NETWORK_CHANGE_IMPLEMENTATION_RESULT` (OpenWrt WAN, 2026-11-01), incident logs за 2026-11-02.
-
----
-
-**Итог:** это полноценный multi-host infrastructure/technical-operations кейс: разделение physical hosts, PVE, OpenWrt, L2/L3, DNS, DNAT×2, Debian, UFW/Docker, SteamCMD, BepInEx, persistent world, Samba/CIFS и реальная диагностика. **Не заявлять fully production-ready / HA / verified DR**, пока соответствующие acceptance tests не закрыты.
