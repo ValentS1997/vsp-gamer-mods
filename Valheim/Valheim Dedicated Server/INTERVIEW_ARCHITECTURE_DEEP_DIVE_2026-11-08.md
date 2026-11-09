@@ -203,10 +203,10 @@ sequenceDiagram
     participant Server as Valheim Steam server
     participant Mods as BepInEx plugins
     participant World as World storage
-    Player->>Edge: DNS resolved; UDP на 92.255.183.46:2456
+    Player->>Edge: DNS resolved, UDP на 92.255.183.46:2456
     Edge->>Host: DNAT → 10.97.1.20:2456
     Host->>Server: DNAT → 172.18.0.2:2456
-    Server-->>Player: Steam/game protocol; запрос пароля
+    Server-->>Player: Steam/game protocol, запрос пароля
     Player->>Server: Аутентификация / игровые действия
     Server->>Mods: Игровые events и hooks
     Mods-->>Server: Модовая логика и данные
