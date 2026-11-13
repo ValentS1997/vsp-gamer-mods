@@ -17,6 +17,18 @@
 
 **Критерий приёмки:** таблица «мод → версия на ПК/сервере → официальный релиз → действие/совместимость», подтверждённые runtime-логи и отсутствие неподтверждённых версий.
 
+### Контрольная точка 2026-11-13 — клиентский runtime (PARTIAL)
+
+**Источник:** вывод `grep -E 'Loading \\[' BepInEx/LogOutput.log` пользователя с `vsp-pc` (2026-11-13 14:19); только загрузка плагинов при последнем запуске, не статус Dedicated Server. Всего **53** строки `Loading [`. 
+
+**Подтверждённые версии клиента:** `EpicLoot 0.14.13`; `AICompanion 0.25.1`; `StarLevelSystem 1.26.3`; `MonsterLabZ 3.0.15`; `GooderAutoShield 1.0.4`; `OreMines 1.2.1`; `RecipeManager 0.12.2`; `Jotunn 2.30.2`; `ExtraSlots 1.2.21`; `AzuCraftyBoxes 1.8.19`; `PartyHud 1.12.0`; `PlantEverything 1.21.4`.
+
+**Официальные релизы на дату проверки (Thunderstore):** `EpicLoot 0.15.6` (<https://thunderstore.io/c/valheim/p/RandyKnapp/EpicLoot/versions/>), `AICompanion 0.25.3` (<https://thunderstore.io/c/valheim/p/Quads_Lab/Quads_Companion/versions/>), `StarLevelSystem 1.32.0` (<https://thunderstore.io/c/valheim/p/MidnightMods/StarLevelSystem/>), `ExtraSlots 1.2.24` (<https://thunderstore.io/c/valheim/p/shudnal/ExtraSlots/versions>). Для `Jotunn`, `MonsterLabZFix`, `GooderAutoShield`, `OreMines`, `PlantEverything` и `PartyHud` установленные версии совпали с опубликованными. Пакет `AzuCraftyBoxes 1.8.19` помечен deprecated (<https://thunderstore.io/c/valheim/p/Azumatt/AzuCraftyBoxes/>).
+
+**Отдельно:** `RecipeManager 0.12.2` загружается (старые пометки PLANNED_NOT_INSTALLED неактуальны). `UpgradeWorld` и `ServerDevcommands` в полученных строках загрузки отсутствуют; это не равнозначно доказательству отсутствия файлов на диске.
+
+**Открыто:** сверка оставшихся модов с релизами; серверные runtime версии; зависимости; решение о порядке обновления. **Установка и изменения: NOT RUN.**
+
 ## 2. Автоматический щит — исключить ножи — RESEARCHED, NOT IMPLEMENTED
 
 - [ ] Подтвердить, что текущий GooderAutoShield не имеет поддерживаемого исключения по типу оружия (имеющиеся в Git настройки: `InstantEquip`, `AutoUnequip`, `DebugMode`).
