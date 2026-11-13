@@ -81,6 +81,17 @@
 
 **Критерий приёмки:** операция Upgrade World выполнена над локальной копией без ошибок; её результат пригоден для дальнейшей игровой проверки владельцем. Возврат мира на сервер **вне объёма** этого чек-листа.
 
+### Контрольная точка 2026-11-13 17:20 — `vsp-pc` (файлы пользователя, read-only)
+
+**Evidence:** пользователь предоставил `ls -laR` каталога `/mnt/steam/SteamLibrary/steamapps/common/Valheim/BepInEx` и ZIP из 172 записей с CFG/данными (локальная проверка архивов без исполнения). Пользователь сообщил, что мир перенесён на `vsp-pc` и локальная игра запущена. **Файлы мира, наличие независимого backup и фактический BepInEx Loading-log после 17:08 не проверены.**
+
+- В `plugins/003-Admin/` по дереву присутствуют `UpgradeWorld.dll`, `ServerDevcommands.dll`, `WorldEditCommands.dll`. Сгенерированные конфиги сообщают версии Upgrade World `1.87`, Server Devcommands `1.116`; `Automatic start=false`, `Safe zones=2`, `Disable automatic genloc=false`. Регистрация команд **[Needs confirmation]** по live F5.
+- `plugins/002-CGM/` содержит AICompanion, EpicLoot, MonsterLabZ, StarLevelSystem DLL. Заголовки текущих CFG: `AICompanion 0.25.1`, `EpicLoot 0.14.13`, `MonsterLabZ 3.0.15`, `StarLevelSystem 1.26.3`; `ExtraSlots 1.2.21`. Заголовки CFG **не доказывают** версии DLL после возможной замены.
+- Для этапа №2: `tech.zinals.valheim.shieldautoequip.dll` указан в `999-Client`; `GooderAutoShield.dll` в дереве не указан, хотя прежние CFG/JSON остались. `Detected Weapons =` **пусто**, то есть ножи не исключены. Игровой тест — **NOT RUN**.
+- Текущий локальный `com.quad.aicompanion.more.cfg`: `FightRange=50` (ранее в Git 5), `BaseHealth=25`, `BaseStamina=75`, `RespawnSeconds=30`. Серверные значения не подтверждены.
+- ZIP содержит **чувствительные файлы** (`AutoServerPassword/passwords.json` и сохранённые данные игроков). **Не коммитить архив и не переносить его содержимое в Git целиком.** Зафиксированы только безопасные сведения выше.
+- **Следующий read-only checkpoint:** в локальном мире `F5` → `locations_count Mystical_Well0,Balder_Altar,AshHuldraQueen_Altar,SpiderCave01,AshlandsCave_01,AshlandsCave_02,ML_ShipWreck02,ML_ShipWreck03`. Затем `locations_list` для нужных ID. `locations_add` и `start` **NOT RUN** до подтверждения резервной копии и анализа результата. Источник синтаксиса: <https://github.com/JereKuusela/valheim-upgrade_world>.
+
 ## 10. Актуализировать Git — NOT RUN
 
 - [ ] Обновить подтверждённый манифест версий/распределение модов по client/server, не смешивая runtime `vsp-pc` и Dedicated Server.
