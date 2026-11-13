@@ -111,6 +111,19 @@
 - **Ограничения:** не повторять `start`, `locations_add`, `genloc` и `world_reset` без отдельной причины и согласования. Операция выполнялась только над локальной копией мира, серверный мир **не изменялся в рамках данного этапа**.
 - Документация автора: <https://github.com/JereKuusela/valheim-upgrade_world>. После проверки списка объектов — корректно сохранить, закрыть локальную игру и сделать независимую копию нового состояния, сохраняя исходный rollback.
 
+### Контрольная точка 2026-11-13 21:11 — SLS/EpicLoot: анализ баланса (READ-ONLY)
+
+**Источник состояния:** предоставленный владельцем ZIP конфигураций от 2026-11-13 17:19; после этого владелец сообщил, что моды обновлены и карта играбельна. **Версии DLL после обновления и фактически действующие CFG/YAML на Dedicated Server [Needs confirmation].** Сообщение о чрезмерном входящем уроне — наблюдение игроков, не количественный тест.
+
+- `MidnightsFX.StarLevelSystem.cfg`: `EnemyDamageLevelMultiplier=0.1` (+10% урона/уровень), `EnemyHealthMultiplier=1` (+100% HP/уровень), `BossEnemyDamageMultiplier=0.5` (+50% урона/уровень), `BossEnemyHealthMultiplier=1.5` (+150% HP/уровень); `EnableMultiplayerEnemyDamageScaling=false`, `EnableNemesisSystem=true`, `MaxLevel=3`, `MaxBossLevel=3`, `ShowQuickConfigureButton=false`.
+- `StarLevelSystem/LevelSettings.yaml`: `EnableConditionalCreatureLevelupChance=true`; таблицы после `defeated_eikthyr` разрешают для Meadows генератор `MinLevel=2, MaxLevel=8`; после `defeated_fader` — `MinLevel=8, MaxLevel=36`. Встроенные комментарии YAML: активный условный tier переопределяет диапазон биома. Это **риск экстремальной прогрессии**, а не подтверждение текущего достигнутого этапа в мире. Требуется проверить global boss keys/уровни в игре.
+- `StarLevelSystem/Modifiers.yaml` содержит боевые аффиксы `Brutal`, `ElementalChaos`, `Fire`, `Poison`, а также `FireNova`, `PoisonNova`. По документации внутри YAML непустые пулы заменяют дефолтные, то есть новые модификаторы SLS 1.28 не включаются автоматически в сохранённый список.
+- **World Combat:** в более раннем проектном обсуждении у владельца был выбран `Very Hard`; активное состояние мира **[Needs confirmation]**. Значение Very Hard = игрок получает 200% урона, наносит 70% и встречает больше звёздных врагов; SLS 1.25+ учитывает Combat modifier для звёзд и части эффектов. Источники: <https://valheim.weirdgloop.org/w/World_Modifiers>, <https://thunderstore.io/c/valheim/p/MidnightMods/StarLevelSystem/changelog>.
+- **Безопасный предложенный тест, не выполнен:** сначала проверить реальный Combat modifier; если `Very Hard`, рассмотреть `Hard` (150% входящего урона) с backup и обратимым изменением **одного** параметра; затем оценить обычных мобов и боссов. Не переписывать YAML массово.
+- `randyknapp.mods.epicloot.cfg`: `Balance Template=legendary`, `Global Drop Rate Modifier=0.3`, `Item Drop Limits=BossKillUnlocksNextBiomeItems`, `Adventure Mode Enabled=true`, `Defer Chest Loot Roll=true`. В `EpicLoot/patches/vsp-gamer/loottables.json` пять патчей для Tier0,1,2,3,6 Tools с `Weight=0.1`. Совместимость этих JSONPath с новой схемой 0.15.x **[Needs confirmation]**.
+- **Новые возможности релизов:** SLS 1.32 — Simple/Advanced Quick Configure, Regions scaling, расширенная условная прогрессия, генераторы боссов; EpicLoot 0.15 — Quick Configure, новая система комплектов и таблиц добычи. Сохраняющиеся старые CFG и baseconfig не следует удалять/генерировать без diff и backup. Источники: <https://thunderstore.io/c/valheim/p/MidnightMods/StarLevelSystem/changelog>, <https://thunderstore.io/c/valheim/p/RandyKnapp/EpicLoot/changelog>.
+- **Статус:** анализ и рекомендации; изменение gameplay CFG/YAML/мира **NOT RUN**; решение за владельцем.
+
 ## 10. Актуализировать Git — NOT RUN
 
 - [ ] Обновить подтверждённый манифест версий/распределение модов по client/server, не смешивая runtime `vsp-pc` и Dedicated Server.
