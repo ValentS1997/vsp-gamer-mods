@@ -99,6 +99,18 @@
 - ZIP содержит **чувствительные файлы** (`AutoServerPassword/passwords.json` и сохранённые данные игроков). **Не коммитить архив и не переносить его содержимое в Git целиком.** Зафиксированы только безопасные сведения выше.
 - **Следующий read-only checkpoint:** в локальном мире `F5` → `locations_count Mystical_Well0,Balder_Altar,AshHuldraQueen_Altar,SpiderCave01,AshlandsCave_01,AshlandsCave_02,ML_ShipWreck02,ML_ShipWreck03`. Затем `locations_list` для нужных ID. `locations_add` и `start` **NOT RUN** до подтверждения резервной копии и анализа результата. Источник синтаксиса: <https://github.com/JereKuusela/valheim-upgrade_world>.
 
+### Контрольная точка 2026-11-13 19:48+ — Upgrade World применён локально
+
+**Источник:** скриншот внутриигровой консоли `vsp-pc`, предоставленный владельцем. В отличие от предыдущего контрольного пункта, здесь пользователь **выполнил `start`**, изменение локальной копии мира подтверждено выводом Upgrade World; сохранение на диск и независимый backup после применения **[Needs confirmation]**.
+
+- Выполнено `locations_add SpiderCave01,AshlandsCave_01,AshlandsCave_02,AshHuldraQueen_Altar,Balder_Altar,ML_ShipWreck02,ML_ShipWreck03,Mystical_Well0` → затем `start`.
+- Preview: `Spawn missing locations to zones. Player base detection (3x3 safe zones). 6435 zones: 428 skipped by having a player base.`
+- Вывод: `Failed to place all AshlandsCave_01, placed 1 out of 7.` и `Failed to place all AshlandsCave_02, placed 2 out of 7.`
+- Итоговые строки: `69 locations ... added to the world (total amount in the world: 27)`; `Spawn missing locations: 100%`; `Spawn missing locations completed. 2 locations spawned to already generated areas.`
+- **Интерпретация:** операция закончилась; цифры 69 и 27 имеют разную/неясную семантику и не могут использоваться как проверенный фактический подсчёт размещённых объектов. Для этого нужен **post-operation `locations_count`** и при необходимости `locations_list`. Физическое наличие объектов, сохранение на диск, базы и посещаемость — **[Needs confirmation]**.
+- **Ограничения:** не повторять `start`, `locations_add`, `genloc` и `world_reset` без отдельной причины и согласования. Операция выполнялась только над локальной копией мира, серверный мир **не изменялся в рамках данного этапа**.
+- Документация автора: <https://github.com/JereKuusela/valheim-upgrade_world>. После проверки списка объектов — корректно сохранить, закрыть локальную игру и сделать независимую копию нового состояния, сохраняя исходный rollback.
+
 ## 10. Актуализировать Git — NOT RUN
 
 - [ ] Обновить подтверждённый манифест версий/распределение модов по client/server, не смешивая runtime `vsp-pc` и Dedicated Server.
