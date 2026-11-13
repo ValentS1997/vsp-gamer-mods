@@ -72,6 +72,13 @@
 
 **Критерий приёмки:** нужные prefab ID зарегистрированы и определён безопасный метод добавления недостающих локаций в уже существующий мир.
 
+### Контрольная точка 2026-11-13 19:48 — `locations_count` на локальной карте
+
+- **Источник:** снимок консоли Valheim, предоставленный владельцем. Выполнено `locations_count Mystical_Well0,Balder_Altar,AshHuldraQueen_Altar,SpiderCave01,AshlandsCave_01,AshlandsCave_02,ML_ShipWreck02,ML_ShipWreck03`. **Результат: `Total: 0`**.
+- **Интерпретация:** текущий реестр локаций локального мира не содержит совпадающих записей; это не доказывает, что prefab в MonsterLabZ не зарегистрированы. Формат `locations_count [id1,id2,...]` подтверждён официальной документацией Upgrade World: <https://github.com/JereKuusela/valheim-upgrade_world>.
+- **Следующее действие:** подготовить `locations_add SpiderCave01,AshlandsCave_01,AshlandsCave_02,AshHuldraQueen_Altar,Balder_Altar,ML_ShipWreck02,ML_ShipWreck03,Mystical_Well0` в локальной игре, получить preview / сообщения об ошибках. Список локаций приведён в инструкции обновления модпака: <https://old.thunderstore.io/c/valheim/p/Jumpperi/Jumpperi_Curated_Modpack/changelog/>.
+- Конфигурация пользователя ранее: `Automatic start=false`; после подготовки **не выполнять `start`**, пока не проверены preview, версия DLL, резервная копия мира (`.db`, `.fwl`) и защита построек. **Изменения мира: NOT RUN.**
+
 ## 7. Локальное обновление локаций через Upgrade World — NOT RUN
 
 - [ ] Получить подтверждение, что рабочая копия мира и резервная копия готовы на `vsp-pc` (подготовка/передача файла выполняется владельцем вне этого чек-листа).
