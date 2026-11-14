@@ -350,24 +350,35 @@ OpenWrt перенаправляет из интернета **только UDP 
 
 Ещё нужны отрицательные проверки доступа из интернета к SSH, SMB и прочим портам, а также повторная проверка LAN после DNAT. Известные широкие правила HOME→LAB all-IPv4 и доступа LAB `/24` к удалённому SMB `445` следует менять только отдельным сетевым изменением.
 
-## 12. Короткая шпаргалка
+## 12. Короткая памятка: включение, выключение, карты и моды
 
-Для всех команд `docker compose` сначала выполните `cd /srv/valheim/compose`.
+**Где выполнять:** команды `qm` и выключение Proxmox — **на PVE-LAB**; Docker, проверку диска и логи — **в Debian VM9001 `valheim-server`**. В Compose используйте абсолютный путь: каталог `/srv/valheim/compose` не предназначен для обычного `cd` пользователя `vspadmin`.
 
-| Действие | Команда |
-|---|---|
-| Проверить диск | `findmnt /srv/valheim` |
-| Запустить или создать контейнер | `sudo docker compose up -d` |
-| Запустить остановленный контейнер | `sudo docker compose start valheim` |
-| Остановить после выхода игроков | `sudo docker compose stop -t 120 valheim` |
-| Перезапустить после выхода игроков | `sudo docker compose restart -t 120 valheim` |
-| Посмотреть контейнер | `sudo docker ps` |
-| Проверить процессы игры | `sudo docker exec valheim-server supervisorctl status` |
-| Смотреть логи | `sudo docker logs -f --tail 100 valheim-server` |
-| Запросить локальную копию | `sudo docker exec valheim-server supervisorctl restart valheim-backup` |
-| Проверить Compose | `sudo docker compose config -q` |
-| Проверить UFW | `sudo ufw status verbose` |
-| Проверить CIFS | `findmnt -t cifs /mnt/pve-net-smb` |
+### Включение
+
+1. Включить физический **PVE-LAB** и выполнить предусмотренную разблокировку.
+2. На PVE-LAB: `sudo qm status 9001`; если `stopped`, выполнить `sudo qm start 9001`.
+3. В VM9001: `findmnt /srv/valheim` — **должен быть отдельный диск /dev/sdb**. При отсутствии mounts **не запускать контейнер**.
+4. Если контейнер уже существует и остановлен: `sudo docker compose -f /srv/valheim/compose/compose.yaml start valheim`. После изменения Compose: `sudo docker compose -f /srv/valheim/compose/compose.yaml up -d valheim`.
+5. Проверить: `sudo docker exec valheim-server supervisorctl status` (`valheim-server RUNNING`), `sudo docker logs --tail 100 valheim-server`, игровое подключение.
+
+### Выключение (строгая последовательность)
+
+1. Предупредить игроков; с административной консоли Valheim запросить `save`, дождаться подтверждения; все игроки выходят.
+2. В VM9001: `sudo docker compose -f /srv/valheim/compose/compose.yaml stop -t 180 valheim`.
+3. Проверить `sudo docker inspect valheim-server --format '{{.State.Status}} {{.State.ExitCode}}'` и `sudo docker logs --tail 100 valheim-server`. **Если есть ошибка записи мира, не выключать VM/PVE**, сохранить логи и разбираться отдельно. Таймаут 180 секунд не гарантирует сохранение.
+4. На PVE-LAB: `sudo qm shutdown 9001`, затем `sudo qm status 9001` — ждать **`status: stopped`**.
+5. Только после этого на PVE-LAB: `sudo systemctl poweroff`. Не использовать `qm stop`, `docker kill` или принудительное удержание Power как штатную остановку.
+
+### Редактирование через SMB (только при остановленном Valheim)
+
+- Windows: `\\\\10.97.1.20\\valheim-share\\worlds` — активные миры; `\\\\10.97.1.20\\valheim-share\\bepinex` — плагины, конфиги и ресурсы. Это предполагаемые **Linux bind mounts** в существующей Samba-шаре; их актуальное подключение после reboot нужно проверить через `findmnt -M /srv/valheim/share/worlds` и `findmnt -M /srv/valheim/share/bepinex` **[Needs confirmation]**.
+- **Карта:** сохранить полную копию каталога `worlds/Valheim` на ПК, затем изменять/заменять файлы целиком при остановленном контейнере. Не удалять оригинал и rollback без проверки восстановимости. При запуске проверить нужный мир и сохранность объектов.
+- **Моды:** сохранить исходные DLL/CFG; заменить файлы в `bepinex/plugins` и при необходимости `bepinex/config`, не копируя целиком клиентский Windows BepInExPack. Проверить совместимость клиент/сервер, зависимости, затем BepInEx/Steam логи и вход игрока.
+- **При ошибке SMB «нет прав на удаление»:** не делать `chmod 777`; проверить ACL родительского каталога, через который идёт удаление, Samba `read only`/ACL и фактический bind mount. На Linux удаление зависит преимущественно от прав **write+execute на родительский каталог**, а не от владельца удаляемого DLL.
+- Для изменения Compose `start` недостаточно: используйте `up -d valheim`, когда действительно готовы применить конфигурацию. Параметры автосохранения/backup «каждые 10 минут» **не подтверждены фактической настройкой и runtime**.
+
+**Backup:** локальные ZIP на том же `/dev/sdb` не заменяют off-host копию; restore drill пока не подтверждён. См. раздел 9 и [PVE_LAB_POWER_CYCLE_2026-11-04.md](PVE_LAB_POWER_CYCLE_2026-11-04.md).
 
 ## 13. Что уже проверено и что осталось сделать
 
