@@ -372,7 +372,7 @@ OpenWrt перенаправляет из интернета **только UDP 
 
 ### Редактирование через SMB (только при остановленном Valheim)
 
-- Windows: `\\\\10.97.1.20\\valheim-share\\worlds` — активные миры; `\\\\10.97.1.20\\valheim-share\\bepinex` — плагины, конфиги и ресурсы. Это предполагаемые **Linux bind mounts** в существующей Samba-шаре; их актуальное подключение после reboot нужно проверить через `findmnt -M /srv/valheim/share/worlds` и `findmnt -M /srv/valheim/share/bepinex` **[Needs confirmation]**.
+- Windows: `\\10.97.1.20\valheim-share\worlds` — активные миры; `\\10.97.1.20\valheim-share\bepinex` — плагины, конфиги и ресурсы. Это предполагаемые **Linux bind mounts** в существующей Samba-шаре; их актуальное подключение после reboot нужно проверить через `findmnt -M /srv/valheim/share/worlds` и `findmnt -M /srv/valheim/share/bepinex` **[Needs confirmation]**.
 - **Карта:** сохранить полную копию каталога `worlds/Valheim` на ПК, затем изменять/заменять файлы целиком при остановленном контейнере. Не удалять оригинал и rollback без проверки восстановимости. При запуске проверить нужный мир и сохранность объектов.
 - **Моды:** сохранить исходные DLL/CFG; заменить файлы в `bepinex/plugins` и при необходимости `bepinex/config`, не копируя целиком клиентский Windows BepInExPack. Проверить совместимость клиент/сервер, зависимости, затем BepInEx/Steam логи и вход игрока.
 - **При ошибке SMB «нет прав на удаление»:** не делать `chmod 777`; проверить ACL родительского каталога, через который идёт удаление, Samba `read only`/ACL и фактический bind mount. На Linux удаление зависит преимущественно от прав **write+execute на родительский каталог**, а не от владельца удаляемого DLL.
